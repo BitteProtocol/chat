@@ -51,7 +51,9 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@solana/web3.js": "1.77.3",
+    "@reown/appkit-adapter-solana": "^1.6.3"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.2",

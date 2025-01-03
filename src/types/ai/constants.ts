@@ -24,4 +24,5 @@ export enum BittePrimitiveName {
   GET_SWAP_TRANSACTIONS = "getSwapTransactions",
   GET_TOKEN_METADATA = "getTokenMetadata",
   GENERATE_EVM_TX = "generate-evm-tx",
+  GENERATE_SOL_TX= "generate-sol-tx"
 }

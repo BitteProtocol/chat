@@ -7,7 +7,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { EVMWalletAdapter } from "../types";
+import { EVMWalletAdapter, SolanaWallet } from "../types";
 
 interface AccountContextType {
   wallet: Wallet;
@@ -15,6 +15,8 @@ interface AccountContextType {
   accountId: string | null;
   evmWallet?: EVMWalletAdapter;
   evmAddress?: string;
+  solanaWallet?: SolanaWallet;
+  solanaAddress?: string;
 }
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
@@ -24,15 +26,18 @@ interface AccountProviderProps {
   wallet: any;
   account: any;
   evmWallet?: EVMWalletAdapter;
+  solanaWallet?: SolanaWallet
 }
-
+//TODO fetch solana address
 export function AccountProvider({
   children,
   wallet,
   account,
   evmWallet,
+  solanaWallet,
 }: AccountProviderProps) {
   const [accountId, setAccountId] = useState<string | null>(null);
+  const [solWallet, setSolWallet] = useState<SolanaWallet>();
 
   useEffect(() => {
     const getAccountId = async () => {
@@ -44,6 +49,15 @@ export function AccountProvider({
     getAccountId();
   }, [wallet, account, accountId]);
 
+  useEffect(() => {
+    const setupSolanaWallet = async () => {
+      if (solanaWallet?.provider) {
+        setSolWallet(solanaWallet);
+      }
+    };
+    setupSolanaWallet();
+  }, [solanaWallet]);
+
   return (
     <AccountContext.Provider
       value={{
@@ -52,6 +66,7 @@ export function AccountProvider({
         accountId,
         evmWallet,
         evmAddress: evmWallet?.address,
+        solanaWallet: solWallet,
       }}
     >
       {children}

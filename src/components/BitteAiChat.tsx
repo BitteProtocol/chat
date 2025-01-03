@@ -15,9 +15,10 @@ export const BitteAiChat = ({
   wallet,
   apiUrl,
   evmWallet,
+  solanaWallet,
 }: BitteAiChatProps) => {
   return (
-    <AccountProvider wallet={wallet} account={account} evmWallet={evmWallet}>
+    <AccountProvider wallet={wallet} account={account} evmWallet={evmWallet} solanaWallet={solanaWallet}>
       <ChatContent
         id={id}
         creator={creator}
@@ -30,6 +31,7 @@ export const BitteAiChat = ({
         account={account}
         wallet={wallet}
         apiUrl={apiUrl}
+        solanaWallet={solanaWallet}
       />
     </AccountProvider>
   );

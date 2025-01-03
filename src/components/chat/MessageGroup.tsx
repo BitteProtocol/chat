@@ -28,6 +28,7 @@ import { EvmTxCard } from "./EvmTxCard";
 import { SAMessage } from "./Message";
 import { ReviewTransaction } from "./ReviewTransaction";
 import ShareDropButton from "./ShareDropButton";
+import { SolTxCard } from "./SolTxCard";
 
 interface MessageGroupProps {
   groupKey: string;
@@ -109,19 +110,27 @@ export const MessageGroup = ({
             if (
               toolName === BittePrimitiveName.GENERATE_TRANSACTION ||
               toolName === BittePrimitiveName.TRANSFER_FT ||
-              toolName === BittePrimitiveName.GENERATE_EVM_TX
+              toolName === BittePrimitiveName.GENERATE_EVM_TX ||
+              toolName === BittePrimitiveName.GENERATE_SOL_TX
             ) {
-              const [transactions, evmSignRequest] =
-                result.data && "evmSignRequest" in result.data
-                  ? [result.data.transactions, result.data.evmSignRequest]
-                  : [result.data, undefined];
-            
+              let transactions, evmSignRequest, solSignRequest;
+
+              if (result.data?.evmSignRequest) {
+                transactions = result.data.transactions;
+                evmSignRequest = result.data.evmSignRequest;
+              } else if (result.data?.solSignRequest) {
+                transactions = result.data.transactions;
+                solSignRequest = result.data.solSignRequest;
+              } else {
+                transactions = result.data;
+              }
+
               return (
                 <ErrorBoundary key={`${groupKey}-${message.id}`}>
                   {evmSignRequest ? (
-                    <EvmTxCard
-                      evmData={evmSignRequest}
-                    />
+                    <EvmTxCard evmData={evmSignRequest} />
+                  ) : solSignRequest ? (
+                    <SolTxCard solData={solSignRequest} />
                   ) : (
                     <ReviewTransaction
                       creator={creator}

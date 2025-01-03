@@ -5,7 +5,9 @@ import {
   Wallet,
 } from "@near-wallet-selector/core";
 import { EthTransactionParams, SignRequestData } from "near-safe";
-import { EVMWalletAdapter } from "../types";
+import { EVMWalletAdapter, SolSignRequest } from "../types";
+import { Connection, Transaction as SolTransaction } from "@solana/web3.js";
+import type { Provider } from "@reown/appkit-adapter-solana/react";
 
 export interface SuccessInfo {
   near: {
@@ -13,34 +15,54 @@ export interface SuccessInfo {
     transactions: Transaction[];
     encodedTxn?: string;
   };
+  solana?: {
+    signatures: string[];
+    confirmations: Array<{
+      status: {
+        Ok: null;
+      } | {
+        Err: any;
+      };
+      confirmationStatus: "processed" | "confirmed" | "finalized" | null;
+    }>;
+  };
 }
 
 interface UseTransactionProps {
   account?: Account;
   wallet?: Wallet;
   evmWallet?: EVMWalletAdapter;
+  solanaConnection?: Connection;
+  solanaProvider?: Provider;
 }
 
 interface HandleTxnOptions {
   transactions?: Transaction[];
   evmData?: SignRequestData;
+  solData?: SolSignRequest;
 }
 
 export const useTransaction = ({
   account,
   wallet,
   evmWallet,
+  solanaConnection,
+  solanaProvider,
 }: UseTransactionProps) => {
   const handleTxn = async ({
     transactions,
     evmData,
+    solData,
   }: HandleTxnOptions): Promise<SuccessInfo> => {
-    const hasNoWalletOrAccount = !wallet && !account && !evmWallet?.address;
+    const hasNoWalletOrAccount =
+      !wallet && !account && !evmWallet?.address && !solanaProvider;
     if (hasNoWalletOrAccount) {
       throw new Error("No wallet or account provided");
     }
 
     let nearResult;
+    let solanaResult;
+
     if (transactions) {
       nearResult = account
         ? await executeWithAccount(transactions, account)
@@ -51,11 +73,26 @@ export const useTransaction = ({
       await executeWithEvmWallet(evmData, evmWallet);
     }
 
+    if (solData && solanaConnection && solanaProvider) {
+      solanaResult = await sendSolanaTransaction(
+        solData,
+        solanaConnection,
+        solanaProvider
+      );
+    }
+
     return {
       near: {
         receipts: Array.isArray(nearResult) ? nearResult : [],
         transactions: transactions || [],
       },
+      solana: solanaResult ? {
+        signatures: solanaResult.map(tx => tx.signature),
+        confirmations: solanaResult.map(tx => ({
+          status: tx.confirmation.err ? { Err: tx.confirmation.err } : { Ok: null },
+          confirmationStatus: tx.confirmation.confirmationStatus || null
+        }))
+      } : undefined
     };
   };
 
@@ -137,3 +174,39 @@ export const executeWithEvmWallet = async (
 
   await Promise.all(txPromises);
 };
+
+async function sendSolanaTransaction(
+  signRequest: SolSignRequest,
+  connection: Connection,
+  walletProvider: Provider
+) {
+  try {
+    const signatures = await Promise.all(
+      signRequest.params.map(async (tx) => {
+        return walletProvider.sendTransaction(tx, connection);
+      })
+    );
+
+    const { value: statuses } = await connection.getSignatureStatuses(signatures, {
+      searchTransactionHistory: true
+    });
+
+    if (!statuses || statuses.some(status => !status)) {
+      throw new Error("Failed to confirm one or more transactions");
+    }
+
+    const confirmations = statuses.map(status => ({
+      err: status?.err,
+      confirmationStatus: status?.confirmationStatus
+    }));
+
+    return signatures.map((signature, index) => ({
+      signature,
+      confirmation: confirmations[index]
+    }));
+
+  } catch (error) {
+    console.error("Failed to send transactions:", error);
+    throw error;
+  }
+}

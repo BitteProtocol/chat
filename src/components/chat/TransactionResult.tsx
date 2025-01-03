@@ -2,7 +2,7 @@ import { Network } from "near-safe";
 import { getNearblocksURL, shortenString } from "../../lib/utils";
 
 export const TransactionResult = ({
-  result: { evm, near },
+  result: { evm, near, solana },
   accountId,
   textColor,
 }: any) => {
@@ -47,6 +47,24 @@ export const TransactionResult = ({
                 rel='noopener noreferrer'
               >
                 {shortenString(receipt.transaction.hash, 10)}
+                <img src='/open-tab.svg' width={12} alt='Open in new tab' />
+              </a>
+            </div>
+          ))}
+        {solana?.signatures && 
+          solana.signatures.map((signature: string, index: number) => (
+            <div
+              key={signature}
+              className='flex items-center justify-between px-6 text-[14px]'
+            >
+              <div>Solana Transaction</div>
+              <a
+                className='flex gap-1'
+                href={`https://explorer.solana.com/tx/${signature}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {shortenString(signature, 10)}
                 <img src='/open-tab.svg' width={12} alt='Open in new tab' />
               </a>
             </div>

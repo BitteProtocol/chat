@@ -14,6 +14,9 @@ import { OpenAPIV3 } from "openapi-types";
 import { Account } from "near-api-js/lib/account";
 import { Hex } from "viem";
 import { BittePrimitiveName } from "./ai/constants";
+import { Connection } from "@reown/appkit-adapter-solana/react";
+import type { Provider } from "@reown/appkit-adapter-solana/react";
+import { Transaction as SolanaTransaction } from "@solana/web3.js";
 
 export type BitteMetadata = {
   [key: string]: unknown;
@@ -194,6 +197,13 @@ export interface BitteAiChatProps {
   colors: ChatComponentColors;
   apiUrl?: string;
   evmWallet?: EVMWalletAdapter;
+  solanaWallet?: SolanaWallet;
+}
+
+export interface SolanaWallet {
+  provider?: Provider;
+  connection?: Connection;
+  address?: string;
 }
 
 export type SelectedAgent = {
@@ -221,7 +231,8 @@ export interface ChatRequestBody {
   };
   accountId?: string;
   network?: string;
-  evmAddress?: Hex;
+  evmAddress?: string;
+  solanaWallet?: SolanaWallet;
 }
 
 export type AllowlistedToken = {
@@ -255,4 +266,10 @@ export type TransactionListProps = {
   showDetails: boolean;
   showTxnDetail: boolean;
   setShowTxnDetail: (showTxnDetail: boolean) => void;
+};
+
+export type SolSignRequest = {
+  method: "sol_sendTransaction";
+  network: string;
+  params: SolanaTransaction[];
 };

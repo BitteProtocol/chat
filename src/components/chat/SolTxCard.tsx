@@ -1,9 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { formatEther } from "viem";
-import { EthTransactionParams, Network, SignRequestData } from "near-safe";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { shortenString } from "../../lib/utils";
+import {
+  SystemProgram,
+  Transaction,
+  PublicKey,
+  LAMPORTS_PER_SOL,
+  Connection,
+} from "@solana/web3.js";
 import {
   Accordion,
   AccordionContent,
@@ -18,50 +22,52 @@ import { useAccount } from "../AccountContext";
 import LoadingMessage from "./LoadingMessage";
 import { TransactionResult } from "./TransactionResult";
 import { useTransaction } from "../../hooks/useTransaction";
+import { SolSignRequest } from "../../types";
 
-export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
+export const SolTxCard = ({ solData }: { solData?: SolSignRequest }) => {
   const { width } = useWindowSize();
   const isMobile = !!width && width < 640;
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [txHash, setTxHash] = useState<string | undefined>();
-  const { evmAddress, evmWallet } = useAccount();
-  //TODO add estimated fees back in
+  const [txResult, setTxResult] = useState<{signatures: string[], confirmations: any[]} | undefined>();
+  const { solanaWallet, solanaAddress } = useAccount();
 
-  if (!evmData)
+  if (!solanaWallet || !solData)
     return (
       <p className='my-6 overflow-auto text-center'>
-        Unable to create evm transaction.
+        Unable to create Solana transaction.
       </p>
     );
 
-  if (
-    !Array.isArray(evmData.params) ||
-    !evmData.params.every(isValidEvmParams)
-  ) {
+  if (!Array.isArray(solData.params) || solData.params.length === 0) {
     return (
       <p className='my-6 overflow-auto text-center'>
-        Invalid EVM transaction parameters.
+        Invalid Solana transaction parameters.
       </p>
     );
   }
 
-  useEffect(() => {
-    if (evmWallet?.hash) {
-      setIsLoading(false);
-      setTxHash(evmWallet.hash);
-    }
-  }, [evmWallet?.hash]);
+  const { provider, connection } = solanaWallet;
 
-  const network = Network.fromChainId(evmData.chainId);
-  const { handleTxn } = useTransaction({ evmWallet: evmWallet });
+  const { handleTxn } = useTransaction({
+    solanaProvider: provider,
+    solanaConnection: connection,
+  });
 
   const handleSmartAction = async () => {
     setIsLoading(true);
     try {
-      await handleTxn({ evmData });
+      const result = await handleTxn({ solData: solData });
+      if (result.solana) {
+        setTxResult({
+          signatures: result.solana.signatures,
+          confirmations: result.solana.confirmations
+        });
+      }
     } catch (error: any) {
       setErrorMsg(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -70,28 +76,21 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
       <div className='mb-8 flex justify-center'>
         <Card className='w-full'>
           <CardHeader className='border-b border-slate-200 p-4 text-center md:p-6'>
-            <p className='text-xl font-semibold'>EVM Transaction</p>
+            <p className='text-xl font-semibold'>Solana Transaction</p>
           </CardHeader>
           <div>
-            {evmData ? (
+            {solData ? (
               <div className='p-6'>
                 <div className='flex flex-col gap-6 text-sm'>
-                  <TransactionDetail
-                    label='Chain ID'
-                    value={shortenString(
-                      evmData.chainId.toString(),
-                      isMobile ? 13 : 21
-                    )}
-                  />
-                  <TransactionDetail label='Network' value={network.name} />
+                  <TransactionDetail label='Network' value={solData.network} />
                   <Accordion
                     type='single'
                     collapsible
                     defaultValue='transaction-0'
                   >
-                    {evmData.params.map((transaction, index) => (
+                    {solData.params.map((transaction: any, index: any) => (
                       <AccordionItem
-                        key={transaction.to}
+                        key={index}
                         value={`transaction-${index}`}
                         className='border-0'
                       >
@@ -103,33 +102,11 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className='flex flex-col gap-6 border-0'>
-                          {transaction.to && (
-                            <TransactionDetail
-                              label='To'
-                              className='-mr-2.5'
-                              value={
-                                <CopyStandard
-                                  text={transaction.to}
-                                  textSize='sm'
-                                  textColor='gray-800'
-                                  charSize={isMobile ? 7 : 12}
-                                />
-                              }
-                            />
-                          )}
-                          <TransactionDetail
-                            label='Value'
-                            value={
-                              transaction.value
-                                ? formatEther(BigInt(transaction.value))
-                                : "0"
-                            }
-                          />
                           <TransactionDetail
                             label='Data'
                             value={
                               <CopyStandard
-                                text={transaction.data || "0x"}
+                                text={transaction}
                                 textSize='sm'
                                 textColor='gray-800'
                                 charSize={isMobile ? 10 : 15}
@@ -164,14 +141,13 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
           ) : null}
 
           {isLoading ? <LoadingMessage /> : null}
-          {txHash ? (
+          {txResult ? (
             <TransactionResult
-              result={{ evm: { txHash, chainId: evmData.chainId } }}
-              accountId={evmAddress}
+              result={{ solana: txResult }}
               textColor='text-gray-800'
             />
           ) : null}
-          {!isLoading && !errorMsg && !txHash ? (
+          {!isLoading && !errorMsg && !txResult ? (
             <CardFooter className='flex items-center gap-6'>
               <>
                 <Button variant='outline' className='w-1/2'>
@@ -194,12 +170,35 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
   );
 };
 
-const isValidEvmParams = (data: unknown): data is EthTransactionParams => {
-  return (
-    typeof data === "object" &&
-    data !== null &&
-    "to" in data &&
-    typeof data.to === "string" &&
-    data.to.startsWith("0x")
-  );
-};
+// TODO: Remove this test helper once we have proper agent integration for testing
+export async function createTestTransaction(connection: Connection) {
+  if (!connection) {
+    throw new Error("Connection is required");
+  }
+
+  try {
+    // Define addresses
+    const fromPubkey = new PublicKey("DRpbCBMxVnDK7maPGv6MvL4SXKKBYv3vzjact1i7DKG8");
+    const toPubkey = new PublicKey("6fQY9fgE4zEWjkZz3XNZGwpjP1VXE9c3ZvGHkGgHqe1V");
+    
+    // Create transfer instruction
+    const transferInstruction = SystemProgram.transfer({
+      fromPubkey,
+      toPubkey, 
+      lamports: LAMPORTS_PER_SOL * 0.1
+    });
+
+    // Create and prepare transaction
+    const transaction = new Transaction();
+    const { blockhash } = await connection.getLatestBlockhash();
+    transaction.recentBlockhash = blockhash;
+    transaction.feePayer = fromPubkey;
+    transaction.add(transferInstruction);
+
+    return [transaction];
+
+  } catch (error) {
+    console.error("Error creating test transaction:", error);
+    throw error;
+  }
+}

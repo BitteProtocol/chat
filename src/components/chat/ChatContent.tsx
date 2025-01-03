@@ -17,7 +17,7 @@ import {
   BitteAiChatProps,
   ChatRequestBody,
 } from "../../types/types";
-import { AccountProvider, useAccount } from "../AccountContext";
+import { useAccount } from "../AccountContext";
 import { Button } from "../ui/button";
 import ShareModal from "../ui/modal/ShareModal";
 import { BitteSpinner } from "./BitteSpinner";
@@ -43,6 +43,7 @@ export const ChatContent = ({
   isShare,
   colors = defaultColors,
   apiUrl,
+  solanaWallet,
 }: BitteAiChatProps) => {
   const chatId = useRef(id || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -91,6 +92,7 @@ export const ChatContent = ({
       },
       accountId: accountId || "",
       evmAddress: evmAddress,
+      solanaWallet: solanaWallet,
     } satisfies ChatRequestBody,
   });
 
