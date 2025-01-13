@@ -10,7 +10,6 @@ import React, {
   useState,
 } from "react";
 import { Hex } from "viem";
-import { defaultColors } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import {
   AssistantsMode,
@@ -23,26 +22,13 @@ import { BitteSpinner } from "./BitteSpinner";
 import { SmartActionsInput } from "./ChatInput";
 import { MessageGroup } from "./MessageGroup";
 
-export const ChatContent = ({
-  agentid,
-  colors = defaultColors,
-  apiUrl,
-  options,
-}: BitteAiChatProps) => {
+export const ChatContent = ({ agentid, apiUrl, options }: BitteAiChatProps) => {
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const messagesRef = useRef<HTMLDivElement | null>(null);
 
   const { accountId, evmAddress } = useAccount();
-
-  const {
-    borderColor,
-    buttonColor,
-    generalBackground,
-    messageBackground,
-    textColor,
-  } = colors;
 
   const {
     messages,
@@ -137,22 +123,15 @@ export const ChatContent = ({
 
   return (
     <div className='flex h-full w-full flex-col gap-4 text-justify'>
-      <div
-        className='relative flex h-[400px] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col border lg:px-6'
-        style={{
-          backgroundColor: generalBackground,
-          borderColor: borderColor,
-        }}
-      >
+      <div className='relative flex h-[400px] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col lg:border lg:border-shad-gray-20 lg:bg-gray-30 lg:px-6'>
         {!isAtBottom ? (
           <Button
             size='icon'
             variant='outline'
             className='absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full hover:bg-inherit'
-            style={{ backgroundColor: generalBackground }}
             onClick={scrollToBottomHandler}
           >
-            <ArrowDown className='h-4 w-4' style={{ color: textColor }} />
+            <ArrowDown className='h-4 w-4' />
           </Button>
         ) : null}
 
@@ -176,9 +155,6 @@ export const ChatContent = ({
                     accountId={accountId!}
                     messages={messages}
                     isLoading={isInProgress}
-                    messageBackgroundColor={messageBackground!}
-                    borderColor={borderColor!}
-                    textColor={textColor!}
                     agentImage={options?.agentImage}
                     agentName={options?.agentName}
                   />
@@ -215,22 +191,12 @@ export const ChatContent = ({
           </div>
         </div>
       </div>
-      <div
-        className='z-10 rounded-lg border p-6'
-        style={{
-          backgroundColor: generalBackground,
-          borderColor: borderColor,
-        }}
-      >
+      <div className='z-10 rounded-lg border border-shad-gray-20 bg-background p-6'>
         <SmartActionsInput
           input={input}
           handleChange={handleInputChange}
           handleSubmit={handleSubmitChat}
           isLoading={isInProgress}
-          buttonColor={buttonColor!}
-          borderColor={borderColor!}
-          textColor={textColor!}
-          backgroundColor={generalBackground!}
           agentName={options?.agentName}
         />
       </div>

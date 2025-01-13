@@ -21,8 +21,6 @@ export const ReviewTransaction = ({
   transactions,
   warnings,
   walletLoading,
-  messageBackgroundColor,
-  borderColor,
 }: {
   transactions: Transaction[];
   warnings?: BitteToolWarning[] | null;
@@ -30,8 +28,6 @@ export const ReviewTransaction = ({
   evmData?: SafeEncodedSignRequest;
   agentId: string;
   walletLoading?: boolean;
-  borderColor: string;
-  messageBackgroundColor: string;
 }) => {
   const [showTxnDetail, setShowTxnDetail] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -111,22 +107,14 @@ export const ReviewTransaction = ({
   };
 
   return (
-    <Card
-      style={{
-        backgroundColor: messageBackgroundColor,
-        borderColor: borderColor,
-      }}
-    >
-      <CardHeader
-        className='border-b text-center'
-        style={{ borderColor: borderColor }}
-      >
+    <Card>
+      <CardHeader className='border-b border-slate-200 text-center'>
         <p className='text-[20px] font-semibold'>Review Transaction</p>
       </CardHeader>
 
       <div>
         {isMint && txImage ? (
-          <div className='border-b' style={{ borderColor: borderColor }}>
+          <div className='border-b border-slate-200'>
             <div className='p-6'>
               <div className='flex items-center justify-between text-[14px]'>
                 <div>Asset</div>
@@ -168,10 +156,7 @@ export const ReviewTransaction = ({
 
         {warnings && warnings.length > 0 && (
           <div className='px-6 pb-8'>
-            <div
-              className='border-t p-4'
-              style={{ borderColor: borderColor }}
-            />
+            <div className='border-t p-4 border-slate-200' />
             {warnings.map((warning, index) => (
               <div
                 key={index}
@@ -193,7 +178,6 @@ export const ReviewTransaction = ({
           modifiedUrl={`https://wallet.bitte.ai`}
           setShowTxnDetail={setShowTxnDetail}
           showTxnDetail={showTxnDetail}
-          borderColor={borderColor}
         />
       </div>
 

@@ -13,7 +13,6 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           className
         )}
         ref={ref}
-        style={style}
         {...props}
       />
     );

@@ -37,9 +37,6 @@ interface MessageGroupProps {
   evmAdapter?: NearSafe;
   account?: Account;
   wallet?: Wallet;
-  messageBackgroundColor: string;
-  borderColor: string;
-  textColor: string;
 }
 
 export const MessageGroup = ({
@@ -50,12 +47,9 @@ export const MessageGroup = ({
   isLoading,
   agentImage,
   agentName,
-  messageBackgroundColor,
-  borderColor,
-  textColor,
 }: MessageGroupProps) => {
   return (
-    <div style={{ color: textColor }}>
+    <div>
       {messages?.map((message, index) => {
         let agentId = getAgentIdFromMessage(message);
 
@@ -91,11 +85,7 @@ export const MessageGroup = ({
               return (
                 <ErrorBoundary key={`${groupKey}-${message.id}`}>
                   {evmSignRequest ? (
-                    <EvmTxCard
-                      evmData={evmSignRequest}
-                      borderColor={borderColor}
-                      messageBackgroundColor={messageBackgroundColor}
-                    />
+                    <EvmTxCard evmData={evmSignRequest} />
                   ) : (
                     <div className='my-6'>
                       <ReviewTransaction
@@ -105,8 +95,6 @@ export const MessageGroup = ({
                         evmData={evmSignRequest}
                         agentId={agentId}
                         walletLoading={isLoading}
-                        borderColor={borderColor}
-                        messageBackgroundColor={messageBackgroundColor}
                       />
                     </div>
                   )}
@@ -117,14 +105,7 @@ export const MessageGroup = ({
         }
 
         return (
-          <Card
-            className='p-6'
-            style={{
-              backgroundColor: messageBackgroundColor,
-              borderColor: borderColor,
-            }}
-            key={`${message.id}-${index}`}
-          >
+          <Card className='p-6' key={`${message.id}-${index}`}>
             <Accordion
               type='single'
               collapsible
@@ -160,10 +141,7 @@ export const MessageGroup = ({
                   </div>
                 </AccordionTrigger>
 
-                <AccordionContent
-                  className='mt-6 border-t pb-0'
-                  style={{ borderColor: borderColor }}
-                >
+                <AccordionContent className='mt-6 border-t border-gray-40 pb-0'>
                   <div className='mt-6 flex w-full flex-col gap-2'>
                     {message.content && (
                       <div className='flex flex-col gap-4'>
@@ -232,10 +210,7 @@ export const MessageGroup = ({
                             })()}
                           </div>
 
-                          <div
-                            className='mt-2 border-t'
-                            style={{ borderColor: borderColor }}
-                          />
+                          <div className='mt-2 border-t border-gray-40' />
                         </div>
                       );
                     })}
