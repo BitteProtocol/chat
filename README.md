@@ -188,7 +188,7 @@ interface BitteAiChatProps {
 
 ## Styling
 
-The component has support for dark/light theme. The component will display the colors of the current selected theme in the consumer app.
+The component has support for dark/light theme, which can be controlled using the `theme` prop. By default, the theme is set to dark.
 
 ## Example Projects
 
