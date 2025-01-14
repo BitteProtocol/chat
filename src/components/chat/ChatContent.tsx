@@ -130,38 +130,38 @@ export const ChatContent = ({
   }, [scrollToBottom]);
 
   return (
-    <div className='flex h-full w-full flex-col gap-4 text-justify'>
-      <div className='relative flex h-[400px] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col lg:border lg:border-shad-gray-20 lg:bg-gray-30 lg:px-6'>
+    <div className="bitte-flex bitte-h-full bitte-w-full bitte-flex-col bitte-gap-4 bitte-text-justify">
+      <div className="bitte-relative bitte-flex h-[400px] bitte-w-full bitte-grow-0 bitte-overflow-y-auto bitte-rounded-lg bitte-max-lg:flex-col bitte-lg:border bitte-lg:border-shad-gray-20 bitte-lg:bg-gray-30 bitte-lg:px-6">
         {!isAtBottom ? (
           <Button
             size='icon'
             variant='outline'
-            className='absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full hover:bg-inherit'
+            className="bitte-absolute bitte-bottom-2 bitte-left-1/2 bitte--translate-x-1/2 bitte-rounded-full bitte-hover:bg-inherit"
             onClick={scrollToBottomHandler}
           >
-            <ArrowDown className='h-4 w-4' />
+            <ArrowDown className="bitte-h-4 bitte-w-4" />
           </Button>
         ) : null}
 
         <div
           ref={messagesRef}
-          className='flex h-full w-full justify-center overflow-y-auto p-4'
+          className="bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-p-4"
         >
           <div
             className={cn(
-              "mx-auto flex w-full flex-col md:max-w-[480px] xl:max-w-[600px] 2xl:mx-56 2xl:max-w-[800px]",
-              !!agentid ? "h-[calc(100%-240px)]" : "h-[calc(100%-208px)]"
+              "bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:max-w-[480px] xl:max-w-[600px] bitte-2xl:mx-56 2xl:max-w-[800px]",
+              !!agentid ? "h-[calc(100%-240px)}]" : "h-[calc(100%-208px)]"
             )}
           >
             {messages.length === 0 && (
-              <div className='flex h-full flex-col items-center justify-center'>
-                <img className='mx-auto mb-4' src={BITTE_IMG} />
-                <div className='mb-14 text-[20px] font-medium text-gray-40'>
+              <div className="bitte-flex bitte-h-full bitte-flex-col bitte-items-center bitte-justify-center">
+                <img className="bitte-mx-auto bitte-mb-4" src={BITTE_IMG} />
+                <div className="bitte-mb-14 text-[20px] bitte-font-medium bitte-text-gray-40">
                   Execute Transactions with AI
                 </div>
               </div>
             )}
-            <div className='flex w-full flex-col space-y-4 py-6'>
+            <div className="bitte-flex bitte-w-full bitte-flex-col bitte-space-y-4 bitte-py-6">
               {groupedMessages.map((messages: Message[]) => {
                 const groupKey = `group-${messages?.[0]?.id}`;
                 return (
@@ -178,7 +178,7 @@ export const ChatContent = ({
                 );
               })}
               {error && (
-                <div className='flex flex-col items-center justify-center space-y-2 px-6 pb-6 text-center text-sm'>
+                <div className="bitte-flex bitte-flex-col bitte-items-center bitte-justify-center bitte-space-y-2 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm">
                   {!accountId ? (
                     <p>
                       An error occurred. <br />
@@ -200,7 +200,7 @@ export const ChatContent = ({
                 </div>
               )}
               {isInProgress ? (
-                <div className='flex w-full flex-col items-center justify-center text-gray-600'>
+                <div className="bitte-flex bitte-w-full bitte-flex-col bitte-items-center bitte-justify-center bitte-text-gray-600">
                   <BitteSpinner width={100} height={100} />
                 </div>
               ) : null}
@@ -208,7 +208,7 @@ export const ChatContent = ({
           </div>
         </div>
       </div>
-      <div className='z-10 rounded-lg border border-shad-gray-20 bg-background p-6'>
+      <div className="bitte-z-10 bitte-rounded-lg bitte-border bitte-border-shad-gray-20 bitte-bg-background bitte-p-6">
         <SmartActionsInput
           input={input}
           handleChange={handleInputChange}

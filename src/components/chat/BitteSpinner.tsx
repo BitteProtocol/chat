@@ -9,7 +9,7 @@ export const BitteSpinner = ({
   height?: number;
 }) => {
   return (
-    <div className='spinner-animation'>
+    <div className="bitte-spinner-animation">
       <Lottie
         loop
         animationData={bitteAnimation}

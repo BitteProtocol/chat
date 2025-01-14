@@ -14,8 +14,8 @@ const DetailMethods = ({
   return (
     <>
       <TxAccordion label='Function Call' methodName={method}>
-        <div className='overflow-x-auto rounded bg-shad-white-10 p-2 text-sm'>
-          <pre className='p-2 md:p-4'>
+        <div className="bitte-overflow-x-auto bitte-rounded bitte-bg-shad-white-10 bitte-p-2 bitte-text-sm">
+          <pre className="bitte-p-2 bitte-md:p-4">
             <code>{JSON.stringify(action, null, 2)}</code>
           </pre>
         </div>
@@ -42,17 +42,17 @@ export const TxnDetailMultipleAction = ({
   return (
     <>
       {showDetails && (
-        <div className='flex flex-col'>
+        <div className="bitte-flex bitte-flex-col">
           {transaction?.actions?.[0].type === "FunctionCall" && (
-            <div className='relative flex w-full flex-col gap-4 rounded p-6'>
-              <span className='text-sm font-semibold text-gray-800'>
+            <div className="bitte-relative bitte-flex bitte-w-full bitte-flex-col bitte-gap-4 bitte-rounded bitte-p-6">
+              <span className="bitte-text-sm bitte-font-semibold bitte-text-gray-800">
                 Contract Details
               </span>
-              <div className='flex flex-col items-start justify-start gap-2 text-sm md:flex-row md:items-center md:justify-between md:gap-0 md:space-x-4'>
-                <span className='text-text-secondary'>For Contract</span>
-                <span className='cursor-pointer'>
+              <div className="bitte-flex bitte-flex-col bitte-items-start bitte-justify-start bitte-gap-2 bitte-text-sm bitte-md:flex-row bitte-md:items-center bitte-md:justify-between bitte-md:gap-0 bitte-md:space-x-4">
+                <span className="bitte-text-text-secondary">For Contract</span>
+                <span className="bitte-cursor-pointer">
                   <a
-                    className='flex gap-1 items-center text-gray-800'
+                    className="bitte-flex bitte-gap-1 bitte-items-center bitte-text-gray-800"
                     href={getNearblocksURL(accountId, undefined, contractName)}
                     target='_blank'
                   >

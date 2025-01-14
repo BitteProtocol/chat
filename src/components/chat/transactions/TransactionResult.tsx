@@ -11,16 +11,16 @@ export const TransactionResult = ({
     : null;
 
   return (
-    <div className='mt-4'>
-      <p className='text-center text-[14px] font-semibold'>
+    <div className="bitte-mt-4">
+      <p className="bitte-text-center text-[14px] bitte-font-semibold">
         Transaction success
       </p>
-      <div className='flex flex-col gap-4 p-6 text-[14px]'>
+      <div className="bitte-flex bitte-flex-col bitte-gap-4 bitte-p-6 text-[14px]">
         {evm?.txHash && scanUrl && (
-          <div className='flex items-center justify-between px-6 text-[14px]'>
-            <div className='text-text-secondary'>EVM Transaction</div>
+          <div className="bitte-flex bitte-items-center bitte-justify-between bitte-px-6 text-[14px]">
+            <div className="bitte-text-text-secondary">EVM Transaction</div>
             <a
-              className='flex gap-1 text-gray-800 items-center'
+              className="bitte-flex bitte-gap-1 bitte-text-gray-800 bitte-items-center"
               href={scanUrl}
               target='_blank'
               rel='noopener noreferrer'
@@ -34,11 +34,11 @@ export const TransactionResult = ({
           near.receipts.map((receipt: any) => (
             <div
               key={receipt.transaction.hash}
-              className='flex items-center justify-between px-6 text-[14px]'
+              className="bitte-flex bitte-items-center bitte-justify-between bitte-px-6 text-[14px]"
             >
-              <div className='text-text-secondary'>Near Transaction</div>
+              <div className="bitte-text-text-secondary">Near Transaction</div>
               <a
-                className='flex gap-1 items-center text-gray-800'
+                className="bitte-flex bitte-gap-1 bitte-items-center bitte-text-gray-800"
                 href={getNearblocksURL(accountId, receipt.transaction.hash)}
                 target='_blank'
                 rel='noopener noreferrer'

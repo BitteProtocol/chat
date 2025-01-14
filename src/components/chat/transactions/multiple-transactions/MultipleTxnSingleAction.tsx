@@ -24,7 +24,7 @@ export const MultipleTxnSingleActionDetail = ({
         };
 
         return (
-          <div className='mb-1' key={idx}>
+          <div className="bitte-mb-1" key={idx}>
             <TxnDetail
               accountId={accountId}
               showTitle={idx === 0}

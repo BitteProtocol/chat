@@ -11,7 +11,7 @@ export const ShowDetailsBtn = ({
 }): JSX.Element => {
   return (
     <div
-      className='flex cursor-pointer items-center justify-center gap-2 bg-shad-white-30 py-4'
+      className="bitte-flex bitte-cursor-pointer bitte-items-center bitte-justify-center bitte-gap-2 bitte-bg-shad-white-30 bitte-py-4"
       onClick={() => setShowDetails(!showDetails)}
     >
       {showDetails ? (
@@ -19,7 +19,7 @@ export const ShowDetailsBtn = ({
       ) : (
         <ChevronsUpDown width={16} height={16} color='#64748B' />
       )}
-      <span className='text-[12px] text-text-secondary'>{displayName}</span>
+      <span className="text-[12px] bitte-text-text-secondary">{displayName}</span>
       </div>
   );
 };

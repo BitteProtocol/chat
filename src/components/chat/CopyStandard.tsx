@@ -29,7 +29,7 @@ export const CopyStandard = ({
   };
 
   return (
-    <div id='copy' className='cursor-pointer p-2.5' onClick={handleCopyLink}>
+    <div id='copy' className="bitte-cursor-pointer bitte-p-2.5" onClick={handleCopyLink}>
       <span
         className={`relative flex items-center justify-center gap-2 ${
           textColor ? `text-${textColor}` : "text-shad-blue-100"
@@ -43,7 +43,7 @@ export const CopyStandard = ({
               text,
               isMobile ? charSize ?? 18 : charSize ?? 35
             )}{" "}
-        <CopyIcon size={16} className='text-shad-blue-100' />
+        <CopyIcon size={16} className="bitte-text-shad-blue-100" />
       </span>
     </div>
   );

@@ -6,10 +6,10 @@ interface CodeBlockProps {
 
 export const CodeBlock = ({ content }: CodeBlockProps) => {
   return (
-    <div className='w-full'>
-      <pre className='disable-scrollbars w-full overflow-x-auto rounded-lg bg-secondary p-4 text-secondary-foreground'>
+    <div className="bitte-w-full">
+      <pre className="bitte-disable-scrollbars bitte-w-full bitte-overflow-x-auto bitte-rounded-lg bitte-bg-secondary bitte-p-4 bitte-text-secondary-foreground">
         <code
-          className='block w-[400px] font-mono text-sm'
+          className="bitte-block w-[400px] bitte-font-mono bitte-text-sm"
           aria-label='Code example'
         >
           {content}

@@ -28,7 +28,7 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
 
   if (!evmData)
     return (
-      <p className='my-6 overflow-auto text-center'>
+      <p className="bitte-my-6 bitte-overflow-auto bitte-text-center">
         Unable to create evm transaction.
       </p>
     );
@@ -38,7 +38,7 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
     !evmData.params.every(isValidEvmParams)
   ) {
     return (
-      <p className='my-6 overflow-auto text-center'>
+      <p className="bitte-my-6 bitte-overflow-auto bitte-text-center">
         Invalid EVM transaction parameters.
       </p>
     );
@@ -65,15 +65,15 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
 
   return (
     <>
-      <div className='mb-8 flex justify-center'>
-        <Card className='w-full'>
-          <CardHeader className='border-b border-slate-200 p-4 text-center md:p-6'>
-            <p className='text-xl font-semibold'>EVM Transaction</p>
+      <div className="bitte-mb-8 bitte-flex bitte-justify-center">
+        <Card className="bitte-w-full">
+          <CardHeader className="bitte-border-b bitte-border-slate-200 bitte-p-4 bitte-text-center bitte-md:p-6">
+            <p className="bitte-text-xl bitte-font-semibold">EVM Transaction</p>
           </CardHeader>
           <div>
             {evmData ? (
-              <div className='p-6'>
-                <div className='flex flex-col gap-6 text-sm'>
+              <div className="bitte-p-6">
+                <div className="bitte-flex bitte-flex-col bitte-gap-6 bitte-text-sm">
                   <TransactionDetail
                     label='Chain ID'
                     value={shortenString(
@@ -91,20 +91,20 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
                       <AccordionItem
                         key={transaction.to}
                         value={`transaction-${index}`}
-                        className='border-0'
+                        className="bitte-border-0"
                       >
-                        <AccordionTrigger className='pt-0 hover:no-underline'>
-                          <div className='flex items-center justify-between text-sm'>
-                            <p className='text-text-secondary'>
+                        <AccordionTrigger className="bitte-pt-0 bitte-hover:no-underline">
+                          <div className="bitte-flex bitte-items-center bitte-justify-between bitte-text-sm">
+                            <p className="bitte-text-text-secondary">
                               Transaction {index + 1}
                             </p>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent className='flex flex-col gap-6 border-0'>
+                        <AccordionContent className="bitte-flex bitte-flex-col bitte-gap-6 bitte-border-0">
                           {transaction.to && (
                             <TransactionDetail
                               label='To'
-                              className='-mr-2.5'
+                              className="bitte--mr-2.5"
                               value={
                                 <CopyStandard
                                   text={transaction.to}
@@ -143,13 +143,13 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
           </div>
 
           {errorMsg && !isLoading ? (
-            <div className='flex flex-col items-center gap-4 px-6 pb-6 text-center text-sm'>
-              <p className='text-red-300'>
+            <div className="bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm">
+              <p className="bitte-text-red-300">
                 An error occurred trying to execute your transaction: {errorMsg}
                 .
               </p>
               <Button
-                className='w-1/2'
+                className="bitte-w-1/2"
                 variant='outline'
                 onClick={() => {
                   setErrorMsg("");
@@ -168,14 +168,14 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
             />
           ) : null}
           {!isLoading && !errorMsg && !txHash ? (
-            <CardFooter className='flex items-center gap-6'>
+            <CardFooter className="bitte-flex bitte-items-center bitte-gap-6">
               <>
-                <Button variant='outline' className='w-1/2'>
+                <Button variant='outline' className="bitte-w-1/2">
                   Decline
                 </Button>
 
                 <Button
-                  className='w-1/2'
+                  className="bitte-w-1/2"
                   onClick={handleSmartAction}
                   disabled={isLoading}
                 >

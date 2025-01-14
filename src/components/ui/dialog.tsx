@@ -18,7 +18,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0  fixed inset-0 z-[60] bg-black/80",
+      "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 bitte-fixed bitte-inset-0 z-[60] bitte-bg-black/80",
       className
     )}
     {...props}
@@ -35,17 +35,17 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-1/2 top-1/2 z-[60] grid w-full max-w-3xl -translate-x-1/2 -translate-y-1/2 gap-4 border border-border bg-background p-6 shadow-lg duration-200 sm:rounded-lg",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] bitte-fixed bitte-left-1/2 bitte-top-1/2 z-[60] bitte-grid bitte-w-full bitte-max-w-3xl bitte--translate-x-1/2 bitte--translate-y-1/2 bitte-gap-4 bitte-border bitte-border-border bitte-bg-background bitte-p-6 bitte-shadow-lg bitte-duration-200 bitte-sm:rounded-lg",
         className
       )}
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className='absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'>
-        <div className='inline-flex size-8 items-center justify-center whitespace-nowrap rounded-md border border-input bg-background p-0 text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'>
-          <X className='size-4' />
+      <DialogPrimitive.Close className="bitte-absolute bitte-right-4 bitte-top-4 bitte-rounded-sm bitte-opacity-70 bitte-ring-offset-background bitte-transition-opacity bitte-hover:opacity-100 bitte-focus:outline-none bitte-focus:ring-2 bitte-focus:ring-ring bitte-focus:ring-offset-2 bitte-disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+        <div className="bitte-inline-flex bitte-size-8 bitte-items-center bitte-justify-center bitte-whitespace-nowrap bitte-rounded-md bitte-border bitte-border-input bitte-bg-background bitte-p-0 bitte-text-sm bitte-font-medium bitte-ring-offset-background bitte-transition-colors bitte-hover:bg-accent bitte-hover:text-accent-foreground bitte-focus-visible:outline-none bitte-focus-visible:ring-2 bitte-focus-visible:ring-ring bitte-focus-visible:ring-offset-2 bitte-disabled:pointer-events-none bitte-disabled:opacity-50">
+          <X className="bitte-size-4" />
         </div>
-        <span className='sr-only'>Close</span>
+        <span className="bitte-sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
@@ -58,7 +58,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
+      "bitte-flex bitte-flex-col bitte-space-y-1.5 bitte-text-center bitte-sm:text-left",
       className
     )}
     {...props}
@@ -72,7 +72,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "bitte-flex bitte-flex-col-reverse bitte-sm:flex-row bitte-sm:justify-end bitte-sm:space-x-2",
       className
     )}
     {...props}
@@ -87,7 +87,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      "bitte-text-lg bitte-font-semibold bitte-leading-none bitte-tracking-tight",
       className
     )}
     {...props}
@@ -101,7 +101,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("bitte-text-sm bitte-text-muted-foreground", className)}
     {...props}
   />
 ));

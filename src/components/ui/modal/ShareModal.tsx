@@ -52,10 +52,10 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
   const dialogTitleInfo = (
     <>
-      <DialogTitle className='mb-2 text-[20px] font-semibold'>
+      <DialogTitle className="bitte-mb-2 text-[20px] bitte-font-semibold">
         {title}
       </DialogTitle>
-      {subtitle && <p className='text-[14px]'>{subtitle}</p>}
+      {subtitle && <p className="text-[14px]">{subtitle}</p>}
     </>
   );
 
@@ -63,51 +63,51 @@ const ShareModal: React.FC<ShareModalProps> = ({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent className='sm:w-[400px]'>
+        <DialogContent className="sm:w-[400px]">
           <DialogHeader>
-            <DialogTitle className='mb-2 text-center text-xl text-gray-800'>
+            <DialogTitle className="bitte-mb-2 bitte-text-center bitte-text-xl bitte-text-gray-800">
               {title}
             </DialogTitle>
-            <DialogDescription className='text-center text-gray-800'>
+            <DialogDescription className="bitte-text-center bitte-text-gray-800">
               {subtitle}
             </DialogDescription>
           </DialogHeader>
-          <div className='mt-4 grid w-full max-w-sm items-center gap-1.5'>
-            <Label htmlFor='smart-action-link' className='text-gray-800'>
+          <div className="bitte-mt-4 bitte-grid bitte-w-full bitte-max-w-sm bitte-items-center bitte-gap-1.5">
+            <Label htmlFor='smart-action-link' className="bitte-text-gray-800">
               Link
             </Label>
             <Input
               id='smart-action-link'
               value={shareLink}
               readOnly
-              className='text-gray-800'
+              className="bitte-text-gray-800"
             />
           </div>
-          <div className='flex items-center gap-4'>
+          <div className="bitte-flex bitte-items-center bitte-gap-4">
             <Button
-              className='w-full'
+              className="bitte-w-full"
               variant='outline'
               onClick={() => window.open(social.twitter, "_blank")}
             >
-              <img src='/twitter_black.svg' className='theme-icon h-5 w-5' />
+              <img src='/twitter_black.svg' className="bitte-theme-icon bitte-h-5 bitte-w-5" />
             </Button>
             <Button
-              className='w-full'
+              className="bitte-w-full"
               variant='outline'
               onClick={() => window.open(social.telegram, "_blank")}
             >
-              <img src='/telegram_black.svg' className='theme-icon h-5 w-5' />
+              <img src='/telegram_black.svg' className="bitte-theme-icon bitte-h-5 bitte-w-5" />
             </Button>
             <Button
-              className='w-full'
+              className="bitte-w-full"
               variant='outline'
               onClick={() => window.open(social.facebook, "_blank")}
             >
-              <img src='/facebook_black.svg' className='theme-icon h-5 w-5' />
+              <img src='/facebook_black.svg' className="bitte-theme-icon bitte-h-5 bitte-w-5" />
             </Button>
           </div>
           <div>
-            <Button className='w-full' onClick={handleCopyLink}>
+            <Button className="bitte-w-full" onClick={handleCopyLink}>
               {showLinkCopiedText ? "Copied" : "Copy Link"}
             </Button>
           </div>
@@ -118,48 +118,48 @@ const ShareModal: React.FC<ShareModalProps> = ({
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='border-0 focus:ring-0' asChild>
+      <DialogTrigger className="bitte-border-0 bitte-focus:ring-0" asChild>
         {trigger}
       </DialogTrigger>
-      <DrawerContent className='flex gap-4 px-2'>
-        <div className='text-center text-gray-800'>{dialogTitleInfo}</div>
-        <div className='mt-4 grid w-full items-center gap-1.5'>
-          <Label htmlFor='smart-action-link' className='text-gray-800'>
+      <DrawerContent className="bitte-flex bitte-gap-4 bitte-px-2">
+        <div className="bitte-text-center bitte-text-gray-800">{dialogTitleInfo}</div>
+        <div className="bitte-mt-4 bitte-grid bitte-w-full bitte-items-center bitte-gap-1.5">
+          <Label htmlFor='smart-action-link' className="bitte-text-gray-800">
             Link
           </Label>
           <Input
             id='smart-action-link'
             value={shareLink}
             readOnly
-            className='text-gray-800'
+            className="bitte-text-gray-800"
           />
         </div>
-        <div className='flex items-center gap-4'>
+        <div className="bitte-flex bitte-items-center bitte-gap-4">
           <Button
-            className='w-full'
+            className="bitte-w-full"
             variant='outline'
             onClick={() => window.open(social.twitter, "_blank")}
           >
-            <img src='/twitter_black.svg' className='theme-icon h-5 w-5' />
+            <img src='/twitter_black.svg' className="bitte-theme-icon bitte-h-5 bitte-w-5" />
           </Button>
           <Button
-            className='w-full'
+            className="bitte-w-full"
             variant='outline'
             onClick={() => window.open(social.telegram, "_blank")}
           >
-            <img src='/telegram_black.svg' className='theme-icon h-5 w-5' />
+            <img src='/telegram_black.svg' className="bitte-theme-icon bitte-h-5 bitte-w-5" />
           </Button>
           <Button
-            className='w-full'
+            className="bitte-w-full"
             variant='outline'
             onClick={() => window.open(social.facebook, "_blank")}
           >
-            <img src='/facebook_black.svg' className='theme-icon h-5 w-5' />
+            <img src='/facebook_black.svg' className="bitte-theme-icon bitte-h-5 bitte-w-5" />
           </Button>
         </div>
-        <DrawerFooter className='gap-4 border-t border-shad-gray-20 p-4'>
+        <DrawerFooter className="bitte-gap-4 bitte-border-t bitte-border-shad-gray-20 bitte-p-4">
           <div>
-            <Button className='w-full' onClick={handleCopyLink}>
+            <Button className="bitte-w-full" onClick={handleCopyLink}>
               {showLinkCopiedText ? "Copied" : "Copy Link"}
             </Button>
           </div>

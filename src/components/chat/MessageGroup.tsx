@@ -90,7 +90,7 @@ export const MessageGroup = ({
                   {evmSignRequest ? (
                     <EvmTxCard evmData={evmSignRequest} />
                   ) : (
-                    <div className='my-6'>
+                    <div className="bitte-my-6">
                       <ReviewTransaction
                         chatId={chatId}
                         creator={creator}
@@ -109,20 +109,20 @@ export const MessageGroup = ({
         }
 
         return (
-          <Card className='p-6' key={`${message.id}-${index}`}>
+          <Card className="bitte-p-6" key={`${message.id}-${index}`}>
             <Accordion
               type='single'
               collapsible
-              className='w-full'
+              className="bitte-w-full"
               defaultValue={uniqueKey}
             >
-              <AccordionItem value={uniqueKey} className='border-0'>
-                <AccordionTrigger className='p-0 hover:no-underline'>
-                  <div className='flex items-center justify-center gap-2'>
+              <AccordionItem value={uniqueKey} className="bitte-border-0">
+                <AccordionTrigger className="bitte-p-0 bitte-hover:no-underline">
+                  <div className="bitte-flex bitte-items-center bitte-justify-center bitte-gap-2">
                     {message.role === "user" ? (
                       <>
-                        <MessageSquare className='h-[18px] w-[18px]' />
-                        <p className='text-[14px] text-shad-blue-100'>
+                        <MessageSquare className="h-[18px] w-[18px]" />
+                        <p className="text-[14px] bitte-text-shad-blue-100">
                           {creator || accountId}
                         </p>
                       </>
@@ -132,14 +132,14 @@ export const MessageGroup = ({
                           src={agentImage}
                           fallbackSrc={BITTE_BLACK_IMG}
                           className={cn(
-                            "h-[18px] w-[18px] rounded",
+                            "h-[18px] w-[18px] bitte-rounded",
                             agentImage === BITTE_BLACK_IMG
-                              ? "invert-0 dark:invert"
-                              : "dark:bg-card-list"
+                              ? "bitte-invert-0 bitte-dark:invert"
+                              : "bitte-dark:bg-card-list"
                           )}
                           alt={`${agentName} icon`}
                         />
-                        <p className='text-[14px]'>
+                        <p className="text-[14px]">
                           {agentName ?? "Bitte Assistant"}
                         </p>
                       </>
@@ -147,10 +147,10 @@ export const MessageGroup = ({
                   </div>
                 </AccordionTrigger>
 
-                <AccordionContent className='mt-6 border-t border-gray-40 pb-0'>
-                  <div className='mt-6 flex w-full flex-col gap-2'>
+                <AccordionContent className="bitte-mt-6 bitte-border-t bitte-border-gray-40 bitte-pb-0">
+                  <div className="bitte-mt-6 bitte-flex bitte-w-full bitte-flex-col bitte-gap-2">
                     {message.content && (
-                      <div className='flex flex-col gap-4 text-zinc-800 dark:text-zinc-300'>
+                      <div className="bitte-flex bitte-flex-col bitte-gap-4 bitte-text-zinc-800 bitte-dark:text-zinc-300">
                         <SAMessage content={message.content} />
                       </div>
                     )}
@@ -166,13 +166,13 @@ export const MessageGroup = ({
 
                       return (
                         <div key={`${toolCallId}-${index}`}>
-                          <div className='flex w-full items-center justify-between text-[12px] text-text-secondary'>
+                          <div className="bitte-flex bitte-w-full bitte-items-center bitte-justify-between text-[12px] bitte-text-text-secondary">
                             <div>Tool Call</div>
-                            <div className='rounded bg-shad-white-10 px-2 py-1'>
+                            <div className="bitte-rounded bitte-bg-shad-white-10 bitte-px-2 bitte-py-1">
                               <code>{toolName}</code>
                             </div>
                           </div>
-                          <div className='p-4'>
+                          <div className="bitte-p-4">
                             {(() => {
                               if (state === "result") {
                                 switch (toolName) {
@@ -180,13 +180,13 @@ export const MessageGroup = ({
                                     return (
                                       <img
                                         src={result.data?.url}
-                                        className='w-full'
+                                        className="bitte-w-full"
                                       />
                                     );
                                   }
                                   case BittePrimitiveName.CREATE_DROP: {
                                     return (
-                                      <div className='flex items-center justify-center gap-2'>
+                                      <div className="bitte-flex bitte-items-center bitte-justify-center bitte-gap-2">
                                         <Button asChild variant='link'>
                                           <a
                                             href={`/claim/${result.data}`}
@@ -216,7 +216,7 @@ export const MessageGroup = ({
                             })()}
                           </div>
 
-                          <div className='mt-2 border-t border-gray-40' />
+                          <div className="bitte-mt-2 bitte-border-t bitte-border-gray-40" />
                         </div>
                       );
                     })}
