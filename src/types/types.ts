@@ -174,21 +174,12 @@ export enum Model {
   Sonnet = "sonnet",
 }
 
-export type ChatComponentColors = {
-  generalBackground?: string;
-  messageBackground?: string;
-  textColor?: string;
-  buttonColor?: string;
-  borderColor?: string;
-};
-
 /**
  * Props for the BitteAiChat component
  * @param agentid - ID of the AI agent to use for chat interactions
  * @param apiUrl - Internal API URL for chat communication (e.g. api/chat).
  *                 Used to proxy requests to bitte api to not expose api key.
  * @param wallet - Optional wallet configuration for allowing transactions through the component see {@link WalletOptions} for more details
- * @param colors - Optional custom colors for styling the chat UI components
  */
 export interface BitteAiChatProps {
   agentid: string;
@@ -196,12 +187,12 @@ export interface BitteAiChatProps {
   historyApiUrl?: string;
   messages?: Message[];
   wallet?: WalletOptions;
-  colors?: ChatComponentColors;
   options?: {
     agentName?: string;
     agentImage?: string;
     chatId?: string;
   };
+  theme?: "dark" | "light";
 }
 
 /**
@@ -288,7 +279,6 @@ export type TransactionListProps = {
   setShowTxnDetail: (showTxnDetail: boolean) => void;
   costs: Cost[];
   gasPrice: string;
-  borderColor: string;
 };
 
 export interface Cost {

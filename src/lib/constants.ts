@@ -17,14 +17,6 @@ export const PLUGINS_OAI_VECTOR_STORE = "oai-vector-store-ai-plugins";
 export const ASSISTANTS_OAI_VECTOR_STORE = "oai-vector-store-ai-assistants";
 export const TOOLS_OAI_VECTOR_STORE = "oai-vector-store-ai-tools";
 
-export const defaultColors = {
-  borderColor: "#e5e7eb",
-  buttonColor: "#000000",
-  generalBackground: "#ffffff",
-  messageBackground: "#f9fafb",
-  textColor: "#000000",
-} as const;
-
 export enum BittePrimitiveName {
   TRANSFER_FT = "transfer-ft",
   GENERATE_TRANSACTION = "generate-transaction",

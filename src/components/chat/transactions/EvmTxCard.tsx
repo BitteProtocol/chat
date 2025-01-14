@@ -18,15 +18,7 @@ import LoadingMessage from "./../LoadingMessage";
 import { TransactionDetail } from "./TransactionDetail";
 import { TransactionResult } from "./TransactionResult";
 
-export const EvmTxCard = ({
-  evmData,
-  messageBackgroundColor,
-  borderColor,
-}: {
-  evmData?: SignRequestData;
-  messageBackgroundColor: string;
-  borderColor: string;
-}) => {
+export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
   const { width } = useWindowSize();
   const isMobile = !!width && width < 640;
   const [errorMsg, setErrorMsg] = useState("");
@@ -74,17 +66,8 @@ export const EvmTxCard = ({
   return (
     <>
       <div className='mb-8 flex justify-center'>
-        <Card
-          className='w-full'
-          style={{
-            backgroundColor: messageBackgroundColor,
-            borderColor: borderColor,
-          }}
-        >
-          <CardHeader
-            className='border-b p-4 text-center md:p-6'
-            style={{ borderColor: borderColor }}
-          >
+        <Card className='w-full'>
+          <CardHeader className='border-b border-slate-200 p-4 text-center md:p-6'>
             <p className='text-xl font-semibold'>EVM Transaction</p>
           </CardHeader>
           <div>

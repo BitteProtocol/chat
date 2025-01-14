@@ -5,7 +5,6 @@ import { getNearblocksURL, shortenString } from "../../../lib/utils";
 export const TransactionResult = ({
   result: { evm, near },
   accountId,
-  textColor,
 }: any) => {
   const scanUrl = evm?.txHash
     ? `${Network.fromChainId(evm.chainId).scanUrl}/tx/${evm.txHash}`
@@ -16,10 +15,7 @@ export const TransactionResult = ({
       <p className='text-center text-[14px] font-semibold'>
         Transaction success
       </p>
-      <div
-        className='flex flex-col gap-4 p-6 text-[14px]'
-        style={{ color: textColor }}
-      >
+      <div className='flex flex-col gap-4 p-6 text-[14px]'>
         {evm?.txHash && scanUrl && (
           <div className='flex items-center justify-between px-6 text-[14px]'>
             <div className='text-text-secondary'>EVM Transaction</div>

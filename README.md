@@ -170,7 +170,6 @@ interface BitteAiChatProps {
   apiUrl: string; // Your API route path (e.g., "/api/chat")
   historyApiUrl?: string; // Your history API route to keep context when signing transactions
   wallet?: WalletOptions; // Wallet configuration
-  colors?: ChatComponentColors;
   options?: {
     agentName?: string; // Custom agent name
     agentImage?: string; // Custom agent image URL
@@ -189,17 +188,7 @@ interface BitteAiChatProps {
 
 ## Styling
 
-The component can be customized using the `colors` prop:
-
-```typescript
-type ChatComponentColors = {
-  generalBackground?: string; // Chat container background
-  messageBackground?: string; // Message bubble background
-  textColor?: string; // Text color
-  buttonColor?: string; // Button color
-  borderColor?: string; // Border color
-};
-```
+The component has support for dark/light theme. The component will display the colors of the current selected theme in the consumer app.
 
 ## Example Projects
 
