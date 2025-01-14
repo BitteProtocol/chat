@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { BITTE_BLACK_IMG } from "../../lib/images";
 
 const IMAGE_API =
   "https://image-cache-service-z3w7d7dnea-ew.a.run.app/media?url=";
@@ -53,7 +54,7 @@ export const MarkdownTable = ({ content }: { content: string }) => {
               const imageMatch = imageMatchQuery?.[1];
               const imageValue = imageMatch?.startsWith("https://")
                 ? imageMatch
-                : "/bitte-symbol-black.svg";
+                : BITTE_BLACK_IMG;
 
               return (
                 <TableCell

@@ -1,6 +1,6 @@
 {
   "name": "@bitte-ai/chat",
-  "version": "0.0.1-beta-28",
+  "version": "0.0.1-beta-29",
   "description": "Bitte AI chat component",
   "files": [
     "dist"
