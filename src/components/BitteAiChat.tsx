@@ -22,7 +22,6 @@ export const BitteAiChat = ({
   const chatId =
     typeof window !== "undefined" && sessionStorage.getItem("chatId");
 
-  console.log("pnpm link working 2222");
   useEffect(() => {
     const fetchData = async () => {
       if (chatId && historyApiUrl) {

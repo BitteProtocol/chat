@@ -64,7 +64,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
-    "near-api-js": "^5.0.1",
+    "near-api-js": "4.0.3",
     "near-safe": "^0.9.4",
     "openai": "^4.73.1",
     "openapi-types": "^12.1.3",
