@@ -175,6 +175,7 @@ interface BitteAiChatProps {
     agentImage?: string; // Custom agent image URL
     chatId?: string; // Custom chat ID
   };
+  theme?: "dark" | "light"; // Custom the UI of the chat
 }
 ```
 
