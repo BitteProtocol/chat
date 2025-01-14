@@ -21,6 +21,8 @@ import { Button } from "../ui/button";
 import { BitteSpinner } from "./BitteSpinner";
 import { SmartActionsInput } from "./ChatInput";
 import { MessageGroup } from "./MessageGroup";
+import { BITTE_IMG } from "../../lib/images";
+
 
 export const ChatContent = ({
   agentid,
@@ -153,7 +155,7 @@ export const ChatContent = ({
           >
             {messages.length === 0 && (
               <div className='flex h-full flex-col items-center justify-center absolute left-1/2 -translate-x-1/2'>
-                <img src='/bitte_transparent.svg' className='mx-auto mb-4' />
+                <img className='mx-auto mb-4' src={BITTE_IMG} />
                 <div className='mb-14 text-[20px] font-medium text-gray-40'>
                   Execute Transactions with AI
                 </div>
