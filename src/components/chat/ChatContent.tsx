@@ -129,7 +129,7 @@ export const ChatContent = ({
 
   return (
     <div className='flex h-full w-full flex-col gap-4 text-justify'>
-      <div className='relative flex h-[400px] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col border order-shad-gray-20 bg-gray-30 lg:px-6'>
+      <div className='relative flex h-[calc(100vh-204px)] xl:h-[calc(100vh-172px)] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col border order-shad-gray-20 bg-gray-30 lg:px-6'>
         {!isAtBottom ? (
           <Button
             size='icon'
