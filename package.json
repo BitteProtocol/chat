@@ -1,6 +1,6 @@
 {
   "name": "bitte-ai-chat",
-  "version": "0.0.1-beta-17",
+  "version": "0.0.1-beta-18",
   "description": "Bitte AI chat component",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

@@ -22,7 +22,12 @@ import { BitteSpinner } from "./BitteSpinner";
 import { SmartActionsInput } from "./ChatInput";
 import { MessageGroup } from "./MessageGroup";
 
-export const ChatContent = ({ agentid, apiUrl, options }: BitteAiChatProps) => {
+export const ChatContent = ({
+  agentid,
+  apiUrl,
+  options,
+  messages: initialMessages,
+}: BitteAiChatProps) => {
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
@@ -45,6 +50,7 @@ export const ChatContent = ({ agentid, apiUrl, options }: BitteAiChatProps) => {
       console.error(e);
     },
     sendExtraMessageFields: true,
+    initialMessages,
     body: {
       id: chatId,
       config: {
@@ -150,6 +156,7 @@ export const ChatContent = ({ agentid, apiUrl, options }: BitteAiChatProps) => {
                 const groupKey = `group-${messages?.[0]?.id}`;
                 return (
                   <MessageGroup
+                    chatId={chatId}
                     key={groupKey}
                     groupKey={groupKey}
                     accountId={accountId!}

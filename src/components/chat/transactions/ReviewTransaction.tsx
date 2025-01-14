@@ -21,6 +21,7 @@ export const ReviewTransaction = ({
   transactions,
   warnings,
   walletLoading,
+  chatId,
 }: {
   transactions: Transaction[];
   warnings?: BitteToolWarning[] | null;
@@ -28,6 +29,7 @@ export const ReviewTransaction = ({
   evmData?: SafeEncodedSignRequest;
   agentId: string;
   walletLoading?: boolean;
+  chatId: string | undefined;
 }) => {
   const [showTxnDetail, setShowTxnDetail] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -89,8 +91,13 @@ export const ReviewTransaction = ({
   }
 
   const handleSmartAction = async () => {
+    // TO DO: add saving to local storage chat id here
     setIsLoading(true);
     setErrorMsg("");
+
+    if (chatId) {
+      sessionStorage.setItem("chatId", chatId);
+    }
     try {
       const successInfo = (await handleTxn({
         transactions: transactions,

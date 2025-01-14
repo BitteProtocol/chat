@@ -184,6 +184,8 @@ export enum Model {
 export interface BitteAiChatProps {
   agentid: string;
   apiUrl: string;
+  historyApiUrl?: string;
+  messages?: Message[];
   wallet?: WalletOptions;
   options?: {
     agentName?: string;

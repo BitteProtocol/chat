@@ -64,7 +64,7 @@ importers:
         version: 5.0.1(encoding@0.1.13)
       near-safe:
         specifier: ^0.9.4
-        version: 0.9.4(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8)
+        version: 0.9.4(@upstash/redis@1.34.3)(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8)
       openai:
         specifier: ^4.73.1
         version: 4.73.1(encoding@0.1.13)(zod@3.23.8)
@@ -1166,6 +1166,9 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
+  '@upstash/redis@1.34.3':
+    resolution: {integrity: sha512-VT25TyODGy/8ljl7GADnJoMmtmJ1F8d84UXfGonRRF8fWYJz7+2J6GzW+a6ETGtk4OyuRTt7FRSvFG5GvrfSdQ==}
+
   '@walletconnect/auth-client@2.1.2':
     resolution: {integrity: sha512-ubJLn+vGb8sTdBFX6xAh4kjR5idrtS3RBngQWaJJJpEPBQmxMb8pM2q0FIRs8Is4K6jKy+uEhusMV+7ZBmTzjw==}
     engines: {node: '>=16'}
@@ -1516,6 +1519,9 @@ packages:
 
   crossws@0.3.1:
     resolution: {integrity: sha512-HsZgeVYaG+b5zA+9PbIPGq4+J/CJynJuearykPsXx4V/eMhyQ5EDVg3Ak2FBZtVXCiOLu/U7IiwDHTr9MA+IKw==}
+
+  crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
 
   css-declaration-sorter@6.4.1:
     resolution: {integrity: sha512-rtdthzxKuyq6IzqX6jEcIzQF/YqccluefyCYheovBOLhFT/drQA9zj/UbRAa9J7C0o6EG6u3E6g+vKkay7/k3g==}
@@ -4568,19 +4574,24 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@walletconnect/auth-client@2.1.2(encoding@0.1.13)':
+  '@upstash/redis@1.34.3':
+    dependencies:
+      crypto-js: 4.2.0
+    optional: true
+
+  '@walletconnect/auth-client@2.1.2(@upstash/redis@1.34.3)(encoding@0.1.13)':
     dependencies:
       '@ethersproject/hash': 5.7.0
       '@ethersproject/transactions': 5.7.0
       '@stablelib/random': 1.0.2
       '@stablelib/sha256': 1.0.1
-      '@walletconnect/core': 2.17.1
+      '@walletconnect/core': 2.17.1(@upstash/redis@1.34.3)
       '@walletconnect/events': 1.0.1
       '@walletconnect/heartbeat': 1.2.2
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/logger': 2.1.2
       '@walletconnect/time': 1.0.2
-      '@walletconnect/utils': 2.17.1
+      '@walletconnect/utils': 2.17.1(@upstash/redis@1.34.3)
       events: 3.3.0
       isomorphic-unfetch: 3.1.0(encoding@0.1.13)
     transitivePeerDependencies:
@@ -4601,21 +4612,21 @@ snapshots:
       - ioredis
       - utf-8-validate
 
-  '@walletconnect/core@2.17.1':
+  '@walletconnect/core@2.17.1(@upstash/redis@1.34.3)':
     dependencies:
       '@walletconnect/heartbeat': 1.2.2
       '@walletconnect/jsonrpc-provider': 1.0.14
       '@walletconnect/jsonrpc-types': 1.0.4
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/jsonrpc-ws-connection': 1.0.14
-      '@walletconnect/keyvaluestorage': 1.1.1
+      '@walletconnect/keyvaluestorage': 1.1.1(@upstash/redis@1.34.3)
       '@walletconnect/logger': 2.1.2
       '@walletconnect/relay-api': 1.0.11
       '@walletconnect/relay-auth': 1.0.4
       '@walletconnect/safe-json': 1.0.2
       '@walletconnect/time': 1.0.2
-      '@walletconnect/types': 2.17.1
-      '@walletconnect/utils': 2.17.1
+      '@walletconnect/types': 2.17.1(@upstash/redis@1.34.3)
+      '@walletconnect/utils': 2.17.1(@upstash/redis@1.34.3)
       '@walletconnect/window-getters': 1.0.1
       events: 3.3.0
       lodash.isequal: 4.5.0
@@ -4679,11 +4690,11 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@walletconnect/keyvaluestorage@1.1.1':
+  '@walletconnect/keyvaluestorage@1.1.1(@upstash/redis@1.34.3)':
     dependencies:
       '@walletconnect/safe-json': 1.0.2
       idb-keyval: 6.2.1
-      unstorage: 1.13.1(idb-keyval@6.2.1)
+      unstorage: 1.13.1(@upstash/redis@1.34.3)(idb-keyval@6.2.1)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -4720,16 +4731,16 @@ snapshots:
     dependencies:
       tslib: 1.14.1
 
-  '@walletconnect/sign-client@2.17.1':
+  '@walletconnect/sign-client@2.17.1(@upstash/redis@1.34.3)':
     dependencies:
-      '@walletconnect/core': 2.17.1
+      '@walletconnect/core': 2.17.1(@upstash/redis@1.34.3)
       '@walletconnect/events': 1.0.1
       '@walletconnect/heartbeat': 1.2.2
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/logger': 2.1.2
       '@walletconnect/time': 1.0.2
-      '@walletconnect/types': 2.17.1
-      '@walletconnect/utils': 2.17.1
+      '@walletconnect/types': 2.17.1(@upstash/redis@1.34.3)
+      '@walletconnect/utils': 2.17.1(@upstash/redis@1.34.3)
       events: 3.3.0
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -4752,12 +4763,12 @@ snapshots:
     dependencies:
       tslib: 1.14.1
 
-  '@walletconnect/types@2.17.1':
+  '@walletconnect/types@2.17.1(@upstash/redis@1.34.3)':
     dependencies:
       '@walletconnect/events': 1.0.1
       '@walletconnect/heartbeat': 1.2.2
       '@walletconnect/jsonrpc-types': 1.0.4
-      '@walletconnect/keyvaluestorage': 1.1.1
+      '@walletconnect/keyvaluestorage': 1.1.1(@upstash/redis@1.34.3)
       '@walletconnect/logger': 2.1.2
       events: 3.3.0
     transitivePeerDependencies:
@@ -4775,7 +4786,7 @@ snapshots:
       - '@vercel/kv'
       - ioredis
 
-  '@walletconnect/utils@2.17.1':
+  '@walletconnect/utils@2.17.1(@upstash/redis@1.34.3)':
     dependencies:
       '@ethersproject/hash': 5.7.0
       '@ethersproject/transactions': 5.7.0
@@ -4785,12 +4796,12 @@ snapshots:
       '@stablelib/sha256': 1.0.1
       '@stablelib/x25519': 1.0.3
       '@walletconnect/jsonrpc-utils': 1.0.8
-      '@walletconnect/keyvaluestorage': 1.1.1
+      '@walletconnect/keyvaluestorage': 1.1.1(@upstash/redis@1.34.3)
       '@walletconnect/relay-api': 1.0.11
       '@walletconnect/relay-auth': 1.0.4
       '@walletconnect/safe-json': 1.0.2
       '@walletconnect/time': 1.0.2
-      '@walletconnect/types': 2.17.1
+      '@walletconnect/types': 2.17.1(@upstash/redis@1.34.3)
       '@walletconnect/window-getters': 1.0.1
       '@walletconnect/window-metadata': 1.0.1
       detect-browser: 5.3.0
@@ -4812,16 +4823,16 @@ snapshots:
       - '@vercel/kv'
       - ioredis
 
-  '@walletconnect/web3wallet@1.16.1(encoding@0.1.13)':
+  '@walletconnect/web3wallet@1.16.1(@upstash/redis@1.34.3)(encoding@0.1.13)':
     dependencies:
-      '@walletconnect/auth-client': 2.1.2(encoding@0.1.13)
-      '@walletconnect/core': 2.17.1
+      '@walletconnect/auth-client': 2.1.2(@upstash/redis@1.34.3)(encoding@0.1.13)
+      '@walletconnect/core': 2.17.1(@upstash/redis@1.34.3)
       '@walletconnect/jsonrpc-provider': 1.0.14
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/logger': 2.1.2
-      '@walletconnect/sign-client': 2.17.1
-      '@walletconnect/types': 2.17.1
-      '@walletconnect/utils': 2.17.1
+      '@walletconnect/sign-client': 2.17.1(@upstash/redis@1.34.3)
+      '@walletconnect/types': 2.17.1(@upstash/redis@1.34.3)
+      '@walletconnect/utils': 2.17.1(@upstash/redis@1.34.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -5114,6 +5125,9 @@ snapshots:
   crossws@0.3.1:
     dependencies:
       uncrypto: 0.1.3
+
+  crypto-js@4.2.0:
+    optional: true
 
   css-declaration-sorter@6.4.1(postcss@8.4.49):
     dependencies:
@@ -6235,9 +6249,9 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  near-ca@0.7.3(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8):
+  near-ca@0.7.3(@upstash/redis@1.34.3)(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8):
     dependencies:
-      '@walletconnect/web3wallet': 1.16.1(encoding@0.1.13)
+      '@walletconnect/web3wallet': 1.16.1(@upstash/redis@1.34.3)(encoding@0.1.13)
       elliptic: 6.6.1
       near-api-js: 5.0.1(encoding@0.1.13)
       viem: 2.21.53(typescript@5.7.2)(zod@3.23.8)
@@ -6261,11 +6275,11 @@ snapshots:
       - utf-8-validate
       - zod
 
-  near-safe@0.9.4(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8):
+  near-safe@0.9.4(@upstash/redis@1.34.3)(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8):
     dependencies:
       '@safe-global/safe-gateway-typescript-sdk': 3.22.4
       near-api-js: 5.0.1(encoding@0.1.13)
-      near-ca: 0.7.3(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8)
+      near-ca: 0.7.3(@upstash/redis@1.34.3)(encoding@0.1.13)(typescript@5.7.2)(zod@3.23.8)
       semver: 7.6.3
       viem: 2.21.53(typescript@5.7.2)(zod@3.23.8)
     transitivePeerDependencies:
@@ -7224,7 +7238,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
 
-  unstorage@1.13.1(idb-keyval@6.2.1):
+  unstorage@1.13.1(@upstash/redis@1.34.3)(idb-keyval@6.2.1):
     dependencies:
       anymatch: 3.1.3
       chokidar: 3.6.0
@@ -7237,6 +7251,7 @@ snapshots:
       ofetch: 1.4.1
       ufo: 1.5.4
     optionalDependencies:
+      '@upstash/redis': 1.34.3
       idb-keyval: 6.2.1
 
   untun@0.1.3:
