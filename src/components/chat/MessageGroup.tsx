@@ -25,6 +25,7 @@ import { SAMessage } from "./Message";
 import ShareDropButton from "./ShareDropButton";
 import { EvmTxCard } from "./transactions/EvmTxCard";
 import { ReviewTransaction } from "./transactions/ReviewTransaction";
+import { BITTE_BLACK_IMG } from "../../lib/images";
 
 interface MessageGroupProps {
   chatId: string | undefined;
@@ -129,10 +130,10 @@ export const MessageGroup = ({
                       <>
                         <ImageWithFallback
                           src={agentImage}
-                          fallbackSrc='/bitte-symbol-black.svg'
+                          fallbackSrc={BITTE_BLACK_IMG}
                           className={cn(
                             "h-[18px] w-[18px] rounded",
-                            agentImage === "/bitte-symbol-black.svg"
+                            agentImage === BITTE_BLACK_IMG
                               ? "invert-0 dark:invert"
                               : "dark:bg-card-list"
                           )}
