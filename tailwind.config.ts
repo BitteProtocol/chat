@@ -1,8 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  prefix: "ai-chat-",
+import type { Config } from "tailwindcss";
+
+export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class",
   theme: {
     extend: {
       screens: {
@@ -14,5 +13,6 @@ module.exports = {
       },
     },
   },
+  darkMode: "class",
   plugins: [],
-};
+} satisfies Config;
