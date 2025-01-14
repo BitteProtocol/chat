@@ -2,7 +2,6 @@
   "name": "@bitte-ai/chat",
   "version": "0.0.1-beta-27",
   "description": "Bitte AI chat component",
-
   "files": [
     "dist"
   ],
@@ -23,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BitteProtocol/bitte-ai-chat"
+    "url": "git+https://github.com/BitteProtocol/bitte-ai-chat.git"
   },
   "author": "Bitte Team",
   "license": "MIT",
