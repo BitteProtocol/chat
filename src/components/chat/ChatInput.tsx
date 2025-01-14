@@ -72,7 +72,7 @@ export const SmartActionsInput = ({
       <Button
         type='submit'
         disabled={!input || isLoading}
-        className='h-[42px] lg:w-[42px] p-0 disabled:opacity-20 bg-gray-800'
+        className='h-[42px] w-full lg:w-[42px] p-0 disabled:opacity-20 bg-gray-800'
       >
         <ArrowUp className='h-[16px] w-[16px] hidden lg:block' />
         <span className='lg:hidden'>Send</span>

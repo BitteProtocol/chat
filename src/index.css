@@ -1,3 +1,379 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .light {
+    --background: #ffffff;
+    --foreground: #0d0d0d;
+
+    --card: #ffffff;
+    --card-foreground: #0d0d0d;
+
+    --popover: #ffffff;
+    --popover-foreground: #0d0d0d;
+
+    --primary: #1c1c1c;
+    --primary-hover: #1c1c1ce6;
+    --primary-foreground: #f8fafc;
+
+    --secondary: #f1f5f9;
+    --secondary-hover: #f1f5f9cc;
+    --secondary-foreground: #1c1c1c;
+
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+
+    --accent: #f1f5f9;
+    --accent-foreground: #1c1c1c;
+
+    --destructive: #d50000;
+    --destructive-foreground: #e6e6e6;
+
+    --border: #ebebeb;
+    --input: #ebebeb;
+    --ring: #0d0d0d;
+
+    --radius: 0.5rem;
+
+    --text-primary: #000000;
+    --text-secondary: #64748b;
+
+    --blue-100: #c5d0ff33;
+    --blue-300: #4f58a3;
+    --blue-300-15: #ebedfb;
+    --blue-link: #3565e31a;
+    --mb-red: #ff2424;
+    --red-300: #c74c4c;
+    --red-300-10: #c74c4c1a;
+    --error-100: #ed5a5a;
+    --error-200: #7f0000;
+    --disabled-100: #eaeaeae3;
+    --disabled-200: #c4c4c4e3;
+    --warning-100: #ffe855;
+    --warning-200: #9d8c00e3;
+    --warning-300: #f2d413;
+    --warning-150: #f2d41333;
+    --wallet-accent-gray: #f1f2fc;
+    --wallet-gray: #f8f9fc;
+    --gray-30: #fafafa;
+    --gray-40: #cbd5e1;
+    --gray-50: #f5f5f5;
+    --gray-100: #f3f4f8;
+    --gray-150: #e8eaf0;
+    --gray-200: #d2d4da;
+    --gray-400: #9496a1;
+    --gray-500: #777986;
+    --gray-600: #5b5d6b;
+    --gray-700: #404252;
+    --gray-800: #0f172a;
+    --gray-900: #18181b;
+    --light-green: #d2e7d4;
+    --green-300: #0a7d6c;
+    --green-300-15: #0a7d6c1a;
+    --purple-100: #7344e4;
+    --purple-100-10: #f1ecfc;
+    --light-purple: #7344e41a;
+    --wallet-purple: #734995;
+    --shad-slate-5: #475569;
+    --shad-slate-20: #677489;
+    --shad-blue-100: #3565e3;
+    --shad-blue-100-10: #3565e30d;
+    --shad-white-10: #f1f5f9;
+    --shad-white-20: #fbfcfd;
+    --shad-white-30: #f8fafc;
+    --shad-error: #cb3a32;
+    --shad-error-5: #cb3a321a;
+    --shad-green-10: #1da02a;
+    --shad-green-20: #4ca054;
+    --shad-green-30: #59bb8f;
+    --shad-green-success: #56bd8f;
+    --shad-light-green: #4ca0541a;
+    --shad-orange-10: #e97a35;
+    --shad-text-gray-10: #334155;
+    --shad-gray-20: #e2e8f0;
+    --shad-gray-30: #f9f9fa;
+    --shad-gray-40: #94a3b8;
+    --shad-bg-light-blue-10: #3565e312;
+    --shad-light-gray-10: #f4f4f5;
+    --shad-yellow-10: #f3cd49;
+    --shad-yellow-20: #f3cd491a;
+    --shad-red-100: #dc2625;
+
+    --card-list: #f8fafc;
+    --card-list-hover: #3565e312;
+
+    --chart-1: 141.7 76.6% 73.1%;
+    --chart-2: 199.4 95.5% 73.9%;
+    --chart-3: 37.7 92.1% 50.2%;
+    --chart-4: 45.9 96.7% 64.5%;
+    --chart-5: 0 93.5% 81.8%;
+  }
+
+  .dark {
+    --background: #000000;
+    --foreground: #f6faff;
+
+    --card: #0a0a0a;
+    --card-foreground: #f6faff;
+
+    --popover: #0a0a0a;
+    --popover-foreground: #f6faff;
+
+    --primary: #fafafa;
+    --primary-hover: #fafafae6;
+    --primary-foreground: #1c1c1c;
+
+    --secondary: #272729;
+    --secondary-foreground: #f6faff;
+    --secondary-hover: #272729cc;
+
+    --muted: #272729;
+    --muted-foreground: #a2a2aa;
+
+    --accent: #27272a;
+    --accent-foreground: #f6faff;
+
+    --destructive: #992626;
+    --destructive-foreground: #f6faff;
+
+    --border: #2b2e3a;
+    --input: #272729;
+    --ring: #d9e1f0;
+
+    --text-primary: #ffffff;
+    --text-secondary: #64748b;
+
+    --purple-100: #c084fc;
+    --purple-100-10: #c084fc33;
+    --light-purple: #c084fc1a;
+    --wallet-purple: #c084fc;
+
+    --shad-yellow-10: #facc15;
+    --shad-yellow-20: #facc151a;
+    --warning-100: #facc15;
+    --warning-200: #facc15;
+    --warning-300: #facc15;
+    --warning-150: #facc1533;
+
+    --shad-green-10: #4ade80;
+    --shad-green-20: #4ade80;
+    --shad-green-30: #4ade80;
+    --shad-green-success: #4ade80;
+    --shad-light-green: #4ade801a;
+    --light-green: #4ade8033;
+
+    --mb-red: #ff2424;
+    --red-300: #f87171;
+    --red-300-10: #f871711a;
+    --error-100: #f87171;
+    --error-200: #f87171;
+    --shad-red-100: #f87171;
+    --shad-error: #f87171;
+
+    --blue-100: #60a5fa33;
+    --blue-300: #60a5fa;
+    --blue-300-15: #ebedfb;
+    --blue-link: #60a5fa1a;
+    --shad-blue-100: #60a5fa;
+    --shad-blue-100-10: #60a5fa0d;
+    --shad-bg-light-blue-10: #60a5fa33;
+
+    --shad-slate-5: #f8fafc;
+    --shad-slate-20: #f8fafc;
+
+    --wallet-accent-gray: #2d3748;
+    --wallet-gray: #334155;
+    --gray-30: #18181a;
+    --gray-40: #505865;
+    --gray-50: #f8fafc;
+    --gray-100: #f8fafc;
+    --gray-150: #f8fafc;
+    --gray-200: #f8fafc;
+    --gray-400: #f8fafc;
+    --gray-500: #f8fafc;
+    --gray-600: #f8fafc;
+    --gray-700: #f8fafc;
+    --gray-800: #ffffff;
+    --gray-900: #4ade80;
+    --shad-text-gray-10: #f8fafc;
+    --shad-gray-20: #334155;
+    --shad-gray-30: #18181a;
+    --shad-gray-40: #f8fafc;
+
+    --shad-white-10: #000000;
+    --shad-white-20: #000000;
+    --shad-white-30: #0f172a;
+
+    --card-list: #18181a;
+    --card-list-hover: #27272a;
+
+    --chart-1: 217.2 91.2% 59.8%;
+    --chart-2: 160.1 84.1% 39.4%;
+    --chart-3: 37.7 92.1% 50.2%;
+    --chart-4: 258.3 89.5% 66.3%;
+    --chart-5: 330.4 81.2% 60.4%;
+  }
+
+  .dark .theme-icon {
+    filter: brightness(0) invert(1);
+  }
+
+  .dark .bitte-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  /* spinner loading animation */
+  .dark .spinner-animation > div > svg g > g > path {
+    fill: #ffffff;
+  }
+
+  .dark .border-slate-200 {
+    border-color: #2b2e3a;
+  }
+
+  .icc {
+    --background: #00175f;
+    --foreground: #ffffff;
+
+    --card: 222.2, 84%, 4.9%;
+    --card-foreground: 210, 40%, 98%;
+
+    --popover: #00175f;
+    --popover-foreground: #ffffff;
+
+    --primary: #ffffff;
+    --primary-hover: #ffffffe6;
+    --primary-foreground: #0f172a;
+
+    --secondary: #022b72;
+    --secondary-hover: #022b72cc;
+    --secondary-foreground: #fafafa;
+
+    --muted: #33337c;
+    --muted-foreground: #ffffff;
+
+    --accent: #022b72;
+    --accent-foreground: #ffffff;
+
+    --destructive: 0, 62.8%, 30.6%;
+    --destructive-foreground: 210, 40%, 98%;
+
+    --border: #33337c;
+    --input: #33337c;
+    --ring: #33337c;
+
+    --gray-200: #33337c;
+    --gray-40: #33337c;
+    --gray-600: #b8b8d3;
+    --gray-700: #b8b8d3;
+    --gray-800: #ffffff;
+
+    --purple-100: #ffffff;
+    --purple-100-10: #7344e4;
+
+    --shad-white-10: #022b72;
+    --shad-white-20: #022b72;
+    --shad-white-30: #022b72;
+
+    --shad-blue-100-10: #022b72;
+    --shad-blue-100: #ffffff;
+    --shad-bg-light-blue-10: #022b72;
+
+    --shad-gray-30: #022b72;
+    --shad-gray-20: #33337c;
+
+    --shad-text-gray-10: #ffffff;
+
+    --wallet-accent-gray: #022b72;
+    --wallet-gray: #022b72;
+
+    --text-primary: #ffffff;
+    --text-secondary: #b8b8d3;
+  }
+
+  .icc .theme-icon {
+    filter: brightness(0) invert(1);
+  }
+
+  .icc .border-slate-200 {
+    border-color: #33337c;
+  }
+
+  .icc #copyLink {
+    background-color: #33337c;
+  }
+
+  /* spinner loading animation */
+  .icc .spinner-animation > div > svg g > g > path {
+    fill: #00175f;
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in {
+  animation: fadeInAnimation ease 1.7s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.spin-animation {
+  animation: spin 1s linear infinite;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* scrollbar */
+
+.disable-scrollbars::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+  /* Chrome/Safari/Webkit */
+}
+
+.disable-scrollbars {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.gradient-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    #000000 50%,
+    #000000 100%
+  );
+}
+
+.bg-icon {
+  background-position: top center;
+  background-size: 100% 100%;
+}

@@ -192,6 +192,7 @@ export interface BitteAiChatProps {
     agentImage?: string;
     chatId?: string;
   };
+  theme?: "dark" | "light";
 }
 
 /**

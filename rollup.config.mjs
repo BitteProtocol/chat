@@ -47,7 +47,7 @@ const config = [
       url(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript(),
       summary(),
       terser(),
     ],
