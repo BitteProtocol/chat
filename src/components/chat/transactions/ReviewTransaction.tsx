@@ -57,7 +57,7 @@ export const ReviewTransaction = ({
 
   if (!transactions || transactions.length === 0) {
     return (
-      <p className='my-6 overflow-auto text-center'>
+      <p className='my-6 overflow-auto text-center text-text-secondary'>
         Unable to create transaction.
       </p>
     );
@@ -136,7 +136,7 @@ export const ReviewTransaction = ({
           <div className='border-b' style={{ borderColor: borderColor }}>
             <div className='p-6'>
               <div className='flex items-center justify-between text-[14px]'>
-                <div>Asset</div>
+                <div className='text-text-secondary'>Asset</div>
                 <img
                   src={`${
                     txImage.includes("https://")
@@ -153,23 +153,25 @@ export const ReviewTransaction = ({
         ) : null}
         <div className='p-6'>
           <div className='flex items-center justify-between text-[14px]'>
-            <div>Tx Type</div>
+            <div className='text-text-secondary'>Tx Type</div>
 
             <TxnBadge transactionType={transactionType} />
           </div>
         </div>
         <div className='flex flex-col gap-6 p-6'>
           <div className='flex items-center justify-between text-[14px]'>
-            <div>Amount</div>
-            <div className='font-semibold'>{totalDeposit} NEAR</div>
+            <div className='text-text-secondary'>Amount</div>
+            <div className='font-semibold text-gray-800'>
+              {totalDeposit} NEAR
+            </div>
           </div>
           <div className='flex items-center justify-between text-[14px]'>
-            <div>From</div>
-            <div>{accountId}</div>
+            <div className='text-text-secondary'>From</div>
+            <div className='text-gray-800'>{accountId}</div>
           </div>
           <div className='flex items-center justify-between text-[14px]'>
-            <div>To</div>
-            <div>{to}</div>
+            <div className='text-text-secondary'>To</div>
+            <div className='text-gray-800'>{to}</div>
           </div>
         </div>
 

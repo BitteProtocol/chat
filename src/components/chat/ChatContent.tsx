@@ -169,6 +169,14 @@ export const ChatContent = ({
               !!agentid ? "h-[calc(100%-240px)]" : "h-[calc(100%-208px)]"
             )}
           >
+            {messages.length === 0 && (
+              <div className='flex h-full flex-col items-center justify-center'>
+                <img src='/bitte_transparent.svg' className='mx-auto mb-4' />
+                <div className='mb-14 text-[20px] font-medium text-gray-40'>
+                  Execute Transactions with AI
+                </div>
+              </div>
+            )}
             <div className='flex w-full flex-col space-y-4 py-6'>
               {groupedMessages.map((messages: Message[]) => {
                 const groupKey = `group-${messages?.[0]?.id}`;

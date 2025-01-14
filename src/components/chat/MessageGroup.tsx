@@ -140,7 +140,9 @@ export const MessageGroup = ({
                     {message.role === "user" ? (
                       <>
                         <MessageSquare className='h-[18px] w-[18px]' />
-                        <p className='text-[14px]'>{creator || accountId}</p>
+                        <p className='text-[14px] text-shad-blue-100'>
+                          {creator || accountId}
+                        </p>
                       </>
                     ) : (
                       <>
@@ -169,7 +171,7 @@ export const MessageGroup = ({
                 >
                   <div className='mt-6 flex w-full flex-col gap-2'>
                     {message.content && (
-                      <div className='flex flex-col gap-4'>
+                      <div className='flex flex-col gap-4 text-zinc-800 dark:text-zinc-300'>
                         <SAMessage content={message.content} />
                       </div>
                     )}
@@ -185,7 +187,7 @@ export const MessageGroup = ({
 
                       return (
                         <div key={`${toolCallId}-${index}`}>
-                          <div className='flex w-full items-center justify-between text-[12px]'>
+                          <div className='flex w-full items-center justify-between text-[12px] text-text-secondary'>
                             <div>Tool Call</div>
                             <div className='rounded bg-shad-white-10 px-2 py-1'>
                               <code>{toolName}</code>

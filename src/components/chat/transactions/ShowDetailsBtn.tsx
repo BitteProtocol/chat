@@ -15,11 +15,11 @@ export const ShowDetailsBtn = ({
       onClick={() => setShowDetails(!showDetails)}
     >
       {showDetails ? (
-        <ChevronsDownUp width={16} height={16} />
+        <ChevronsDownUp width={16} height={16} color='#64748B' />
       ) : (
-        <ChevronsUpDown width={16} height={16} />
+        <ChevronsUpDown width={16} height={16} color='#64748B' />
       )}
-      <span className='text-[12px]'>{displayName}</span>
-    </div>
+      <span className='text-[12px] text-text-secondary'>{displayName}</span>
+      </div>
   );
 };

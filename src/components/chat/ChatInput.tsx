@@ -57,7 +57,7 @@ export const SmartActionsInput = ({
         ) : (
           <div
             ref={agentNameRef}
-            className='w-fit rounded-full border border-dashed px-2 py-1 text-xs font-semibold uppercase absolute left-2 top-1/2 -translate-y-1/2 text-opacity-0'
+            className='w-fit rounded-full border border-dashed px-2 py-1 text-xs font-semibold uppercase absolute left-2 top-1/2 -translate-y-1/2 text-opacity-0 text-gray-40'
             style={{ borderColor: borderColor, color: textColor }}
           >
             {previousAgentName}

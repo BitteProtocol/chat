@@ -22,7 +22,7 @@ export const TransactionResult = ({
       >
         {evm?.txHash && scanUrl && (
           <div className='flex items-center justify-between px-6 text-[14px]'>
-            <div>EVM Transaction</div>
+            <div className='text-text-secondary'>EVM Transaction</div>
             <a
               className='flex gap-1 text-gray-800 items-center'
               href={scanUrl}
@@ -40,9 +40,9 @@ export const TransactionResult = ({
               key={receipt.transaction.hash}
               className='flex items-center justify-between px-6 text-[14px]'
             >
-              <div>Near Transaction</div>
+              <div className='text-text-secondary'>Near Transaction</div>
               <a
-                className='flex gap-1 items-center'
+                className='flex gap-1 items-center text-gray-800'
                 href={getNearblocksURL(accountId, receipt.transaction.hash)}
                 target='_blank'
                 rel='noopener noreferrer'
