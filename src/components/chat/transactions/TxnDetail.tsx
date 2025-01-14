@@ -32,13 +32,15 @@ export const TxnDetail = ({
           {transaction?.actions?.[0].type === "FunctionCall" && (
             <div className='relative flex w-full flex-col gap-4 rounded p-6'>
               {showTitle ? (
-                <span className='text-sm font-semibold'>Contract Details</span>
+                <span className='text-sm font-semibold text-gray-800'>
+                  Contract Details
+                </span>
               ) : null}
               <div className='flex flex-col items-start justify-start gap-2 text-sm md:flex-row md:items-center md:justify-between md:gap-0 md:space-x-4'>
-                <span>For Contract</span>
+                <span className='text-text-secondary'>For Contract</span>
                 <span className='cursor-pointer'>
                   <a
-                    className='flex gap-1 items-center'
+                    className='flex gap-1 items-center text-gray-800'
                     href={getNearblocksURL(accountId, undefined, contractName)}
                     target='_blank'
                   >
@@ -50,7 +52,7 @@ export const TxnDetail = ({
               {method && (
                 <>
                   <TxAccordion label='Function Call' methodName={method}>
-                    <div className='overflow-x-auto rounded bg-shad-white-10 p-2 text-sm'>
+                    <div className='overflow-x-auto rounded bg-shad-white-10 p-2 text-sm text-text-primary'>
                       <pre className='p-2 md:p-4'>
                         <code>
                           {JSON.stringify(

@@ -19,7 +19,7 @@ const TxAccordion = ({
   return (
     <>
       <div className='flex items-center justify-between'>
-        <div className='text-[14px] text-text-secondary'>{label}</div>
+      <div className='text-[14px] text-text-secondary'>{label}</div>
 
         <div className='flex cursor-pointer gap-0.5' onClick={toggleAccordion}>
           <span className='flex items-center justify-center bg-shad-white-10 p-1 px-2 text-[14px] text-text-primary'>

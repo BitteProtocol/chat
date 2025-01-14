@@ -38,7 +38,7 @@ export const TransactionResult = ({
             >
               <div className='text-text-secondary'>Near Transaction</div>
               <a
-                className='flex gap-1 items-center'
+                className='flex gap-1 items-center text-gray-800'
                 href={getNearblocksURL(accountId, receipt.transaction.hash)}
                 target='_blank'
                 rel='noopener noreferrer'

@@ -26,11 +26,15 @@ export const TxnFees = ({
   return (
     <div className='px-6'>
       <div className='relative mb-1 flex w-full flex-col gap-4 rounded border-b border-slate-200 py-6'>
-        <span className='text-sm font-semibold'>Network Fees</span>
+        <span className='text-sm font-semibold text-gray-800'>
+          Network Fees
+        </span>
         <div className='flex flex-col items-start justify-start text-sm md:flex-row md:items-center md:justify-between md:gap-0 md:space-x-4'>
-          <span>Estimated Fees</span>
+          <span className='text-text-secondary'>Estimated Fees</span>
           <div className='flex flex-col'>
-            <span className={` ${showNoTxnFeeHighlight ? "line-through" : ""}`}>
+            <span
+              className={`text-gray-800 ${showNoTxnFeeHighlight ? "line-through" : ""}`}
+            >
               {Number(totalGas).toFixed(5)} NEAR
             </span>
             {showNoTxnFeeHighlight ? (
@@ -39,15 +43,15 @@ export const TxnFees = ({
           </div>
         </div>
         <div className='flex flex-col items-start justify-start text-sm md:flex-row md:items-center md:justify-between md:gap-0 md:space-x-4'>
-          <span>Fee Limit</span>
-          <span>
+          <span className='text-text-secondary'>Fee Limit</span>
+          <span className='text-gray-800'>
             {feeLimitTgas} {""}
             Tgas
           </span>
         </div>
         <div className='flex flex-col items-start justify-start text-sm md:flex-row md:items-center md:justify-between md:gap-0 md:space-x-4'>
-          <span>Deposit</span>
-          <span>
+          <span className='text-text-secondary'>Deposit</span>
+          <span className='text-gray-800'>
             {totalDeposit} {""}
             NEAR
           </span>

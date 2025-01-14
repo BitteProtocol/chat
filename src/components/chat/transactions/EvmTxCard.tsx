@@ -95,7 +95,9 @@ export const EvmTxCard = ({ evmData }: { evmData?: SignRequestData }) => {
                       >
                         <AccordionTrigger className='pt-0 hover:no-underline'>
                           <div className='flex items-center justify-between text-sm'>
-                            <p>Transaction {index + 1}</p>
+                            <p className='text-text-secondary'>
+                              Transaction {index + 1}
+                            </p>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className='flex flex-col gap-6 border-0'>
