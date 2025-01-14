@@ -1,19 +1,25 @@
 {
   "name": "@bitte-ai/chat",
-  "version": "0.0.1-beta-20",
+  "version": "0.0.1-beta-24",
   "description": "Bitte AI chat component",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean --external fsevents",
+    "build": "tsup --config tsup.config.ts",
     "lint": "eslint src --ext .ts,tsx,js,jsx",
     "lint:types": "tsc --noEmit",
     "prettier:write": "prettier --w src",
     "clean": "rm -rf dist"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
   },
   "repository": {
     "type": "git",
@@ -75,6 +81,7 @@
     "remark-math": "^6.0.0",
     "tailwind-merge": "^2.5.5",
     "vaul": "^1.1.1",
-    "viem": "^2.21.52"
+    "viem": "^2.21.52",
+    "zod": "^3.24.1"
   }
 }
