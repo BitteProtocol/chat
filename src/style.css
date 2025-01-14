@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  .light {
+  .bitte-light {
     --background: #ffffff;
     --foreground: #0d0d0d;
 
@@ -37,7 +37,7 @@
     --blue-100: #c5d0ff33;
     --blue-300: #4f58a3;
     --red-300: #c74c4c;
-  
+
     --gray-30: #fafafa;
     --gray-40: #cbd5e1;
     --gray-600: #5b5d6b;
@@ -75,7 +75,7 @@
     --card-list-hover: #3565e312;
   }
 
-  .dark {
+  .bitte-dark {
     --background: #000000;
     --foreground: #f6faff;
 
@@ -141,16 +141,16 @@
     --card-list-hover: #27272a;
   }
 
-  .dark .theme-icon {
+  .bitte-dark .theme-icon {
     filter: brightness(0) invert(1);
   }
 
   /* spinner loading animation */
-  .dark .spinner-animation > div > svg g > g > path {
+  .bitte-dark .spinner-animation > div > svg g > g > path {
     fill: #ffffff;
   }
 
-  .dark .border-slate-200 {
+  .bitte-dark .border-slate-200 {
     border-color: #2b2e3a;
   }
 }

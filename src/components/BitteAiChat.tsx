@@ -43,7 +43,7 @@ export const BitteAiChat = ({
 
   return (
     <AccountProvider wallet={wallet}>
-      <div className={theme}>
+      <div className={`bitte-${theme}`}>
         <ChatContent
           wallet={wallet}
           apiUrl={apiUrl}

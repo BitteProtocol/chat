@@ -1,6 +1,6 @@
 {
   "name": "@bitte-ai/chat",
-  "version": "0.0.1-beta-29",
+  "version": "0.0.1-beta-30",
   "description": "Bitte AI chat component",
   "files": [
     "dist"
@@ -10,7 +10,8 @@
     "lint": "eslint src --ext .ts,tsx,js,jsx",
     "lint:types": "tsc --noEmit",
     "prettier:write": "prettier --w src",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prefix": "node.js prefix"
   },
   "exports": {
     ".": {
