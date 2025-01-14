@@ -131,7 +131,7 @@ export const ChatContent = ({
 
   return (
     <div className='flex h-full w-full flex-col gap-4 text-justify'>
-      <div className='relative flex h-[400px] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col lg:border lg:border-shad-gray-20 lg:bg-gray-30 lg:px-6'>
+      <div className='relative flex h-[400px] w-full grow-0 overflow-y-auto rounded-lg max-lg:flex-col border order-shad-gray-20 bg-gray-30 lg:px-6'>
         {!isAtBottom ? (
           <Button
             size='icon'
@@ -154,7 +154,7 @@ export const ChatContent = ({
             )}
           >
             {messages.length === 0 && (
-              <div className='flex h-full flex-col items-center justify-center'>
+              <div className='flex h-full flex-col items-center justify-center absolute left-1/2 -translate-x-1/2'>
                 <img className='mx-auto mb-4' src={BITTE_IMG} />
                 <div className='mb-14 text-[20px] font-medium text-gray-40'>
                   Execute Transactions with AI
