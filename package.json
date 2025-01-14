@@ -1,6 +1,6 @@
 {
-  "name": "bitte-ai-chat",
-  "version": "0.0.1-beta-18",
+  "name": "@bitte-ai/chat",
+  "version": "0.0.1-beta-20",
   "description": "Bitte AI chat component",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -9,9 +9,7 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:tsc": "tsc",
-    "build": "rm -rf dist && rollup -c",
-    "dev": "rm -rf dist && rollup -c -w",
+    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean --external fsevents",
     "lint": "eslint src --ext .ts,tsx,js,jsx",
     "lint:types": "tsc --noEmit",
     "prettier:write": "prettier --w src",
@@ -19,9 +17,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "GITHUB_REPO"
+    "url": "https://github.com/BitteProtocol/bitte-ai-chat"
   },
-  "author": "Rui Santiago",
+  "author": "Bitte Team",
   "license": "MIT",
   "keywords": [
     "bitte",
@@ -29,13 +27,10 @@
     "ai",
     "agents"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.1",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.3.0",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "11.1.6",
-    "@rollup/plugin-url": "^8.0.2",
     "@types/bn.js": "^5.1.6",
     "@types/node": "^20.17.9",
     "@types/react": "^18.2.0",
@@ -43,11 +38,8 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
-    "rollup": "4.28.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-summary": "^3.0.0",
     "tailwindcss": "^3.4.16",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
@@ -81,7 +73,6 @@
     "react-markdown": "^9.0.1",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
-    "rollup-plugin-dts": "^6.1.1",
     "tailwind-merge": "^2.5.5",
     "vaul": "^1.1.1",
     "viem": "^2.21.52"

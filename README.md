@@ -21,7 +21,7 @@ The **Bitte AI Chat** component is a React component that enables AI-powered cha
 Install the package using npm or yarn:
 
 ```
-pnpm install bitte-ai-chat
+pnpm install @bitte-ai/chat
 ```
 
 ### NEAR Integration
@@ -31,8 +31,10 @@ You can integrate with NEAR using either the NEAR Wallet Selector or a direct ac
 #### Using Wallet Selector
 
 ```typescript
-import { useBitteWallet, Wallet } from "@mintbase-js/react";
-import { BitteAiChat } from "bitte-ai-chat";
+import { useBitteWallet, Wallet } from "@bitte-ai/react";
+import { BitteAiChat } from "@bitte-ai/chat";
+import "@bitte-ai/chat/dist/index.css";
+
 
 export default function Chat() {
   const { selector } = useBitteWallet();
