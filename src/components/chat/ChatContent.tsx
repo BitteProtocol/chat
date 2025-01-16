@@ -204,7 +204,6 @@ export const ChatContent = ({
                     borderColor={borderColor!}
                     textColor={textColor!}
                     agentImage={options?.agentImage}
-                    agentName={options?.agentName}
                   />
                 );
               })}
