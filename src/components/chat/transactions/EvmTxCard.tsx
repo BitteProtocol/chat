@@ -1,6 +1,6 @@
 import { EthTransactionParams, Network, SignRequestData } from "near-safe";
 import { useEffect, useState } from "react";
-import { formatEther } from "viem";
+import { formatUnits } from "viem";
 import { useTransaction } from "../../../hooks/useTransaction";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 import { shortenString } from "../../../lib/utils";
@@ -141,7 +141,7 @@ export const EvmTxCard = ({
                         label='Value'
                         value={
                           transaction.value
-                            ? formatEther(BigInt(transaction.value))
+                            ? formatUnits(BigInt(transaction.value), 8)
                             : "0"
                         }
                       />
