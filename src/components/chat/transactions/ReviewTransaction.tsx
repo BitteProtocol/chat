@@ -229,7 +229,7 @@ export const ReviewTransaction = ({
       {result && !loading ? (
         <TransactionResult result={result} accountId={accountId} />
       ) : null}
-      {balance ? (
+      {balance && balance > totalDeposit ? (
         !loading && !result && !errorMsg && accountId ? (
           <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
             <>

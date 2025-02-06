@@ -196,7 +196,12 @@ export const EvmTxCard = ({
           accountId={evmAddress}
         />
       ) : null}
-      {data?.value ? (
+      {data?.value &&
+      data?.value >
+        evmData.params.reduce(
+          (acc, transaction) => acc + BigInt(transaction.value || 0),
+          BigInt(0)
+        ) ? (
         !isLoading && !errorMsg && !txHash ? (
           <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
             <>
