@@ -1,6 +1,7 @@
 import { EthTransactionParams, Network, SignRequestData } from "near-safe";
 import { useEffect, useState } from "react";
 import { formatEther } from "viem";
+import { useBalance } from "wagmi";
 import { useTransaction } from "../../../hooks/useTransaction";
 import { useWindowSize } from "../../../hooks/useWindowSize";
 import { shortenString } from "../../../lib/utils";
@@ -35,6 +36,12 @@ export const EvmTxCard = ({
   const [isLoading, setIsLoading] = useState(false);
   const [txHash, setTxHash] = useState<string | undefined>();
   const { evmAddress, evmWallet, chainId } = useAccount();
+
+  const formattedEvmAddress =
+    evmAddress && evmAddress.startsWith("0x")
+      ? (evmAddress as `0x${string}`)
+      : undefined;
+  const { data } = useBalance({ address: formattedEvmAddress });
 
   if (!evmData)
     return (
@@ -90,7 +97,7 @@ export const EvmTxCard = ({
       style={{
         backgroundColor: messageBackgroundColor,
         borderColor: borderColor,
-        color: textColor
+        color: textColor,
       }}
     >
       <CardHeader
@@ -189,23 +196,29 @@ export const EvmTxCard = ({
           accountId={evmAddress}
         />
       ) : null}
-      {!isLoading && !errorMsg && !txHash ? (
-        <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
-          <>
-            <Button variant='outline' className='bitte-w-1/2'>
-              Decline
-            </Button>
+      {data?.value ? (
+        !isLoading && !errorMsg && !txHash ? (
+          <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
+            <>
+              <Button variant='outline' className='bitte-w-1/2'>
+                Decline
+              </Button>
 
-            <Button
-              className='bitte-w-1/2'
-              onClick={handleSmartAction}
-              disabled={isLoading}
-            >
-              {isLoading ? "Confirming..." : "Approve"}
-            </Button>
-          </>
-        </CardFooter>
-      ) : null}
+              <Button
+                className='bitte-w-1/2'
+                onClick={handleSmartAction}
+                disabled={isLoading}
+              >
+                {isLoading ? "Confirming..." : "Approve"}
+              </Button>
+            </>
+          </CardFooter>
+        ) : null
+      ) : (
+        <p className='bitte-text-red-300'>
+          Not enough funds available to complete the transaction.
+        </p>
+      )}
     </Card>
   );
 };

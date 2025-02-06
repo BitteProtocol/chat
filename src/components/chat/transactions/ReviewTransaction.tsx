@@ -229,23 +229,29 @@ export const ReviewTransaction = ({
       {result && !loading ? (
         <TransactionResult result={result} accountId={accountId} />
       ) : null}
-      {!loading && !result && !errorMsg && accountId ? (
-        <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
-          <>
-            <Button variant='outline' className='bitte-w-1/2'>
-              Decline
-            </Button>
+      {balance ? (
+        !loading && !result && !errorMsg && accountId ? (
+          <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
+            <>
+              <Button variant='outline' className='bitte-w-1/2'>
+                Decline
+              </Button>
 
-            <Button
-              variant='default'
-              className='bitte-w-1/2'
-              onClick={handleSmartAction}
-            >
-              Approve
-            </Button>
-          </>
-        </CardFooter>
-      ) : null}
+              <Button
+                variant='default'
+                className='bitte-w-1/2'
+                onClick={handleSmartAction}
+              >
+                Approve
+              </Button>
+            </>
+          </CardFooter>
+        ) : null
+      ) : (
+        <p className='bitte-text-red-300'>
+          Not enough funds available to complete the transaction.
+        </p>
+      )}
     </Card>
   );
 };
