@@ -215,7 +215,7 @@ export const EvmTxCard = ({
           </CardFooter>
         ) : null
       ) : (
-        <p className='bitte-text-red-300'>
+        <p className='bitte-text-red-300 my-4 px-6 bitte-text-sm bitte-text-center'>
           Not enough funds available to complete the transaction.
         </p>
       )}
