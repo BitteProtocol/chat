@@ -3,28 +3,9 @@ import {
   CoreToolMessage,
   Message,
   ToolInvocation,
-  convertToCoreMessages,
   generateId,
 } from "ai";
 import { SmartActionAiMessage, SmartActionMessage } from "../types";
-
-export const convertToSmartActionMessages = ({
-  messages,
-  agentId,
-}: {
-  messages: Message[];
-  agentId?: string;
-}): SmartActionMessage[] => {
-  const smartActionMessages = convertToCoreMessages(messages).map(
-    (message, index) => ({
-      ...message,
-      id: messages[index]?.id,
-      agentId,
-    })
-  );
-
-  return smartActionMessages;
-};
 
 export const convertResponseMessages = (
   messages: (CoreAssistantMessage | CoreToolMessage)[],
@@ -135,44 +116,3 @@ export function convertToUIMessages(
     return chatMessages;
   }, []);
 }
-
-export const getTypedToolInvocations = <TTools>(
-  toolInvocation: ToolInvocation
-) => {
-  type ExecuteArgs<T> = T extends {
-    execute: (
-      args: infer A,
-      options?: {
-        abortSignal?: AbortSignal;
-      }
-    ) => unknown;
-  }
-    ? A
-    : never;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  type ExecuteReturn<T> = T extends { execute: (...args: any) => infer R }
-    ? Awaited<R>
-    : never;
-
-  type TypedToolInvocation = {
-    [T in keyof TTools]: Omit<
-      ToolInvocation,
-      "toolName" | "args" | "result"
-    > & {
-      toolName: T;
-      args: ExecuteArgs<TTools[T]>;
-      result: ExecuteReturn<TTools[T]>;
-    };
-  }[keyof TTools];
-
-  const toolName = toolInvocation.toolName as keyof TTools;
-
-  if (toolInvocation.state === "result") {
-    const result = toolInvocation.result as ExecuteReturn<
-      TTools[typeof toolName]
-    >;
-    return { ...toolInvocation, toolName, result } as TypedToolInvocation;
-  }
-
-  return { ...toolInvocation, toolName } as TypedToolInvocation;
-};

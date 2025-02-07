@@ -35,4 +35,5 @@ export enum BittePrimitiveName {
   GET_TOKEN_METADATA = "getTokenMetadata",
   GENERATE_EVM_TX = "generate-evm-tx",
   RENDER_CHART = "render-chart",
+  SIGN_MESSAGE = "sign-message",
 }

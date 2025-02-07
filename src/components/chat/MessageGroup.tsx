@@ -8,11 +8,11 @@ import { Wallet } from "@near-wallet-selector/core";
 import { Account } from "near-api-js";
 import { cn, safeStringify } from "../../lib/utils";
 
-import { getAgentIdFromMessage, getTypedToolInvocations } from "../../lib/chat";
+import { getAgentIdFromMessage } from "../../lib/chat";
 import { BittePrimitiveName, DEFAULT_AGENT_ID } from "../../lib/constants";
 import { BITTE_BLACK_IMG } from "../../lib/images";
 import { isDataString } from "../../lib/regex";
-import { SmartActionAiMessage } from "../../types/types";
+import { SmartActionAiMessage, BitteToolResult } from "../../types/types";
 import {
   Accordion,
   AccordionContent,
@@ -28,6 +28,7 @@ import { ErrorBoundary } from "./ErrorBoundary";
 import { SAMessage } from "./Message";
 import { EvmTxCard } from "./transactions/EvmTxCard";
 import { ReviewTransaction } from "./transactions/ReviewTransaction";
+import { ReviewSignMessage } from "./transactions/ReviewSignMessage";
 
 interface MessageGroupProps {
   chatId: string | undefined;
@@ -44,6 +45,10 @@ interface MessageGroupProps {
   messageBackgroundColor: string;
   borderColor: string;
   textColor: string;
+  addToolResult: (params: {
+    toolCallId: string;
+    result: BitteToolResult;
+  }) => void;
 }
 
 export const MessageGroup = ({
@@ -57,6 +62,7 @@ export const MessageGroup = ({
   borderColor,
   textColor,
   chatId,
+  addToolResult,
 }: MessageGroupProps) => {
   // State to track agentId for each message
   const [messagesWithAgentId, setMessagesWithAgentId] = useState<
@@ -100,15 +106,34 @@ export const MessageGroup = ({
 
         if (message.toolInvocations) {
           for (const invocation of message.toolInvocations) {
-            const { toolName, state, result } = getTypedToolInvocations(
-              invocation
-            ) as {
-              toolName: string;
-              state: string;
-              result: any;
-            };
+            const { toolName, toolCallId, state, args } = invocation;
+            const result =
+              invocation.state === "result" ? invocation.result : null;
 
             if (state !== "result") {
+              if (toolName === BittePrimitiveName.SIGN_MESSAGE) {
+                const { message, nonce, recipient, callbackUrl } = args;
+
+                return (
+                  <ReviewSignMessage
+                    chatId={chatId}
+                    message={message}
+                    nonce={nonce}
+                    recipient={recipient}
+                    callbackUrl={callbackUrl}
+                    textColor={textColor}
+                    messageBackgroundColor={messageBackgroundColor}
+                    borderColor={borderColor}
+                    addToolResult={(result) =>
+                      addToolResult({
+                        toolCallId: toolCallId,
+                        result,
+                      })
+                    }
+                  />
+                );
+              }
+
               continue;
             }
 
@@ -213,13 +238,11 @@ export const MessageGroup = ({
                     )}
 
                     {message.toolInvocations?.map((toolInvocation, index) => {
-                      const { toolName, toolCallId, state, result } =
-                        getTypedToolInvocations(toolInvocation) as {
-                          toolCallId: string;
-                          toolName: string;
-                          state: string;
-                          result: any;
-                        };
+                      const { toolName, toolCallId, state } = toolInvocation;
+                      const result =
+                        toolInvocation.state === "result"
+                          ? toolInvocation.result
+                          : null;
 
                       return (
                         <div key={`${toolCallId}-${index}`}>

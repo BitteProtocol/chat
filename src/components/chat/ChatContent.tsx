@@ -57,6 +57,7 @@ export const ChatContent = ({
     isLoading: isInProgress,
     handleSubmit,
     reload,
+    addToolResult,
     error,
   } = useChat({
     maxSteps: 7,
@@ -228,6 +229,7 @@ export const ChatContent = ({
                     borderColor={borderColor!}
                     textColor={textColor!}
                     agentImage={options?.agentImage}
+                    addToolResult={addToolResult}
                   />
                 );
               })}
