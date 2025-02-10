@@ -38,7 +38,7 @@ export const ChatContent = ({
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
-  const messagesRef = useRef<HTMLDivElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const { accountId, evmAddress, chainId } = useAccount();
 
@@ -126,7 +126,7 @@ export const ChatContent = ({
   useLayoutEffect(() => {
     if (isAtBottom && autoScrollEnabled) {
       requestAnimationFrame(() => {
-        scrollToBottom(messagesRef.current);
+        scrollToBottom(messagesEndRef.current);
       });
     }
   }, [messages, isAtBottom, autoScrollEnabled, scrollToBottom]);
@@ -137,8 +137,8 @@ export const ChatContent = ({
   };
 
   const handleScroll = useCallback(() => {
-    if (messagesRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = messagesRef.current;
+    if (messagesEndRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = messagesEndRef.current;
       const atBottom = scrollTop + clientHeight >= scrollHeight - 100;
       setIsAtBottom(atBottom);
       setAutoScrollEnabled(atBottom);
@@ -146,7 +146,7 @@ export const ChatContent = ({
   }, []);
 
   useEffect(() => {
-    const scrollElement = messagesRef.current;
+    const scrollElement = messagesEndRef.current;
     if (scrollElement) {
       scrollElement.addEventListener("scroll", handleScroll);
       handleScroll();
@@ -159,7 +159,7 @@ export const ChatContent = ({
   }, [handleScroll]);
 
   const scrollToBottomHandler = useCallback(() => {
-    scrollToBottom(messagesRef.current);
+    scrollToBottom(messagesEndRef.current);
     setAutoScrollEnabled(true);
   }, [scrollToBottom]);
 
@@ -190,10 +190,7 @@ export const ChatContent = ({
           </Button>
         ) : null}
 
-        <div
-          ref={messagesRef}
-          className='bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
-        >
+        <div className='bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'>
           <div
             className={cn(
               "bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:bitte-mx-24 2xl:bitte-mx-56",
@@ -264,6 +261,7 @@ export const ChatContent = ({
               ) : null}
             </div>
           </div>
+          <div ref={messagesEndRef} />
         </div>
       </div>
       <div
