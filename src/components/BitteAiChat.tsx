@@ -58,6 +58,7 @@ export const BitteAiChat = ({
           agentImage: options?.agentImage,
           chatId: options?.chatId ?? (chatId || undefined),
           localAgent: options?.localAgent,
+          prompt: options?.prompt,
         }}
         welcomeMessageComponent={welcomeMessageComponent}
         mobileInputExtraButton={mobileInputExtraButton}

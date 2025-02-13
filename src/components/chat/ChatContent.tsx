@@ -34,7 +34,7 @@ export const ChatContent = ({
   options,
   messages: initialMessages,
   welcomeMessageComponent,
-  mobileInputExtraButton
+  mobileInputExtraButton,
 }: BitteAiChatProps) => {
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -59,6 +59,7 @@ export const ChatContent = ({
     handleSubmit,
     reload,
     addToolResult,
+    append,
     error,
   } = useChat({
     maxSteps: 7,
@@ -164,6 +165,16 @@ export const ChatContent = ({
     scrollToBottom(messagesRef.current);
     setAutoScrollEnabled(true);
   }, [scrollToBottom]);
+
+  useEffect(() => {
+    if (options?.prompt && messages.length === 0 && !isInProgress) {
+      append({
+        id: generateId(),
+        role: "user",
+        content: options.prompt,
+      });
+    }
+  }, [messages.length, isInProgress, options]);
 
   return (
     <div className='bitte-flex bitte-h-full bitte-w-full bitte-flex-col bitte-gap-4 bitte-text-justify'>

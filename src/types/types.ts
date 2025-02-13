@@ -205,6 +205,7 @@ export interface BitteAiChatProps {
     agentName?: string;
     agentImage?: string;
     chatId?: string;
+    prompt?: string;
     localAgent?: {
       pluginId: string;
       accountId: string;

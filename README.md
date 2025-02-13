@@ -187,6 +187,7 @@ interface BitteAiChatProps {
     agentName?: string; // Custom agent name
     agentImage?: string; // Custom agent image URL
     chatId?: string; // Custom chat ID
+    prompt?: string // Custom Initial prompt
   };
   welcomeMessageComponent?: JSX.Element; // Custom Welcome Message to be displayed when the chat loads
   mobileInputExtraButton?: JSX.Element // Custom Button to add in mobile next to 'Send'
