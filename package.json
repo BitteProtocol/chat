@@ -39,8 +39,8 @@
   "devDependencies": {
     "@types/bn.js": "^5.1.6",
     "@types/node": "^20.17.9",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
@@ -49,8 +49,8 @@
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.2",
@@ -84,5 +84,8 @@
     "viem": "^2.21.52",
     "wagmi": "^2.14.8",
     "zod": "^3.24.1"
-  }
+  },
+  "overrides": {
+    "react-is": "19.0.0"
+ }
 }
