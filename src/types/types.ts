@@ -212,8 +212,8 @@ export interface BitteAiChatProps {
       spec: BitteOpenAPISpec;
     };
   };
-  welcomeMessageComponent?: JSX.Element;
-  mobileInputExtraButton?: JSX.Element;
+  welcomeMessageComponent?: React.JSX.Element;
+  mobileInputExtraButton?: React.JSX.Element;
 }
 
 /**
