@@ -201,6 +201,7 @@ export interface BitteAiChatProps {
   messages?: Message[];
   wallet?: WalletOptions;
   colors?: ChatComponentColors;
+  placeholderText?:string;
   options?: {
     agentName?: string;
     agentImage?: string;

@@ -15,6 +15,7 @@ interface SmartActionsInputProps {
   textColor: string;
   backgroundColor: string;
   mobileInputExtraButton?: JSX.Element;
+  placeholderText?: string
 }
 
 export const SmartActionsInput = ({
@@ -57,7 +58,7 @@ export const SmartActionsInput = ({
         <AgentPill name={agentName || previousAgentName} ref={agentNameRef} />
 
         <Textarea
-          placeholder='Message Smart Actions'
+          placeholder={placeholderText || 'Message Smart Actions'}
           style={{
             paddingLeft: `${paddingLeft}px`,
             background: backgroundColor,

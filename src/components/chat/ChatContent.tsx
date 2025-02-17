@@ -35,6 +35,7 @@ export const ChatContent = ({
   messages: initialMessages,
   welcomeMessageComponent,
   mobileInputExtraButton,
+  placeholderText
 }: BitteAiChatProps) => {
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -298,6 +299,7 @@ export const ChatContent = ({
           backgroundColor={generalBackground!}
           agentName={options?.agentName}
           mobileInputExtraButton={mobileInputExtraButton}
+          placeholderText={placeholderText}
         />
       </div>
     </div>
