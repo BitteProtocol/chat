@@ -13,6 +13,7 @@ export const BitteAiChat = ({
   historyApiUrl,
   agentId,
   options,
+  messageComponents
 }: BitteAiChatProps) => {
   const [loadedData, setLoadedData] = useState({
     agentIdLoaded: "",
@@ -61,6 +62,7 @@ export const BitteAiChat = ({
         agentId={agentId ?? agentIdLoaded}
         messages={uiMessages}
         options={optionsProps}
+        messageComponents={messageComponents}
       />
     </AccountProvider>
   );

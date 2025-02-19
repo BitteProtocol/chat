@@ -32,6 +32,7 @@ export const ChatContent = ({
   apiKey,
   options,
   messages: initialMessages,
+  messageComponents
 }: BitteAiChatProps) => {
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -239,6 +240,7 @@ export const ChatContent = ({
                     textColor={textColor!}
                     agentImage={options?.agentImage}
                     addToolResult={addToolResult}
+                    components={messageComponents}
                   />
                 );
               })}

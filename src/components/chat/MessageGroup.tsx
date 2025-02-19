@@ -4,7 +4,7 @@ import { getAgentIdFromMessage } from '../../lib/chat'
 import { DEFAULT_AGENT_ID } from '../../lib/constants'
 import { BITTE_BLACK_IMG } from "../../lib/images"
 import { cn } from "../../lib/utils"
-import type { BitteToolResult, SmartActionAiMessage } from "../../types/types"
+import type { BitteToolResult, ChatCustomComponents, MessageGroupComponentProps, SmartActionAiMessage, ToolResultComponentProps } from "../../types/types"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 import { Card } from "../ui/card"
 import { ImageWithFallback } from "../ui/ImageWithFallback"
@@ -14,26 +14,7 @@ import { SAMessage } from "./Message"
   export const formatAgentId = (agentId: string) => {
     return agentId.replace(".vercel.app", "");
   };
-// Define component prop types for customization
-interface MessageGroupComponentProps {
-  message: SmartActionAiMessage
-  isUser: boolean
-  userName: string
-  children: React.ReactNode
-  style: {
-    backgroundColor: string
-    borderColor: string
-    textColor: string
-  }
-}
 
-interface ToolResultComponentProps {
-  toolName: string
-  result: any
-  style: {
-    borderColor: string
-  }
-}
 
 interface MessageGroupProps {
   chatId?: string
@@ -48,10 +29,7 @@ interface MessageGroupProps {
   borderColor: string
   textColor: string
   addToolResult: (params: { toolCallId: string; result: BitteToolResult }) => void
-  components?: {
-    MessageContainer?: React.ComponentType<MessageGroupComponentProps>
-    ToolResult?: React.ComponentType<ToolResultComponentProps>
-  }
+  components?: ChatCustomComponents
 }
 
 // Default components
