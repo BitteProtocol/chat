@@ -203,7 +203,6 @@ export const ChatContent = ({
             />
           </Button>
         ) : null}
-
         <div
           ref={messagesRef}
           className='bitte-flex bitte-flex-grow bitte-min-h-0 bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
