@@ -13,7 +13,7 @@ import { Hex } from "viem";
 import { defaultColors } from "../../lib/constants";
 import { BITTE_IMG } from "../../lib/images";
 import { executeLocalToolCall } from "../../lib/local-agent";
-import { cn, shortenAddress } from "../../lib/utils";
+import { shortenAddress } from "../../lib/utils";
 import {
   AssistantsMode,
   BitteAiChatProps,
@@ -174,10 +174,8 @@ export const ChatContent = ({
   }, [messages.length, isInProgress, options]);
 
   return (
-    <div className='bitte-flex bitte-h-full bitte-w-full bitte-flex-col bitte-gap-4 bitte-text-justify'>
-      <div
-        className='bitte-chat-main bitte-text-start bitte-relative bitte-flex bitte-min-h-[220px] lg:bitte-min-h-[360px] bitte-w-full bitte-h-full bitte-grow-0 bitte-overflow-y-auto lg:bitte-rounded-md bitte-max-lg:flex-col bitte-border-t bitte-border-b lg:bitte-border lg:bitte-pl-6'
-        style={{
+    <div className='bitte-flex bitte-flex-col bitte-h-full bitte-min-h-0 bitte-w-full bitte-gap-4 bitte-text-justify'>
+      <div className="bitte-chat-main bitte-text-start bitte-relative bitte-flex bitte-flex-col bitte-flex-grow bitte-min-h-0 bitte-w-full lg:bitte-rounded-md bitte-max-lg:flex-col bitte-border-t bitte-border-b lg:bitte-border lg:bitte-pl-6"        style={{
           backgroundColor: generalBackground,
           borderColor: borderColor,
         }}
@@ -202,16 +200,9 @@ export const ChatContent = ({
 
         <div
           ref={messagesRef}
-          className='bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
+          className="bitte-flex bitte-flex-grow bitte-min-h-0 bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4"
         >
-          <div
-            className={cn(
-              "bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:bitte-mx-24 2xl:bitte-mx-56",
-              !!agentId
-                ? "bitte-h-[calc(100%-240px)]"
-                : "bitte-h-[calc(100%-208px)]"
-            )}
-          >
+          <div className="bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:bitte-mx-24 2xl:bitte-mx-56">
             {messages.length === 0 &&
               (options?.welcomeMessageComponent ? (
                 options.welcomeMessageComponent
