@@ -174,10 +174,7 @@ export const ChatContent = ({
   }, [messages.length, isInProgress, options]);
 
   return (
-    <div
-      className='bitte-flex bitte-flex-col bitte-w-full bitte-gap-4 bitte-text-justify'
-      style={{ height: "min(100%, 600px)" }}
-    >
+    <div className='bitte-flex bitte-flex-col bitte-w-full bitte-gap-4 bitte-text-justify bitte-max-h-[300px] md:bitte-max-h-none'>
       <div
         className='bitte-chat-main bitte-text-start bitte-relative bitte-flex bitte-flex-col bitte-flex-1 bitte-min-h-[400px] bitte-w-full lg:bitte-rounded-md bitte-max-lg:flex-col bitte-border-t bitte-border-b lg:bitte-border lg:bitte-pl-6'
         style={{
