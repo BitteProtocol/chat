@@ -132,7 +132,6 @@ export const ReviewSignMessage = ({
                 <CopyStandard
                   text={result}
                   textSize='sm'
-                  textColor='gray-800'
                   charSize={18}
                   isUrl={false}
                 />

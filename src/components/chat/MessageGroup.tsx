@@ -1,55 +1,77 @@
-import { MessageSquare } from 'lucide-react'
-import { useEffect, useState } from "react"
-import { getAgentIdFromMessage } from '../../lib/chat'
-import { DEFAULT_AGENT_ID } from '../../lib/constants'
-import { BITTE_BLACK_IMG } from "../../lib/images"
-import { cn } from "../../lib/utils"
-import type { BitteToolResult, ChatCustomComponents, MessageGroupComponentProps, SmartActionAiMessage, ToolResultComponentProps } from "../../types/types"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
-import { Card } from "../ui/card"
-import { ImageWithFallback } from "../ui/ImageWithFallback"
-import { SAMessage } from "./Message"
-
-  // Function to remove ".vercel.app" from agentId
-  export const formatAgentId = (agentId: string) => {
-    return agentId.replace(".vercel.app", "");
-  };
-
+import { MessageSquare } from "lucide-react";
+import { formatAgentId, getAgentIdFromMessage } from "../../lib/chat";
+import { BittePrimitiveName, DEFAULT_AGENT_ID } from "../../lib/constants";
+import { BITTE_BLACK_IMG } from "../../lib/images";
+import { isDataString } from "../../lib/regex";
+import {
+  BitteToolResult,
+  ChatCustomComponents,
+  MessageGroupComponentProps,
+  SmartActionAiMessage,
+  ToolResultComponentProps,
+} from "../../types/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ChartWrapper } from "../ui/charts/ChartWrapper";
+import { ImageWithFallback } from "../ui/ImageWithFallback";
+import { CodeBlock } from "./CodeBlock";
+import { ErrorBoundary } from "./ErrorBoundary";
+import { SAMessage } from "./Message";
+import { EvmTxCard } from "./transactions/EvmTxCard";
+import { ReviewSignMessage } from "./transactions/ReviewSignMessage";
+import { ReviewTransaction } from "./transactions/ReviewTransaction";
+import { cn } from "../../lib/utils";
+import { useEffect, useState } from "react";
 
 interface MessageGroupProps {
-  chatId?: string
-  groupKey: string
-  messages: SmartActionAiMessage[]
-  accountId: string
-  creator?: string
-  isLoading?: boolean
-  agentImage?: string
-  agentName?: string
-  messageBackgroundColor: string
-  borderColor: string
-  textColor: string
-  addToolResult: (params: { toolCallId: string; result: BitteToolResult }) => void
-  components?: ChatCustomComponents
+  chatId?: string;
+  groupKey: string;
+  messages: SmartActionAiMessage[];
+  accountId: string;
+  creator?: string;
+  isLoading?: boolean;
+  agentImage?: string;
+  agentName?: string;
+  messageBackgroundColor: string;
+  borderColor: string;
+  textColor: string;
+  addToolResult: (params: {
+    toolCallId: string;
+    result: BitteToolResult;
+  }) => void;
+  components?: ChatCustomComponents;
 }
 
 // Default components
-const DefaultMessageContainer = ({ message, isUser, userName, children, style }: MessageGroupComponentProps) => (
+const DefaultMessageContainer = ({
+  message,
+  isUser,
+  userName,
+  children,
+  style,
+}: MessageGroupComponentProps) => (
   <Card
-    className="bitte-p-6"
+    className='bitte-p-6'
     style={{
       backgroundColor: style.backgroundColor,
       borderColor: style.borderColor,
-      color: style.textColor
+      color: style.textColor,
     }}
   >
-    <Accordion type="single" collapsible className="bitte-w-full">
-      <AccordionItem value={message.id} className="bitte-border-0">
-        <AccordionTrigger className="bitte-p-0">
-          <div className="bitte-flex bitte-items-center bitte-justify-center bitte-gap-2">
+    <Accordion type='single' collapsible className='bitte-w-full'>
+      <AccordionItem value={message.id} className='bitte-border-0'>
+        <AccordionTrigger className='bitte-p-0'>
+          <div className='bitte-flex bitte-items-center bitte-justify-center bitte-gap-2'>
             {isUser ? (
               <>
-                <MessageSquare className="bitte-h-[18px] bitte-w-[18px]" />
-                <p className="bitte-text-[14px]">{userName}</p>
+                <MessageSquare className='bitte-h-[18px] bitte-w-[18px]' />
+                <p className='bitte-text-[14px]'>{userName}</p>
               </>
             ) : (
               <>
@@ -64,7 +86,7 @@ const DefaultMessageContainer = ({ message, isUser, userName, children, style }:
                   )}
                   alt={`${message.agentId} icon`}
                 />
-                <p className="bitte-text-[14px]">
+                <p className='bitte-text-[14px]'>
                   {formatAgentId(message.agentId ?? "Bitte Assistant")}
                 </p>
               </>
@@ -72,7 +94,7 @@ const DefaultMessageContainer = ({ message, isUser, userName, children, style }:
           </div>
         </AccordionTrigger>
         <AccordionContent
-          className="bitte-mt-6 bitte-border-t bitte-pb-0"
+          className='bitte-mt-6 bitte-border-t bitte-pb-0'
           style={{ borderColor: style.borderColor }}
         >
           {children}
@@ -80,25 +102,27 @@ const DefaultMessageContainer = ({ message, isUser, userName, children, style }:
       </AccordionItem>
     </Accordion>
   </Card>
-)
+);
 
-const DefaultToolResult = ({ toolName, result, style }: ToolResultComponentProps) => (
+const DefaultToolResult = ({
+  toolName,
+  result,
+  style,
+}: ToolResultComponentProps) => (
   <div>
-    <div className="bitte-flex bitte-w-full bitte-items-center bitte-justify-between bitte-text-[12px]">
+    <div className='bitte-flex bitte-w-full bitte-items-center bitte-justify-between bitte-text-[12px]'>
       <div>Tool Call</div>
-      <div className="bitte-rounded bitte-bg-shad-white-10 bitte-px-2 bitte-py-1">
+      <div className='bitte-rounded bitte-bg-shad-white-10 bitte-px-2 bitte-py-1'>
         <code>{toolName}</code>
       </div>
     </div>
-    <div className="bitte-p-4">
-      {/* Tool result rendering logic */}
-    </div>
+    <div className='bitte-p-4'>{/* Tool result rendering logic */}</div>
     <div
-      className="bitte-mt-2 bitte-border-t"
+      className='bitte-mt-2 bitte-border-t'
       style={{ borderColor: style.borderColor }}
     />
   </div>
-)
+);
 
 export const MessageGroup = ({
   groupKey,
@@ -111,14 +135,16 @@ export const MessageGroup = ({
   textColor,
   chatId,
   addToolResult,
-  components = {}
+  components = {},
 }: MessageGroupProps) => {
   const {
     MessageContainer = DefaultMessageContainer,
-    ToolResult = DefaultToolResult
-  } = components
+    ToolResult = DefaultToolResult,
+  } = components;
 
-  const [messagesWithAgentId, setMessagesWithAgentId] = useState<SmartActionAiMessage[]>([])
+  const [messagesWithAgentId, setMessagesWithAgentId] = useState<
+    SmartActionAiMessage[]
+  >([]);
 
   // Function to update agentId for each message
   const updateAgentIdForMessages = (
@@ -145,16 +171,11 @@ export const MessageGroup = ({
     setMessagesWithAgentId(updatedMessages);
   }, [messages]);
 
-  // Function to remove ".vercel.app" from agentId
-  const formatAgentId = (agentId: string) => {
-    return agentId.replace(".vercel.app", "");
-  };
-
   return (
     <div style={{ color: textColor }}>
       {messagesWithAgentId?.map((message, index) => {
-        const isUser = message.role === "user"
-        const userName = creator || accountId
+        const isUser = message.role === "user";
+        const userName = creator || accountId;
 
         return (
           <MessageContainer
@@ -165,12 +186,12 @@ export const MessageGroup = ({
             style={{
               backgroundColor: messageBackgroundColor,
               borderColor: borderColor,
-              textColor: textColor
+              textColor: textColor,
             }}
           >
-            <div className="bitte-mt-6 bitte-flex bitte-w-full bitte-flex-col bitte-gap-2">
+            <div className='bitte-mt-6 bitte-flex bitte-w-full bitte-flex-col bitte-gap-2'>
               {message.content && (
-                <div className="bitte-flex bitte-flex-col bitte-gap-4">
+                <div className='bitte-flex bitte-flex-col bitte-gap-4'>
                   <SAMessage content={message.content} />
                 </div>
               )}
@@ -179,14 +200,18 @@ export const MessageGroup = ({
                 <ToolResult
                   key={`${toolInvocation.toolCallId}-${index}`}
                   toolName={toolInvocation.toolName}
-                  result={toolInvocation.state === "result" ? toolInvocation.result : null}
+                  result={
+                    toolInvocation.state === "result"
+                      ? toolInvocation.result
+                      : null
+                  }
                   style={{ borderColor }}
                 />
               ))}
             </div>
           </MessageContainer>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};

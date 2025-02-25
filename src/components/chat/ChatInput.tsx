@@ -15,7 +15,7 @@ interface SmartActionsInputProps {
   textColor: string;
   backgroundColor: string;
   mobileInputExtraButton?: React.JSX.Element;
-  placeholderText?: string
+  placeholderText?: string;
 }
 
 export const SmartActionsInput = ({
@@ -29,7 +29,7 @@ export const SmartActionsInput = ({
   textColor,
   backgroundColor,
   mobileInputExtraButton,
-  placeholderText
+  placeholderText,
 }: SmartActionsInputProps) => {
   const agentNameRef = useRef<HTMLDivElement>(null);
   const [paddingLeft, setPaddingLeft] = useState<number>(125);
@@ -59,7 +59,7 @@ export const SmartActionsInput = ({
         <AgentPill name={agentName || previousAgentName} ref={agentNameRef} />
 
         <Textarea
-          placeholder={placeholderText || 'Message Smart Actions'}
+          placeholder={placeholderText || "Message Smart Actions"}
           style={{
             paddingLeft: `${paddingLeft}px`,
             background: backgroundColor,
@@ -68,7 +68,7 @@ export const SmartActionsInput = ({
           className='bitte-h-[42px] bitte-w-full bitte-resize-none bitte-min-h-0 textarea-chat'
           onChange={handleChange}
           onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-            if (e.key === "Enter" && !e.shiftKey) {
+            if (e.key === "Enter" && !e.shiftKey && !isLoading) {
               e.preventDefault();
               handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
             }
@@ -78,7 +78,9 @@ export const SmartActionsInput = ({
       </div>
       <div className='bitte-flex bitte-gap-2 bitte-w-full lg:bitte-contents'>
         {mobileInputExtraButton ? (
-          <div className='bitte-w-full lg:bitte-hidden'>{mobileInputExtraButton}</div>
+          <div className='bitte-w-full lg:bitte-hidden'>
+            {mobileInputExtraButton}
+          </div>
         ) : null}
         <Button
           type='submit'

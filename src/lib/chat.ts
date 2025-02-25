@@ -116,3 +116,8 @@ export function convertToUIMessages(
     return chatMessages;
   }, []);
 }
+
+  // Function to remove ".vercel.app" from agentId
+  export const formatAgentId = (agentId: string) => {
+    return agentId.replace(".vercel.app", "");
+  };

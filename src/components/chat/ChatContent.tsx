@@ -65,9 +65,7 @@ export const ChatContent = ({
     api: apiUrl,
     onToolCall: async ({ toolCall }): Promise<BitteToolResult | undefined> => {
       const localAgent = options?.localAgent;
-      if (!localAgent) {
-        return undefined;
-      }
+      if (!localAgent) return undefined;
 
       try {
         return await executeLocalToolCall(localAgent, toolCall);
@@ -130,7 +128,7 @@ export const ChatContent = ({
         scrollToBottom(messagesRef.current);
       });
     }
-  }, [messages, isAtBottom, autoScrollEnabled, scrollToBottom]);
+  }, [isAtBottom, autoScrollEnabled, scrollToBottom, messages]);
 
   const handleSubmitChat = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -172,18 +170,19 @@ export const ChatContent = ({
         content: options.prompt,
       });
     }
-  }, [messages.length, isInProgress, options]);
+  }, [messages.length, isInProgress, options?.prompt, append]);
 
   return (
-    <div className='bitte-flex bitte-h-full bitte-w-full bitte-flex-col bitte-gap-4 bitte-text-justify'>
+    <div className='bitte-relative bitte-w-full bitte-h-full bitte-flex bitte-flex-col bitte-gap-4'>
+      {/* Main chat container */}
       <div
-        className='bitte-chat-main bitte-text-start bitte-relative bitte-flex bitte-min-h-[220px] lg:bitte-min-h-[360px] bitte-w-full bitte-h-full bitte-grow-0 bitte-overflow-y-auto lg:bitte-rounded-md bitte-max-lg:flex-col bitte-border-t bitte-border-b lg:bitte-border lg:bitte-pl-6'
+        className='bitte-chat-main bitte-text-start bitte-flex-1 bitte-relative bitte-min-h-[360px] bitte-w-full bitte-overflow-hidden lg:bitte-rounded-md bitte-border-t bitte-border-b lg:bitte-border bitte-pl-6'
         style={{
           backgroundColor: generalBackground,
           borderColor: borderColor,
         }}
       >
-        {!isAtBottom ? (
+        {!isAtBottom && (
           <Button
             size='icon'
             variant='outline'
@@ -199,11 +198,11 @@ export const ChatContent = ({
               style={{ color: textColor }}
             />
           </Button>
-        ) : null}
+        )}
 
         <div
           ref={messagesRef}
-          className='bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
+          className='bitte-absolute bitte-inset-0 bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
         >
           <div
             className={cn(
@@ -218,14 +217,19 @@ export const ChatContent = ({
                 options.welcomeMessageComponent
               ) : (
                 <div className='bitte-flex bitte-flex-col bitte-gap-4 bitte-items-center bitte-justify-center bitte-absolute bitte-left-1/2 bitte--translate-x-1/2 bitte-top-1/2 bitte--translate-y-1/2 bitte-text-center bitte-w-full'>
-                  <img className='bitte-mx-auto bitte-mb-4' src={BITTE_IMG} />
+                  <img
+                    className='bitte-mx-auto bitte-mb-4'
+                    src={BITTE_IMG || "/placeholder.svg"}
+                    alt='Bitte'
+                  />
                   <div className='bitte-mb-14 bitte-text-[20px] bitte-font-medium bitte-text-gray-40'>
                     Execute Transactions with AI
                   </div>
                 </div>
               ))}
+
             <div className='bitte-flex bitte-w-full bitte-flex-col bitte-gap-4 bitte-py-6'>
-              {groupedMessages.map((messages: Message[]) => {
+              {groupedMessages?.map((messages: Message[]) => {
                 const groupKey = `group-${messages?.[0]?.id}`;
                 return (
                   <MessageGroup
@@ -244,6 +248,7 @@ export const ChatContent = ({
                   />
                 );
               })}
+
               {error && (
                 <div className='bitte-flex bitte-flex-col bitte-items-center bitte-justify-center bitte-space-y-2 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
                   {!accountId && !evmAddress ? (
@@ -266,21 +271,24 @@ export const ChatContent = ({
                   )}
                 </div>
               )}
-              {isInProgress ? (
-                <div className='bitte-flex bitte-w-full bitte-flex-col bitte-items-center bitte-justify-center bitte-text-gray-600'>
+
+              {isInProgress && (
+                <div className='bitte-flex bitte-w-full bitte-flex-col bitte-items-center bitte-justify-center'>
                   <BitteSpinner
                     width={100}
                     height={100}
                     color={textColor || defaultColors.textColor}
                   />
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Input container - with gap */}
       <div
-        className='bitte-z-10 lg:bitte-rounded-md bitte-border-t bitte-border-b lg:bitte-border bitte-p-6'
+        className='lg:bitte-rounded-md bitte-border-t bitte-border-b lg:bitte-border bitte-p-6 bitte-w-full'
         style={{
           backgroundColor: generalBackground,
           borderColor: borderColor,

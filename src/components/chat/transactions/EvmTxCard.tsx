@@ -131,7 +131,6 @@ export const EvmTxCard = ({
                             <CopyStandard
                               text={transaction.to}
                               textSize='sm'
-                              textColor='gray-800'
                               charSize={isMobile ? 7 : 12}
                             />
                           }
