@@ -230,6 +230,7 @@ export interface BitteAiChatProps {
   messages?: Message[];
   wallet?: WalletOptions;
   options?: BitteAiChatOptions;
+  messageComponents?: ChatCustomComponents
 }
 
 
@@ -332,4 +333,30 @@ export interface AccountCreationData {
   accountId: string;
   isCreated: boolean;
   txnHash?: string; // TODO - I believe this field is unused.
+}
+
+export interface MessageGroupComponentProps {
+  message: SmartActionAiMessage
+  isUser: boolean
+  userName: string
+  children: React.ReactNode
+  style: {
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+  }
+}
+
+export interface ToolResultComponentProps {
+  toolName: string
+  result: any
+  style: {
+    borderColor: string
+  }
+}
+
+export interface ChatCustomComponents {
+    MessageContainer?: React.ComponentType<MessageGroupComponentProps>
+    ToolResult?: React.ComponentType<ToolResultComponentProps>
+  
 }
