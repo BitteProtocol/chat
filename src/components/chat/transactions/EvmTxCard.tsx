@@ -208,13 +208,11 @@ export const EvmTxCard = ({
                 /* handle decline */
               }}
               disabled={isLoading}
-              textColor={textColor}
             />
             <ApproveButton
               onClick={handleSmartAction}
               disabled={isLoading}
               isLoading={isLoading}
-              textColor={textColor}
             />
           </>
         </CardFooter>

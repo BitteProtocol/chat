@@ -386,8 +386,6 @@ export interface TransactionButtonProps {
   onClick: () => void;
   disabled?: boolean;
   isLoading?: boolean;
-  textColor: string;
-  buttonColor?: string;
 }
 
 // Container props
