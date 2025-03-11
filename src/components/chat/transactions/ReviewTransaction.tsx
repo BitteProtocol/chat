@@ -1,7 +1,7 @@
 import { Transaction } from "@near-wallet-selector/core";
 import BN from "bn.js";
 import { SafeEncodedSignRequest } from "near-safe";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccountBalance } from "../../../hooks/useAccountBalance";
 import { SuccessInfo, useTransaction } from "../../../hooks/useTransaction";
 import { useTxnFees } from "../../../hooks/useTxnFees";
@@ -69,6 +69,37 @@ export const ReviewTransaction = ({
 
   const { width } = useWindowSize();
   const isMobile = !!width && width < 640;
+
+  useEffect(() => {
+    if (!result) {
+      const searchParams = new URLSearchParams(window.location.search);
+      const txHash = searchParams.get("transactionHashes");
+
+      if (txHash) {
+        // Create a success info object from the transaction hash
+        const successInfo = {
+          near: {
+            receipts: [
+              {
+                transaction: {
+                  hash: txHash,
+                },
+              },
+            ],
+          },
+        };
+        setResult(successInfo);
+
+        // Clear the URL parameters
+        searchParams.delete("transactionHashes");
+        searchParams.delete("account_id");
+        const newUrl = `${window.location.pathname}${
+          searchParams.toString() ? "?" + searchParams.toString() : ""
+        }`;
+        window.history.replaceState({}, "", newUrl);
+      }
+    }
+  }, [result]);
 
   if (!transactions || transactions.length === 0) {
     return (
