@@ -101,7 +101,7 @@ export default function Chat() {
 
   return (
     <BitteAiChat
-      agentid="your-agent-id"
+      agentId="your-agent-id"
       apiUrl="/api/chat"
       wallet={{ near: { wallet } }}
     />
@@ -115,7 +115,7 @@ export default function Chat() {
 import { Account } from "near-api-js";
 // get near account instance from near-api-js by instantiating a keypair
 <BitteAiChat
-  agentid="your-agent-id"
+  agentId="your-agent-id"
   apiUrl="/api/chat"
   wallet={{ near: { account: nearAccount } }}
 />
@@ -135,7 +135,7 @@ export default function Chat() {
 
   return (
     <BitteAiChat
-      agentid="your-agent-id"
+      agentId="your-agent-id"
       apiUrl="/api/chat"
       wallet={{
         evm: {
@@ -216,7 +216,7 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
 
 ```typescript
 interface BitteAiChatProps {
-  agentid: string; // ID of the AI agent to use
+  agentId: string; // ID of the AI agent to use
   apiUrl: string; // Your API route path (e.g., "/api/chat")
   historyApiUrl?: string; // Your history API route to keep context when signing transactions
   wallet?: WalletOptions; // Wallet configuration

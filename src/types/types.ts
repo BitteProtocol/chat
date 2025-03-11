@@ -224,7 +224,7 @@ export interface BitteAiChatOptions {
 
 /**
  * Props for the BitteAiChat component
- * @param agentid - ID of the AI agent to use for chat interactions
+ * @param agentId - ID of the AI agent to use for chat interactions
  * @param apiUrl - Internal API URL for chat communication (e.g. api/chat).
  *                 Used to proxy requests to bitte api to not expose api key.
  * @param options - Your Chat Options
