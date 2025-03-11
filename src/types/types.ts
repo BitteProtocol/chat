@@ -130,6 +130,7 @@ export type SmartActionAiMessage = Message & {
   id?: string;
   agentId?: string;
   agentImage?: string;
+  agentName?: string;
 };
 
 export type SmartActionChat = SmartAction & {

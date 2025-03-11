@@ -58,6 +58,7 @@ export const MessageGroup = ({
   creator,
   isLoading,
   agentImage,
+  agentName,
   messageBackgroundColor,
   borderColor,
   textColor,
@@ -88,7 +89,7 @@ export const MessageGroup = ({
       );
       const messageAgentImage =
         existingMessage?.agentImage || agentImage || BITTE_BLACK_IMG;
-      return { ...message, agentId, agentImage: messageAgentImage };
+      return { ...message, agentId, agentImage: messageAgentImage, agentName };
     });
   };
 
