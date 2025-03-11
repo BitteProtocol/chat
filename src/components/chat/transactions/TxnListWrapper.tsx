@@ -1,8 +1,8 @@
-import { TransactionListProps } from "../../../types";
-import { MultipleTxnDetail } from "./multiple-transactions/MultipleTxnDetail";
-import { ShowDetailsBtn } from "./ShowDetailsBtn";
-import { SingleTxnDetail } from "./single-transaction/SingleTxnDetail";
-import { TxnFees } from "./TxnFees";
+import { TransactionListProps } from '../../../types';
+import { MultipleTxnDetail } from './multiple-transactions/MultipleTxnDetail';
+import { ShowDetailsBtn } from './ShowDetailsBtn';
+import { SingleTxnDetail } from './single-transaction/SingleTxnDetail';
+import { TxnFees } from './TxnFees';
 
 export const TxnListWrapper = ({
   accountId,
@@ -14,7 +14,7 @@ export const TxnListWrapper = ({
   showTxnDetail,
   setShowTxnDetail,
   operation,
-  borderColor
+  borderColor,
 }: TransactionListProps): JSX.Element => {
   return (
     <div className="bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col bitte-gap-1">
@@ -22,13 +22,13 @@ export const TxnListWrapper = ({
         <ShowDetailsBtn
           setShowDetails={setShowTxnDetail}
           showDetails={showTxnDetail}
-          displayName='Transaction Details'
+          displayName="Transaction Details"
         />
 
         {showTxnDetail ? (
           <TxnFees
             costs={costs || []}
-            gasPrice={gasPrice || ""}
+            gasPrice={gasPrice || ''}
             transaction={transaction}
             operation={operation}
             borderColor={borderColor}
@@ -39,7 +39,7 @@ export const TxnListWrapper = ({
           <MultipleTxnDetail
             accountId={accountId}
             costs={costs || []}
-            gasPrice={gasPrice || ""}
+            gasPrice={gasPrice || ''}
             transaction={transaction}
             modifiedUrl={modifiedUrl}
             showDetails={showDetails}
@@ -49,7 +49,7 @@ export const TxnListWrapper = ({
           <SingleTxnDetail
             accountId={accountId}
             costs={costs || []}
-            gasPrice={gasPrice || ""}
+            gasPrice={gasPrice || ''}
             transaction={transaction}
             modifiedUrl={modifiedUrl}
             showDetails={showDetails}

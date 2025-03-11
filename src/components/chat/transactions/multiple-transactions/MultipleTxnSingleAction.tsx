@@ -1,7 +1,7 @@
-import { Transaction } from "@near-wallet-selector/core";
-import { formatCosts } from "../../../../lib/utils";
-import { TxnDetailWrapperProps } from "../../../../types/transaction";
-import { TxnDetail } from "../TxnDetail";
+import { Transaction } from '@near-wallet-selector/core';
+import { formatCosts } from '../../../../lib/utils';
+import { TxnDetailWrapperProps } from '../../../../types/transaction';
+import { TxnDetail } from '../TxnDetail';
 
 export const MultipleTxnSingleActionDetail = ({
   accountId,

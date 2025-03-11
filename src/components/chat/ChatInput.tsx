@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { SendButtonComponentProps } from "../../types";
-import { Textarea } from "../ui/textarea";
-import { AgentPill } from "./AgentPill";
-import DefaultSendButton from "./default-components/DefaultSendButtonComponent";
+import React, { useEffect, useRef, useState } from 'react';
+import { SendButtonComponentProps } from '../../types';
+import { Textarea } from '../ui/textarea';
+import { AgentPill } from './AgentPill';
+import DefaultSendButton from './default-components/DefaultSendButtonComponent';
 
 interface SmartActionsInputProps {
   input: string;
@@ -35,7 +35,7 @@ export const SmartActionsInput = ({
 }: SmartActionsInputProps) => {
   const agentNameRef = useRef<HTMLDivElement>(null);
   const [paddingLeft, setPaddingLeft] = useState<number>(125);
-  const [previousAgentName, setPreviousAgentName] = useState("Select Agent");
+  const [previousAgentName, setPreviousAgentName] = useState('Select Agent');
 
   useEffect(() => {
     if (agentNameRef.current) {
@@ -53,24 +53,24 @@ export const SmartActionsInput = ({
 
   return (
     <form
-      className='bitte-relative bitte-mb-0 bitte-flex bitte-w-full bitte-items-center bitte-justify-center bitte-gap-4 max-lg:bitte-flex-wrap'
+      className="bitte-relative bitte-mb-0 bitte-flex bitte-w-full bitte-items-center bitte-justify-center bitte-gap-4 max-lg:bitte-flex-wrap"
       style={{ color: textColor }}
       onSubmit={handleSubmit}
     >
-      <div className='bitte-w-full bitte-relative'>
+      <div className="bitte-w-full bitte-relative">
         <AgentPill name={agentName || previousAgentName} ref={agentNameRef} />
 
         <Textarea
-          placeholder={placeholderText || "Message Smart Actions"}
+          placeholder={placeholderText || 'Message Smart Actions'}
           style={{
             paddingLeft: `${paddingLeft}px`,
             background: backgroundColor,
             borderColor: borderColor,
           }}
-          className='bitte-h-[42px] bitte-w-full bitte-resize-none bitte-min-h-0 textarea-chat'
+          className="bitte-h-[42px] bitte-w-full bitte-resize-none bitte-min-h-0 textarea-chat"
           onChange={handleChange}
           onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-            if (e.key === "Enter" && !e.shiftKey && !isLoading) {
+            if (e.key === 'Enter' && !e.shiftKey && !isLoading) {
               e.preventDefault();
               handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
             }
@@ -78,9 +78,9 @@ export const SmartActionsInput = ({
           value={input}
         />
       </div>
-      <div className='bitte-flex bitte-gap-2 bitte-w-full lg:bitte-contents'>
+      <div className="bitte-flex bitte-gap-2 bitte-w-full lg:bitte-contents">
         {mobileInputExtraButton ? (
-          <div className='bitte-w-full lg:bitte-hidden'>
+          <div className="bitte-w-full lg:bitte-hidden">
             {mobileInputExtraButton}
           </div>
         ) : null}

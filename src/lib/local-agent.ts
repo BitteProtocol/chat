@@ -1,4 +1,4 @@
-import { BitteToolResult } from "../types";
+import { BitteToolResult } from '../types';
 
 interface ToolCall<NAME extends string, ARGS> {
   toolCallId: string;
@@ -29,18 +29,18 @@ export const executeLocalToolCall = async ({
 
   const { toolPath, httpMethod } = findToolPathAndMethod(
     localAgent,
-    toolCall.toolName
+    toolCall.toolName,
   );
 
   if (!toolPath || !httpMethod) {
-    console.error("Tool path or method not found for:", toolCall.toolName);
+    console.error('Tool path or method not found for:', toolCall.toolName);
     return undefined;
   }
 
   try {
     const args = toolCall.args ? JSON.parse(JSON.stringify(toolCall.args)) : {};
     const { url, remainingArgs } = buildUrlWithParams(baseUrl, toolPath, args);
-    
+
     const { options } = buildRequestOptions({
       httpMethod,
       remainingArgs,
@@ -48,13 +48,13 @@ export const executeLocalToolCall = async ({
     });
 
     const finalUrl =
-      httpMethod === "GET" ? handleQueryParams(url, remainingArgs) : url;
+      httpMethod === 'GET' ? handleQueryParams(url, remainingArgs) : url;
 
     const response = await fetch(finalUrl, options);
 
     if (!response.ok) {
       throw new Error(
-        `HTTP error during tool execution: ${response.status} ${response.statusText}`
+        `HTTP error during tool execution: ${response.status} ${response.statusText}`,
       );
     }
 
@@ -67,8 +67,8 @@ export const executeLocalToolCall = async ({
     };
   } catch (error) {
     const errorMessage =
-      error instanceof Error ? error.message : "Unknown error";
-    console.error("Error executing tool call:", errorMessage);
+      error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error executing tool call:', errorMessage);
     return {
       error: errorMessage,
     };
@@ -77,7 +77,7 @@ export const executeLocalToolCall = async ({
 
 export const findToolPathAndMethod = (
   localAgent: LocalAgent,
-  toolName: string
+  toolName: string,
 ): { toolPath?: string; httpMethod?: string } => {
   let toolPath: string | undefined;
   let httpMethod: string | undefined;
@@ -90,7 +90,7 @@ export const findToolPathAndMethod = (
           httpMethod = method.toUpperCase();
         }
       });
-    }
+    },
   );
 
   return { toolPath, httpMethod };
@@ -99,7 +99,7 @@ export const findToolPathAndMethod = (
 export const buildUrlWithParams = (
   baseUrl: string,
   toolPath: string,
-  args: any
+  args: any,
 ): { url: string; remainingArgs: any } => {
   let url = `${baseUrl}${toolPath}`;
   const remainingArgs = { ...args };
@@ -126,8 +126,8 @@ export const buildRequestOptions = ({
   metadata?: Record<string, unknown>;
 }): { options: RequestInit } => {
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
-    ...(metadata ? { "mb-metadata": JSON.stringify(metadata) } : {}),
+    'Content-Type': 'application/json',
+    ...(metadata ? { 'mb-metadata': JSON.stringify(metadata) } : {}),
   };
 
   const fetchOptions: RequestInit = {
@@ -135,7 +135,7 @@ export const buildRequestOptions = ({
     headers,
   };
 
-  if (httpMethod !== "GET") {
+  if (httpMethod !== 'GET') {
     fetchOptions.body = JSON.stringify(remainingArgs);
   }
 
@@ -152,16 +152,16 @@ export const handleQueryParams = (url: string, remainingArgs: any): string => {
 
   const queryString = queryParams.toString();
   if (queryString) {
-    url += (url.includes("?") ? "&" : "?") + queryString;
+    url += (url.includes('?') ? '&' : '?') + queryString;
   }
   return url;
 };
 
 export const parseResponse = async (response: Response): Promise<any> => {
-  const contentType = response.headers.get("Content-Type") || "";
-  return contentType.includes("application/json")
+  const contentType = response.headers.get('Content-Type') || '';
+  return contentType.includes('application/json')
     ? response.json()
-    : contentType.includes("text")
+    : contentType.includes('text')
       ? response.text()
       : response.blob();
 };

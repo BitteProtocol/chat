@@ -1,29 +1,29 @@
-import { EthTransactionParams, Network, SignRequestData } from "near-safe";
-import { useEffect, useState } from "react";
-import { formatEther } from "viem";
-import { useTransaction } from "../../../hooks/useTransaction";
-import { useWindowSize } from "../../../hooks/useWindowSize";
-import { shortenString } from "../../../lib/utils";
+import { EthTransactionParams, Network, SignRequestData } from 'near-safe';
+import { useEffect, useState } from 'react';
+import { formatEther } from 'viem';
+import { useTransaction } from '../../../hooks/useTransaction';
+import { useWindowSize } from '../../../hooks/useWindowSize';
+import { shortenString } from '../../../lib/utils';
 import {
   TransactionButtonProps,
   TransactionContainerProps,
-} from "../../../types";
-import { useAccount } from "../../AccountContext";
+} from '../../../types';
+import { useAccount } from '../../AccountContext';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../../ui/accordion";
-import { Button } from "../../ui/button";
-import { CardFooter, CardHeader } from "../../ui/card";
-import DefaultTxApproveButton from "../default-components/DefaultTxApproveButton";
-import DefaultTxContainer from "../default-components/DefaultTxContainer";
-import DefaultTxDeclineButton from "../default-components/DefaultTxDeclineButton";
-import { CopyStandard } from "./../CopyStandard";
-import LoadingMessage from "./../LoadingMessage";
-import { TransactionDetail } from "./TransactionDetail";
-import { TransactionResult } from "./TransactionResult";
+} from '../../ui/accordion';
+import { Button } from '../../ui/button';
+import { CardFooter, CardHeader } from '../../ui/card';
+import DefaultTxApproveButton from '../default-components/DefaultTxApproveButton';
+import DefaultTxContainer from '../default-components/DefaultTxContainer';
+import DefaultTxDeclineButton from '../default-components/DefaultTxDeclineButton';
+import { CopyStandard } from './../CopyStandard';
+import LoadingMessage from './../LoadingMessage';
+import { TransactionDetail } from './TransactionDetail';
+import { TransactionResult } from './TransactionResult';
 
 export const EvmTxCard = ({
   evmData,
@@ -44,14 +44,14 @@ export const EvmTxCard = ({
 }) => {
   const { width } = useWindowSize();
   const isMobile = !!width && width < 640;
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [txHash, setTxHash] = useState<string | undefined>();
   const { evmAddress, evmWallet, chainId } = useAccount();
 
   if (!evmData)
     return (
-      <p className='bitte-my-4 bitte-overflow-auto bitte-text-center'>
+      <p className="bitte-my-4 bitte-overflow-auto bitte-text-center">
         Unable to create evm transaction.
       </p>
     );
@@ -61,7 +61,7 @@ export const EvmTxCard = ({
     !evmData.params.every(isValidEvmParams)
   ) {
     return (
-      <p className='bitte-my-4 bitte-overflow-auto bitte-text-center'>
+      <p className="bitte-my-4 bitte-overflow-auto bitte-text-center">
         Invalid EVM transaction parameters.
       </p>
     );
@@ -92,7 +92,7 @@ export const EvmTxCard = ({
       setErrorMsg(
         error instanceof Error
           ? error.message
-          : `Unknown error: ${JSON.stringify(error)}`
+          : `Unknown error: ${JSON.stringify(error)}`,
       );
     }
   };
@@ -106,62 +106,62 @@ export const EvmTxCard = ({
       }}
     >
       <CardHeader
-        className='bitte-border-b bitte-p-4 bitte-text-center bitte-md:p-6'
+        className="bitte-border-b bitte-p-4 bitte-text-center bitte-md:p-6"
         style={{ borderColor: borderColor }}
       >
-        <p className='bitte-text-xl bitte-font-semibold'>EVM Transaction</p>
+        <p className="bitte-text-xl bitte-font-semibold">EVM Transaction</p>
       </CardHeader>
       <div>
         {evmData ? (
-          <div className='bitte-p-6'>
-            <div className='bitte-flex bitte-flex-col bitte-gap-6 bitte-text-sm'>
+          <div className="bitte-p-6">
+            <div className="bitte-flex bitte-flex-col bitte-gap-6 bitte-text-sm">
               <TransactionDetail
-                label='Chain ID'
+                label="Chain ID"
                 value={shortenString(
                   evmData.chainId.toString(),
-                  isMobile ? 13 : 21
+                  isMobile ? 13 : 21,
                 )}
               />
-              <TransactionDetail label='Network' value={network.name} />
-              <Accordion type='single' collapsible defaultValue='transaction-0'>
+              <TransactionDetail label="Network" value={network.name} />
+              <Accordion type="single" collapsible defaultValue="transaction-0">
                 {evmData.params.map((transaction, index) => (
                   <AccordionItem
                     key={`tx-${transaction.to}-${index}`}
                     value={`transaction-${index}`}
                   >
-                    <AccordionTrigger className='bitte-pt-0'>
-                      <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-sm'>
+                    <AccordionTrigger className="bitte-pt-0">
+                      <div className="bitte-flex bitte-items-center bitte-justify-between bitte-text-sm">
                         <p>Transaction {index + 1}</p>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className='bitte-flex bitte-flex-col bitte-gap-6'>
+                    <AccordionContent className="bitte-flex bitte-flex-col bitte-gap-6">
                       {transaction.to && (
                         <TransactionDetail
-                          label='To'
-                          className='bitte--mr-2.5'
+                          label="To"
+                          className="bitte--mr-2.5"
                           value={
                             <CopyStandard
                               text={transaction.to}
-                              textSize='sm'
+                              textSize="sm"
                               charSize={isMobile ? 7 : 12}
                             />
                           }
                         />
                       )}
                       <TransactionDetail
-                        label='Value'
+                        label="Value"
                         value={
                           transaction.value
                             ? formatEther(BigInt(transaction.value))
-                            : "0"
+                            : '0'
                         }
                       />
                       <TransactionDetail
-                        label='Data'
+                        label="Data"
                         value={
                           <CopyStandard
-                            text={transaction.data || "0x"}
-                            textSize='sm'
+                            text={transaction.data || '0x'}
+                            textSize="sm"
                             charSize={isMobile ? 10 : 15}
                           />
                         }
@@ -176,15 +176,15 @@ export const EvmTxCard = ({
       </div>
 
       {errorMsg ? (
-        <div className='bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
-          <p className='bitte-text-red-300'>
+        <div className="bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm">
+          <p className="bitte-text-red-300">
             An error occurred trying to execute your transaction: {errorMsg}.
           </p>
           <Button
-            className='bitte-w-1/2'
-            variant='outline'
+            className="bitte-w-1/2"
+            variant="outline"
             onClick={() => {
-              setErrorMsg("");
+              setErrorMsg('');
             }}
           >
             Dismiss
@@ -201,7 +201,7 @@ export const EvmTxCard = ({
         />
       ) : null}
       {!isLoading && !errorMsg && !txHash ? (
-        <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
+        <CardFooter className="bitte-flex bitte-items-center bitte-gap-6">
           <>
             <DeclineButton
               onClick={() => {
@@ -223,10 +223,10 @@ export const EvmTxCard = ({
 
 const isValidEvmParams = (data: unknown): data is EthTransactionParams => {
   return (
-    typeof data === "object" &&
+    typeof data === 'object' &&
     data !== null &&
-    "to" in data &&
-    typeof data.to === "string" &&
-    data.to.startsWith("0x")
+    'to' in data &&
+    typeof data.to === 'string' &&
+    data.to.startsWith('0x')
   );
 };

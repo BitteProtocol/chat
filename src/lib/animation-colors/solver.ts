@@ -1,4 +1,4 @@
-import { Color } from "./colors";
+import { Color } from './colors';
 
 export class Solver {
   target: Color;

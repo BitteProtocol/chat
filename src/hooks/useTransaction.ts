@@ -2,13 +2,10 @@ import {
   FinalExecutionOutcome,
   Transaction,
   Wallet,
-} from "@near-wallet-selector/core";
-import { Account } from "near-api-js";
-import {
-  EthTransactionParams,
-  SignRequestData
-} from "near-safe";
-import { EVMWalletAdapter } from "../types";
+} from '@near-wallet-selector/core';
+import { Account } from 'near-api-js';
+import { EthTransactionParams, SignRequestData } from 'near-safe';
+import { EVMWalletAdapter } from '../types';
 
 export interface SuccessInfo {
   near: {
@@ -40,7 +37,7 @@ export const useTransaction = ({
   }: HandleTxnOptions): Promise<SuccessInfo> => {
     const hasNoWalletOrAccount = !wallet && !account && !evmWallet?.address;
     if (hasNoWalletOrAccount) {
-      throw new Error("No wallet or account provided");
+      throw new Error('No wallet or account provided');
     }
 
     let nearResult;
@@ -69,11 +66,11 @@ export const useTransaction = ({
 
 export const executeWithAccount = async (
   transactions: Transaction[],
-  account: Account
+  account: Account,
 ): Promise<FinalExecutionOutcome[]> => {
   const results = await Promise.all(
     transactions.map(async (txn) => {
-      if (txn.actions.every((action) => action.type === "FunctionCall")) {
+      if (txn.actions.every((action) => action.type === 'FunctionCall')) {
         try {
           return await account.functionCall({
             contractId: txn.receiverId,
@@ -85,22 +82,22 @@ export const executeWithAccount = async (
         } catch (error) {
           console.error(
             `Transaction failed for contract ${txn.receiverId}, method ${txn.actions[0].params.methodName}:`,
-            error
+            error,
           );
           return null;
         }
       }
       return null;
-    })
+    }),
   );
   return results.filter(
-    (result): result is FinalExecutionOutcome => result !== null
+    (result): result is FinalExecutionOutcome => result !== null,
   );
 };
 
 export const executeWithWallet = async (
   transactions: Transaction[],
-  wallet: Wallet | undefined
+  wallet: Wallet | undefined,
 ): Promise<void | FinalExecutionOutcome[]> => {
   if (!wallet) {
     throw new Error("Can't have undefined account and wallet");
@@ -112,25 +109,25 @@ export const executeWithWallet = async (
 
 export const executeWithEvmWallet = async (
   evmData: SignRequestData,
-  evmWallet: EVMWalletAdapter
+  evmWallet: EVMWalletAdapter,
 ): Promise<void> => {
   if (!Array.isArray(evmData.params)) {
-    throw new Error("Invalid transaction parameters");
+    throw new Error('Invalid transaction parameters');
   }
 
   if (
     !evmData.params.every(
-      (tx): tx is EthTransactionParams => typeof tx === "object" && "to" in tx
+      (tx): tx is EthTransactionParams => typeof tx === 'object' && 'to' in tx,
     )
   ) {
-    throw new Error("Invalid transaction parameters");
+    throw new Error('Invalid transaction parameters');
   }
 
   const txPromises = evmData.params.map((tx) => {
     const rawTxParams = {
       to: tx.to,
       value: tx.value ? BigInt(tx.value) : BigInt(0),
-      data: tx.data || "0x",
+      data: tx.data || '0x',
       from: tx.from,
       gas: tx.gas ? BigInt(tx.gas) : undefined,
     };

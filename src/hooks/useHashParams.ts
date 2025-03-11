@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface HashParamOptions {
   /**
@@ -14,7 +14,7 @@ interface HashParamOptions {
  * @returns Object containing hash parameters and related utilities
  */
 export function useHashParams<T extends Record<string, string>>(
-  options: HashParamOptions = {}
+  options: HashParamOptions = {},
 ): {
   hashParams: T;
   clearHashParams: () => void;
@@ -24,7 +24,7 @@ export function useHashParams<T extends Record<string, string>>(
 
   // Function to parse the hash parameters
   const parseHashParams = () => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     if (window.location.hash) {
       const params = new URLSearchParams(window.location.hash.substring(1));
@@ -37,12 +37,12 @@ export function useHashParams<T extends Record<string, string>>(
 
   // Clear hash parameters from URL
   const clearHashParams = () => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     window.history.replaceState(
       null,
       document.title,
-      window.location.pathname + window.location.search
+      window.location.pathname + window.location.search,
     );
     setHashParams({} as T);
   };
@@ -57,9 +57,9 @@ export function useHashParams<T extends Record<string, string>>(
         parseHashParams();
       };
 
-      window.addEventListener("hashchange", handleHashChange);
+      window.addEventListener('hashchange', handleHashChange);
       return () => {
-        window.removeEventListener("hashchange", handleHashChange);
+        window.removeEventListener('hashchange', handleHashChange);
       };
     }
 

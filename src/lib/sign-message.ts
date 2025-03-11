@@ -1,15 +1,15 @@
-import type { SignMessageParams, Wallet } from "@near-wallet-selector/core";
-import { randomBytes } from "crypto";
-import { errorString } from "./utils";
-import type { SignMessageResult } from "../types";
+import type { SignMessageParams, Wallet } from '@near-wallet-selector/core';
+import { randomBytes } from 'crypto';
+import { errorString } from './utils';
+import type { SignMessageResult } from '../types';
 
 const getNonceBuffer = (nonce: string): Buffer => {
   const nonceLength = 32;
 
-  const buffer = Buffer.from(nonce, "base64");
+  const buffer = Buffer.from(nonce, 'base64');
 
   if (buffer.length > nonceLength) {
-    throw Error("Expected nonce to be a 32 bytes buffer");
+    throw Error('Expected nonce to be a 32 bytes buffer');
   } else if (buffer.length < nonceLength) {
     const padding = Buffer.alloc(nonceLength - buffer.length);
     return Buffer.concat([buffer, padding], nonceLength);
@@ -19,8 +19,8 @@ const getNonceBuffer = (nonce: string): Buffer => {
 };
 
 export const signMessage = async (
-  signMessageParams: Omit<SignMessageParams, "nonce"> & { nonce: string },
-  wallet: Wallet
+  signMessageParams: Omit<SignMessageParams, 'nonce'> & { nonce: string },
+  wallet: Wallet,
 ): Promise<SignMessageResult | undefined> => {
   const { message, nonce, recipient, callbackUrl, state } = signMessageParams;
 
@@ -34,7 +34,7 @@ export const signMessage = async (
     })
     .catch((error) => {
       const errorMessage = errorString(error);
-      console.error("failed in signMessage", errorMessage);
+      console.error('failed in signMessage', errorMessage);
       throw new Error(errorMessage);
     });
 
@@ -44,7 +44,7 @@ export const signMessage = async (
       ...signedMessage,
       nonce,
       recipient,
-      callbackUrl: callbackUrl || "",
+      callbackUrl: callbackUrl || '',
       message,
     };
   }
@@ -52,4 +52,4 @@ export const signMessage = async (
 
 // Generate exactly 32 bytes of random data and convert to base64 string
 export const generateNonceString = (): string =>
-  randomBytes(32).toString("base64");
+  randomBytes(32).toString('base64');

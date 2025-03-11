@@ -1,5 +1,5 @@
-import { ArrowUpRight } from "lucide-react";
-import { Button } from "../ui/button";
+import { ArrowUpRight } from 'lucide-react';
+import { Button } from '../ui/button';
 import {
   Table,
   TableBody,
@@ -7,27 +7,27 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
-import { BITTE_BLACK_IMG } from "../../lib/images";
+} from '../ui/table';
+import { BITTE_BLACK_IMG } from '../../lib/images';
 
 const IMAGE_API =
-  "https://image-cache-service-z3w7d7dnea-ew.a.run.app/media?url=";
+  'https://image-cache-service-z3w7d7dnea-ew.a.run.app/media?url=';
 
 export const MarkdownTable = ({ content }: { content: string }) => {
   // Split the markdown string into lines
-  const lines = content.split("\n");
+  const lines = content.split('\n');
 
   // Filter out the lines that are part of the table
   const tableLines = lines.filter(
-    (line) => line.startsWith("|") && !line.includes("---")
+    (line) => line.startsWith('|') && !line.includes('---'),
   );
 
   // Split each line into cells
   const cells = tableLines.map((line) =>
     line
-      .split("|")
+      .split('|')
       .slice(1, -1)
-      .map((cell) => cell.trim())
+      .map((cell) => cell.trim()),
   );
 
   return (
@@ -46,13 +46,16 @@ export const MarkdownTable = ({ content }: { content: string }) => {
       </TableHeader>
       <TableBody>
         {cells.slice(1).map((row, rowIndex) => (
-          <TableRow key={rowIndex} className="bitte-border-none hover:bitte-bg-transparent">
+          <TableRow
+            key={rowIndex}
+            className="bitte-border-none hover:bitte-bg-transparent"
+          >
             {row.map((cell, cellIndex) => {
               const linkMatchQuery = cell.match(/\[Link\]\((.*)\)/);
               const linkValue = linkMatchQuery?.[1];
               const imageMatchQuery = cell.match(/!\[.*\]\((.*)\)/);
               const imageMatch = imageMatchQuery?.[1];
-              const imageValue = imageMatch?.startsWith("https://")
+              const imageValue = imageMatch?.startsWith('https://')
                 ? imageMatch
                 : BITTE_BLACK_IMG;
 
@@ -63,9 +66,9 @@ export const MarkdownTable = ({ content }: { content: string }) => {
                 >
                   <div className="bitte-max-w-[250px] bitte-break-words">
                     {linkValue ? (
-                      <a href={linkValue} target='_blank'>
+                      <a href={linkValue} target="_blank">
                         <Button
-                          variant='ghost'
+                          variant="ghost"
                           className="bitte-flex bitte-items-center bitte-gap-2 bitte-p-0 bitte-text-shad-blue-100 hover:text-shad-blue-100"
                         >
                           View

@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from 'react';
 
-import { cn } from "../../lib/utils"
+import { cn } from '../../lib/utils';
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -9,20 +9,27 @@ const Table = React.forwardRef<
   <div className="bitte-relative bitte-w-full bitte-overflow-auto">
     <table
       ref={ref}
-      className={cn("bitte-w-full bitte-caption-bottom bitte-text-sm", className)}
+      className={cn(
+        'bitte-w-full bitte-caption-bottom bitte-text-sm',
+        className,
+      )}
       {...props}
     />
   </div>
-))
-Table.displayName = "Table"
+));
+Table.displayName = 'Table';
 
 const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn("[&_tr]:bitte-border-b", className)} {...props} />
-))
-TableHeader.displayName = "TableHeader"
+  <thead
+    ref={ref}
+    className={cn('[&_tr]:bitte-border-b', className)}
+    {...props}
+  />
+));
+TableHeader.displayName = 'TableHeader';
 
 const TableBody = React.forwardRef<
   HTMLTableSectionElement,
@@ -30,11 +37,11 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn("[&_tr:last-child]:bitte-border-0", className)}
+    className={cn('[&_tr:last-child]:bitte-border-0', className)}
     {...props}
   />
-))
-TableBody.displayName = "TableBody"
+));
+TableBody.displayName = 'TableBody';
 
 const TableFooter = React.forwardRef<
   HTMLTableSectionElement,
@@ -43,13 +50,13 @@ const TableFooter = React.forwardRef<
   <tfoot
     ref={ref}
     className={cn(
-      "bitte-border-t bitte-bg-muted/50 bitte-font-medium [&>tr]:last:bitte-border-b-0",
-      className
+      'bitte-border-t bitte-bg-muted/50 bitte-font-medium [&>tr]:last:bitte-border-b-0',
+      className,
     )}
     {...props}
   />
-))
-TableFooter.displayName = "TableFooter"
+));
+TableFooter.displayName = 'TableFooter';
 
 const TableRow = React.forwardRef<
   HTMLTableRowElement,
@@ -58,13 +65,13 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "bitte-border-b bitte-transition-colors hover:bitte-bg-muted/50 data-[state=selected]:bitte-bg-muted",
-      className
+      'bitte-border-b bitte-transition-colors hover:bitte-bg-muted/50 data-[state=selected]:bitte-bg-muted',
+      className,
     )}
     {...props}
   />
-))
-TableRow.displayName = "TableRow"
+));
+TableRow.displayName = 'TableRow';
 
 const TableHead = React.forwardRef<
   HTMLTableCellElement,
@@ -73,13 +80,13 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "bitte-h-10 bitte-px-2 bitte-text-left bitte-align-middle bitte-font-medium bitte-text-muted-foreground [&:has([role=checkbox])]:bitte-pr-0 [&>[role=checkbox]]:bitte-translate-y-[2px]",
-      className
+      'bitte-h-10 bitte-px-2 bitte-text-left bitte-align-middle bitte-font-medium bitte-text-muted-foreground [&:has([role=checkbox])]:bitte-pr-0 [&>[role=checkbox]]:bitte-translate-y-[2px]',
+      className,
     )}
     {...props}
   />
-))
-TableHead.displayName = "TableHead"
+));
+TableHead.displayName = 'TableHead';
 
 const TableCell = React.forwardRef<
   HTMLTableCellElement,
@@ -88,13 +95,13 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "bitte-p-2 bitte-align-middle [&:has([role=checkbox])]:bitte-pr-0 [&>[role=checkbox]]:bitte-translate-y-[2px]",
-      className
+      'bitte-p-2 bitte-align-middle [&:has([role=checkbox])]:bitte-pr-0 [&>[role=checkbox]]:bitte-translate-y-[2px]',
+      className,
     )}
     {...props}
   />
-))
-TableCell.displayName = "TableCell"
+));
+TableCell.displayName = 'TableCell';
 
 const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
@@ -102,11 +109,14 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("bitte-mt-4 bitte-text-sm bitte-text-muted-foreground", className)}
+    className={cn(
+      'bitte-mt-4 bitte-text-sm bitte-text-muted-foreground',
+      className,
+    )}
     {...props}
   />
-))
-TableCaption.displayName = "TableCaption"
+));
+TableCaption.displayName = 'TableCaption';
 
 export {
   Table,
@@ -117,4 +127,4 @@ export {
   TableRow,
   TableCell,
   TableCaption,
-}
+};

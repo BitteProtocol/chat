@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { useHashParams } from "../../../hooks/useHashParams";
-import { generateNonceString, signMessage } from "../../../lib/sign-message";
-import { errorString } from "../../../lib/utils";
+import { useEffect, useMemo, useState } from 'react';
+import { useHashParams } from '../../../hooks/useHashParams';
+import { generateNonceString, signMessage } from '../../../lib/sign-message';
+import { errorString } from '../../../lib/utils';
 import {
   BitteToolResult,
   SignMessageResult,
   TransactionButtonProps,
   TransactionContainerProps,
-} from "../../../types";
-import { useAccount } from "../../AccountContext";
-import { Button } from "../../ui/button";
-import { CardContent, CardFooter, CardHeader } from "../../ui/card";
-import { CopyStandard } from "../CopyStandard";
-import DefaultTxApproveButton from "../default-components/DefaultTxApproveButton";
-import DefaultTxContainer from "../default-components/DefaultTxContainer";
-import DefaultTxDeclineButton from "../default-components/DefaultTxDeclineButton";
-import LoadingMessage from "../LoadingMessage";
+} from '../../../types';
+import { useAccount } from '../../AccountContext';
+import { Button } from '../../ui/button';
+import { CardContent, CardFooter, CardHeader } from '../../ui/card';
+import { CopyStandard } from '../CopyStandard';
+import DefaultTxApproveButton from '../default-components/DefaultTxApproveButton';
+import DefaultTxContainer from '../default-components/DefaultTxContainer';
+import DefaultTxDeclineButton from '../default-components/DefaultTxDeclineButton';
+import LoadingMessage from '../LoadingMessage';
 
 interface ReviewSignMessageProps {
   message: string;
@@ -38,7 +38,7 @@ interface ReviewSignMessageProps {
 export const ReviewSignMessage = ({
   message,
   nonce: nonceParam,
-  callbackUrl = "",
+  callbackUrl = '',
   recipient,
   textColor,
   messageBackgroundColor,
@@ -51,7 +51,7 @@ export const ReviewSignMessage = ({
   customDeclineTxButton: DeclineButton = DefaultTxDeclineButton,
 }: ReviewSignMessageProps) => {
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
   const [result, setResult] = useState<SignMessageResult | null>(null);
 
   const { wallet, accountId } = useAccount();
@@ -71,7 +71,7 @@ export const ReviewSignMessage = ({
     }
 
     if (chatId) {
-      sessionStorage.setItem("chatId", chatId);
+      sessionStorage.setItem('chatId', chatId);
     }
 
     // Second check for stored nonce in session storage
@@ -129,7 +129,7 @@ export const ReviewSignMessage = ({
 
     try {
       setLoading(true);
-      setErrorMsg("");
+      setErrorMsg('');
       const signedMessage = await signMessage(
         {
           message,
@@ -137,7 +137,7 @@ export const ReviewSignMessage = ({
           callbackUrl,
           recipient: recipient || accountId,
         },
-        wallet
+        wallet,
       );
 
       if (signedMessage) {
@@ -162,25 +162,25 @@ export const ReviewSignMessage = ({
       }}
     >
       <CardHeader
-        className='bitte-border-b bitte-text-center'
+        className="bitte-border-b bitte-text-center"
         style={{ borderColor: borderColor }}
       >
-        <p className='bitte-text-[20px] bitte-font-semibold'>Sign Message</p>
+        <p className="bitte-text-[20px] bitte-font-semibold">Sign Message</p>
       </CardHeader>
 
       <CardContent>
-        <div className='bitte-border-b' style={{ borderColor: borderColor }}>
-          <div className='bitte-flex bitte-flex-col bitte-gap-6 bitte-p-6'>
-            <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]'>
+        <div className="bitte-border-b" style={{ borderColor: borderColor }}>
+          <div className="bitte-flex bitte-flex-col bitte-gap-6 bitte-p-6">
+            <div className="bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]">
               <div style={{ color: textColor }}>Message</div>
               <div style={{ color: textColor }}>{message}</div>
             </div>
-            <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]'>
+            <div className="bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]">
               <div style={{ color: textColor }}>Nonce</div>
               <div style={{ color: textColor }}>{nonce}</div>
             </div>
             {recipient ? (
-              <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]'>
+              <div className="bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]">
                 <div style={{ color: textColor }}>Recipient</div>
                 <div style={{ color: textColor }}>{recipient}</div>
               </div>
@@ -189,12 +189,12 @@ export const ReviewSignMessage = ({
         </div>
 
         {result && !loading ? (
-          <CardContent className='bitte-pt-6'>
-            <div className='bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
-              <div className='bitte-flex bitte-justify-end'>
+          <CardContent className="bitte-pt-6">
+            <div className="bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm">
+              <div className="bitte-flex bitte-justify-end">
                 <CopyStandard
                   text={result.signature}
-                  textSize='sm'
+                  textSize="sm"
                   charSize={18}
                   isUrl={false}
                 />
@@ -205,14 +205,14 @@ export const ReviewSignMessage = ({
       </CardContent>
 
       {errorMsg && !loading ? (
-        <div className='bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
-          <p className='bitte-text-red-300'>
+        <div className="bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm">
+          <p className="bitte-text-red-300">
             An error occurred while signing the message: {errorMsg}
           </p>
           <Button
-            className='bitte-w-1/2'
-            variant='outline'
-            onClick={() => setErrorMsg("")}
+            className="bitte-w-1/2"
+            variant="outline"
+            onClick={() => setErrorMsg('')}
           >
             Dismiss
           </Button>
@@ -222,17 +222,17 @@ export const ReviewSignMessage = ({
       {loading ? <LoadingMessage color={textColor} /> : null}
 
       {!loading && !result && !errorMsg ? (
-        <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
+        <CardFooter className="bitte-flex bitte-items-center bitte-gap-6">
           <Button
-            variant='outline'
-            className='bitte-w-1/2'
-            onClick={() => addToolResult({ error: "User declined to sign" })}
+            variant="outline"
+            className="bitte-w-1/2"
+            onClick={() => addToolResult({ error: 'User declined to sign' })}
           >
             Decline
           </Button>
           <Button
-            variant='default'
-            className='bitte-w-1/2'
+            variant="default"
+            className="bitte-w-1/2"
             onClick={handleMessageSign}
           >
             Sign Message

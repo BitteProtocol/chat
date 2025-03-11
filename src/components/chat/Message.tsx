@@ -1,16 +1,16 @@
-import React, { FC, memo } from "react";
+import React, { FC, memo } from 'react';
 
-import ReactMarkdown, { Options } from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import { MarkdownTable } from "./MarkdownTable";
-import { isMarkdownTableString } from "../../lib/regex";
+import ReactMarkdown, { Options } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import { MarkdownTable } from './MarkdownTable';
+import { isMarkdownTableString } from '../../lib/regex';
 
 const MemoizedReactMarkdown: FC<Options> = memo(
   ReactMarkdown,
   (prevProps, nextProps) =>
     prevProps.children === nextProps.children &&
-    prevProps.className === nextProps.className
+    prevProps.className === nextProps.className,
 );
 
 const LinkRenderer = ({
@@ -21,8 +21,8 @@ const LinkRenderer = ({
   return (
     <a
       href={href as string}
-      target='_blank'
-      rel='noopener noreferrer'
+      target="_blank"
+      rel="noopener noreferrer"
       className="bitte-text-blue-300"
       {...props}
     >
@@ -49,4 +49,4 @@ export const SAMessage = memo(({ content }: { content: string }) => {
   );
 });
 
-SAMessage.displayName = "SAMessage";
+SAMessage.displayName = 'SAMessage';

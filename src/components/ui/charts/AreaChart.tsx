@@ -4,10 +4,9 @@ import {
   AreaChart as RechartsAreaChart,
   XAxis,
   YAxis,
-} from "recharts";
-import { ChartProps } from "../../../lib/chart-helpers";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../chart";
-
+} from 'recharts';
+import { ChartProps } from '../../../lib/chart-helpers';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '../chart';
 
 export const AreaChart = ({
   chartConfig,
@@ -17,11 +16,10 @@ export const AreaChart = ({
   dateFormatter,
   valueFormatter,
 }: ChartProps) => {
-
   return (
     <ChartContainer
       config={chartConfig}
-      className='bitte-min-h-[200px] bitte-w-full bitte-select-none'
+      className="bitte-min-h-[200px] bitte-w-full bitte-select-none"
     >
       <RechartsAreaChart data={chartData} accessibilityLayer>
         <CartesianGrid vertical={false} strokeOpacity={0.2} syncWithTicks />
@@ -29,21 +27,21 @@ export const AreaChart = ({
           dataKey={timeKey}
           tickLine={false}
           axisLine={false}
-          domain={["auto", "auto"]}
-          interval='equidistantPreserveStart'
+          domain={['auto', 'auto']}
+          interval="equidistantPreserveStart"
           tickFormatter={(value) => dateFormatter(value)}
         />
         <YAxis
           tickLine={false}
           axisLine={false}
-          domain={["auto", "auto"]}
+          domain={['auto', 'auto']}
           tickFormatter={(value) => valueFormatter(value, true)}
-          scale='linear'
+          scale="linear"
         />
         <ChartTooltip
           content={
             <ChartTooltipContent
-              indicator='dot'
+              indicator="dot"
               labelFormatter={(_value, payload) =>
                 dateFormatter(payload[0].payload[timeKey], false)
               }
@@ -55,7 +53,7 @@ export const AreaChart = ({
           <Area
             key={key}
             dataKey={key}
-            type='natural'
+            type="natural"
             fill={chartConfig[key].color}
             stroke={chartConfig[key].color}
             fillOpacity={0.5}

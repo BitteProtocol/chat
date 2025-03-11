@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error) {
-    console.error("Generationerror:", error);
+    console.error('Generationerror:', error);
   }
 
   render() {
