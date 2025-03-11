@@ -1,4 +1,4 @@
-import { ChevronsDownUp, ChevronsUpDown } from "lucide-react";
+import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react';
 
 export const ShowDetailsBtn = ({
   setShowDetails,

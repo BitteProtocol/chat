@@ -1,7 +1,7 @@
-import { FunctionCallAction } from "@near-wallet-selector/core";
-import { formatCosts } from "../../../../lib/utils";
-import { TxnDetailWrapperProps } from "../../../../types/transaction";
-import { TxnDetailMultipleAction } from "../TxnDetailMultipleAction";
+import { FunctionCallAction } from '@near-wallet-selector/core';
+import { formatCosts } from '../../../../lib/utils';
+import { TxnDetailWrapperProps } from '../../../../types/transaction';
+import { TxnDetailMultipleAction } from '../TxnDetailMultipleAction';
 
 export const SingleTxnMultipleAction = ({
   transaction,

@@ -5,11 +5,11 @@ import {
   ComposedChart,
   XAxis,
   YAxis,
-} from "recharts";
-import { ChartProps } from "../../../lib/chart-helpers";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../chart";
+} from 'recharts';
+import { ChartProps } from '../../../lib/chart-helpers';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '../chart';
 
-const TOOLTIP_LABELS = ["O", "H", "L", "C"];
+const TOOLTIP_LABELS = ['O', 'H', 'L', 'C'];
 
 export const CandleChart = ({
   chartConfig,
@@ -17,7 +17,7 @@ export const CandleChart = ({
   chartData,
   dateFormatter,
   valueFormatter,
-}: ChartProps<"candle">) => {
+}: ChartProps<'candle'>) => {
   const data = chartData.map((point) => {
     const open = point.open;
     const close = point.close;
@@ -41,8 +41,8 @@ export const CandleChart = ({
       wickBottom: Math.abs(low - candleLow),
       candleHeight,
       candleColor: up
-        ? "bitte-fill-shad-green-success"
-        : "bitte-fill-shad-red-100", // Using literal hex colors instead of class names
+        ? 'bitte-fill-shad-green-success'
+        : 'bitte-fill-shad-red-100', // Using literal hex colors instead of class names
       diff: point.close - point.open,
       diffPercent: ((point.close - point.open) / point.open) * 100,
     };
@@ -50,12 +50,12 @@ export const CandleChart = ({
 
   const maxValue: number = data.reduce(
     (max, point) => Math.max(point.high, max),
-    -Infinity
+    -Infinity,
   );
 
   const minValue: number = data.reduce(
     (min, point) => Math.min(point.low, min),
-    Infinity
+    Infinity,
   );
   const tickPadding = (maxValue - minValue) / 2;
 
@@ -67,33 +67,33 @@ export const CandleChart = ({
   return (
     <ChartContainer
       config={chartConfig}
-      className='bitte-min-h-[200px] bitte-w-full bitte-select-none'
+      className="bitte-min-h-[200px] bitte-w-full bitte-select-none"
     >
       <ComposedChart
         data={data}
         accessibilityLayer
         barCategoryGap={0}
-        stackOffset='sign'
+        stackOffset="sign"
       >
         <CartesianGrid strokeOpacity={0.2} syncWithTicks strokeWidth={1} />
         <XAxis
           dataKey={timeKey}
           tickLine={false}
           axisLine={false}
-          domain={["auto", "auto"]}
-          interval='equidistantPreserveStart'
+          domain={['auto', 'auto']}
+          interval="equidistantPreserveStart"
           tickFormatter={(value) => dateFormatter(value)}
         />
         <YAxis
-          orientation='left'
+          orientation="left"
           tickLine={false}
           axisLine={false}
           tickFormatter={(value) => valueFormatter(value, true)}
-          type='number'
+          type="number"
           domain={[minHeight, maxHeight]}
           allowDataOverflow={true}
-          scale='linear'
-          interval='preserveEnd'
+          scale="linear"
+          interval="preserveEnd"
         />
         <ChartTooltip
           cursor={true}
@@ -103,29 +103,29 @@ export const CandleChart = ({
           content={
             <ChartTooltipContent
               formatter={(_value, _name, entry) => {
-                if (!entry || entry.type === "none") return;
+                if (!entry || entry.type === 'none') return;
 
                 const diff = entry.payload.diff;
                 const diffPercent = entry.payload.diffPercent;
-                const values = ["open", "high", "low", "close"].map(
-                  (key) => entry.payload[key]
+                const values = ['open', 'high', 'low', 'close'].map(
+                  (key) => entry.payload[key],
                 );
 
                 return (
-                  <div className='bitte--mb-4 bitte-grid bitte-grid-cols-2 bitte-gap-2'>
+                  <div className="bitte--mb-4 bitte-grid bitte-grid-cols-2 bitte-gap-2">
                     <p style={{ color: entry.payload.candleColor }}>
-                      {diff > 0 ? "+" : ""}
+                      {diff > 0 ? '+' : ''}
                       {valueFormatter(diff)}
                     </p>
                     <p style={{ color: entry.payload.candleColor }}>
-                      {diffPercent > 0 ? "+" : ""}
+                      {diffPercent > 0 ? '+' : ''}
                       {diffPercent.toFixed(2)}% (24hr)
                     </p>
                     {values.map((value, index) => (
                       <p key={TOOLTIP_LABELS[index]}>
-                        <span className='bitte-text-muted-foreground'>
+                        <span className="bitte-text-muted-foreground">
                           {TOOLTIP_LABELS[index]}:
-                        </span>{" "}
+                        </span>{' '}
                         {valueFormatter(value)}
                       </p>
                     ))}
@@ -136,12 +136,12 @@ export const CandleChart = ({
           }
         />
         {/* y-axis offset */}
-        <Bar dataKey='low' stackId='stack' fillOpacity={0} />
+        <Bar dataKey="low" stackId="stack" fillOpacity={0} />
         {/* wick bottom */}
         <Bar
-          dataKey='wickBottom'
-          stackId='stack'
-          tooltipType='none'
+          dataKey="wickBottom"
+          stackId="stack"
+          tooltipType="none"
           maxBarSize={1}
         >
           {data.map((entry) => (
@@ -153,7 +153,7 @@ export const CandleChart = ({
         </Bar>
         {/* candle body */}
         maxBarSize={1}
-        <Bar dataKey='candleHeight' stackId='stack' tooltipType='none'>
+        <Bar dataKey="candleHeight" stackId="stack" tooltipType="none">
           {data.map((entry) => (
             <Cell
               key={`candle-body-${entry.time}`}
@@ -163,9 +163,9 @@ export const CandleChart = ({
         </Bar>
         {/* wick top */}
         <Bar
-          dataKey='wickTop'
-          stackId='stack'
-          tooltipType='none'
+          dataKey="wickTop"
+          stackId="stack"
+          tooltipType="none"
           maxBarSize={1}
         >
           {data.map((entry) => (

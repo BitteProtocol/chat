@@ -1,10 +1,10 @@
-import { Message } from "ai";
-import { useEffect, useState } from "react";
-import { convertToUIMessages } from "../lib/chat";
-import { fetchChatHistory } from "../lib/fetchChatHistory";
-import { BitteAiChatOptions, BitteAiChatProps } from "../types/types";
-import { AccountProvider } from "./AccountContext";
-import { ChatContent } from "./chat/ChatContent";
+import { Message } from 'ai';
+import { useEffect, useState } from 'react';
+import { convertToUIMessages } from '../lib/chat';
+import { fetchChatHistory } from '../lib/fetchChatHistory';
+import { BitteAiChatOptions, BitteAiChatProps } from '../types/types';
+import { AccountProvider } from './AccountContext';
+import { ChatContent } from './chat/ChatContent';
 
 export const BitteAiChat = ({
   wallet,
@@ -15,12 +15,12 @@ export const BitteAiChat = ({
   options,
 }: BitteAiChatProps) => {
   const [loadedData, setLoadedData] = useState({
-    agentIdLoaded: "",
+    agentIdLoaded: '',
     uiMessages: [] as Message[],
   });
 
   const chatId =
-    typeof window !== "undefined" && sessionStorage.getItem("chatId");
+    typeof window !== 'undefined' && sessionStorage.getItem('chatId');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +33,7 @@ export const BitteAiChat = ({
             uiMessages: uiMessages,
           });
           // Clear chatId from session storage
-          sessionStorage.removeItem("chatId");
+          sessionStorage.removeItem('chatId');
         }
       }
     };

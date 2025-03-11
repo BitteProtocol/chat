@@ -1,6 +1,6 @@
-import { TxnDetailWrapperProps } from "../../../../types/transaction";
-import { SingleTxnMultipleAction } from "./SingleTxnMultipleAction";
-import { SingleTxnSingleAction } from "./SingleTxnSingleAction";
+import { TxnDetailWrapperProps } from '../../../../types/transaction';
+import { SingleTxnMultipleAction } from './SingleTxnMultipleAction';
+import { SingleTxnSingleAction } from './SingleTxnSingleAction';
 
 export const SingleTxnDetail = ({
   accountId,

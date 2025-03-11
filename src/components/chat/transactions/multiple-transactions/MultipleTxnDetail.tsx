@@ -1,6 +1,6 @@
-import { TxnDetailWrapperProps } from "../../../../types/transaction";
-import { MultipleTxnMultiActionDetails } from "./MultipleTxnMultiAction";
-import { MultipleTxnSingleActionDetail } from "./MultipleTxnSingleAction";
+import { TxnDetailWrapperProps } from '../../../../types/transaction';
+import { MultipleTxnMultiActionDetails } from './MultipleTxnMultiAction';
+import { MultipleTxnSingleActionDetail } from './MultipleTxnSingleAction';
 
 export const MultipleTxnDetail = ({
   accountId,
@@ -12,7 +12,7 @@ export const MultipleTxnDetail = ({
   gasPrice,
 }: TxnDetailWrapperProps): JSX.Element => {
   const hasMultipleActions = transaction.every(
-    (tx) => tx.actions && tx.actions.length > 1
+    (tx) => tx.actions && tx.actions.length > 1,
   );
 
   return hasMultipleActions ? (

@@ -7,9 +7,9 @@ export const isMarkdownTableString = (message: string) => {
 
 export const isDataString = (str: string): boolean => {
   const cleaned = str
-    .replace(/\\n/g, "") // Remove escaped newlines
-    .replace(/\s+/g, " ") // Replace multiple whitespace with single space
-    .replace(/['"]/g, "") // Remove quotes
+    .replace(/\\n/g, '') // Remove escaped newlines
+    .replace(/\s+/g, ' ') // Replace multiple whitespace with single space
+    .replace(/['"]/g, '') // Remove quotes
     .trim();
 
   // Match a string that starts with {, [, or contains :

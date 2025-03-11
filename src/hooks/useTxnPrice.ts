@@ -1,15 +1,15 @@
-import { getLatestGasPrice } from "@mintbase-js/rpc/lib/methods/getLatestGasPrice";
+import { getLatestGasPrice } from '@mintbase-js/rpc/lib/methods/getLatestGasPrice';
 import {
   Action,
   FunctionCallAction,
   Transaction,
-} from "@near-wallet-selector/core";
-import BN from "bn.js/";
-import { formatNearAmount } from "near-api-js/lib/utils/format";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { RPC_URL } from "../lib/constants";
-import { Cost } from "../types";
-import { ActionCosts } from "../types/transaction";
+} from '@near-wallet-selector/core';
+import BN from 'bn.js/';
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { RPC_URL } from '../lib/constants';
+import { Cost } from '../types';
+import { ActionCosts } from '../types/transaction';
 
 export const useTxnPrice = (balance: BN, transactions?: Transaction[]) => {
   const [hasBalance, setHasBalance] = useState(true);
@@ -20,9 +20,9 @@ export const useTxnPrice = (balance: BN, transactions?: Transaction[]) => {
     costs: Cost[];
     price: string;
   }>({
-    gasPrice: "0",
+    gasPrice: '0',
     costs: [],
-    price: "0",
+    price: '0',
   });
 
   const gasPriceFetched = useRef(false);
@@ -47,11 +47,11 @@ export const useTxnPrice = (balance: BN, transactions?: Transaction[]) => {
         updatePriceState({ gasPrice: currentGasPrice.toString() });
         gasPriceFetched.current = true;
       } catch (error) {
-        console.error("Failed to fetch gas price:", error);
+        console.error('Failed to fetch gas price:', error);
         updatePriceState({ gasPrice: '100000000' });
       }
     };
-    if (priceState?.gasPrice === "0") {
+    if (priceState?.gasPrice === '0') {
       definePrice();
     }
   }, [priceState?.gasPrice]);
@@ -62,19 +62,19 @@ export const useTxnPrice = (balance: BN, transactions?: Transaction[]) => {
       const costs = transactions.map((txn) => {
         const actionCosts = txn.actions.map((action: Action) => {
           switch (action.type) {
-            case "FunctionCall":
+            case 'FunctionCall':
               return {
-                deposit: new BN(action.params.deposit || "0"),
+                deposit: new BN(action.params.deposit || '0'),
                 gas: new BN(action.params.gas),
               };
-            case "Transfer":
+            case 'Transfer':
               return {
-                deposit: new BN(action.params.deposit || "0"),
+                deposit: new BN(action.params.deposit || '0'),
                 gas: COSTS[action.type as ActionCosts],
               };
             default:
               return {
-                deposit: new BN("0"),
+                deposit: new BN('0'),
                 gas: COSTS[action.type as ActionCosts],
               };
           }
@@ -126,16 +126,16 @@ export const useTxnPrice = (balance: BN, transactions?: Transaction[]) => {
       .map((txn) => {
         const functionCallAction = txn.actions.find(
           (action) =>
-            action.type === "FunctionCall" &&
-            action.params.methodName !== "storage_deposit"
+            action.type === 'FunctionCall' &&
+            action.params.methodName !== 'storage_deposit',
         );
 
         if (!functionCallAction) return null;
         const args = (functionCallAction as FunctionCallAction)?.params?.args;
 
         return (
-          ("amount" in args &&
-            typeof args?.amount === "string" &&
+          ('amount' in args &&
+            typeof args?.amount === 'string' &&
             args?.amount) ||
           null
         );
@@ -148,10 +148,10 @@ export const useTxnPrice = (balance: BN, transactions?: Transaction[]) => {
       priceState.costs?.[0]?.deposit &&
       formatNearAmount(priceState.costs?.[0]?.deposit.toString(), 3);
     if (
-      ["0", "0.000", null, undefined, ""].includes(costsAmount) ||
+      ['0', '0.000', null, undefined, ''].includes(costsAmount) ||
       isNaN(Number(costsAmount))
     ) {
-      return formatNearAmount(otherTokensAmount || "0", 3);
+      return formatNearAmount(otherTokensAmount || '0', 3);
     } else {
       return costsAmount;
     }

@@ -1,7 +1,7 @@
-import { Transaction } from "@near-wallet-selector/core";
-import { useTxnFees } from "../../../hooks/useTxnFees";
-import { Cost } from "../../../types";
-import { TransactionOperation } from "../../../types/transaction";
+import { Transaction } from '@near-wallet-selector/core';
+import { useTxnFees } from '../../../hooks/useTxnFees';
+import { Cost } from '../../../types';
+import { TransactionOperation } from '../../../types/transaction';
 
 export const TxnFees = ({
   transaction,
@@ -20,11 +20,11 @@ export const TxnFees = ({
   const { totalGas, totalDeposit, feeLimitTgas } = useTxnFees(
     transaction,
     costs,
-    gasPrice
+    gasPrice,
   );
 
   const showNoTxnFeeHighlight =
-    operation?.operation === "relay" || operation?.operation === "sponsor";
+    operation?.operation === 'relay' || operation?.operation === 'sponsor';
 
   return (
     <div className="bitte-px-6">
@@ -36,25 +36,29 @@ export const TxnFees = ({
         <div className="bitte-flex bitte-flex-col bitte-items-start bitte-justify-start bitte-text-sm md:bitte-flex-row md:bitte-items-center md:bitte-justify-between md:bitte-gap-0 md:bitte-space-x-4">
           <span>Estimated Fees</span>
           <div className="bitte-flex bitte-flex-col">
-            <span className={` ${showNoTxnFeeHighlight ? "bitte-line-through" : ""}`}>
+            <span
+              className={` ${showNoTxnFeeHighlight ? 'bitte-line-through' : ''}`}
+            >
               {Number(totalGas).toFixed(5)} NEAR
             </span>
             {showNoTxnFeeHighlight ? (
-              <span className="bitte-text-end bitte-text-shad-green-30">0 NEAR</span>
+              <span className="bitte-text-end bitte-text-shad-green-30">
+                0 NEAR
+              </span>
             ) : null}
           </div>
         </div>
         <div className="bitte-flex bitte-flex-col bitte-items-start bitte-justify-start bitte-text-sm md:bitte-flex-row md:ibitte-tems-center md:bitte-justify-between md:bitte-gap-0 md:bitte-space-x-4">
           <span>Fee Limit</span>
           <span>
-            {feeLimitTgas} {""}
+            {feeLimitTgas} {''}
             Tgas
           </span>
         </div>
         <div className="bitte-flex bitte-flex-col bitte-items-start bitte-justify-start bitte-text-sm md:bitte-flex-row md:bitte-items-center md:bitte-justify-between md:bitte-gap-0 md:bitte-space-x-4">
           <span>Deposit</span>
           <span>
-            {totalDeposit} {""}
+            {totalDeposit} {''}
             NEAR
           </span>
         </div>

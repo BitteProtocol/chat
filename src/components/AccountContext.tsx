@@ -1,13 +1,13 @@
-import { Wallet } from "@near-wallet-selector/core";
-import { Account } from "near-api-js";
+import { Wallet } from '@near-wallet-selector/core';
+import { Account } from 'near-api-js';
 import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
   useState,
-} from "react";
-import { EVMWalletAdapter, WalletOptions } from "../types";
+} from 'react';
+import { EVMWalletAdapter, WalletOptions } from '../types';
 
 interface AccountContextType {
   wallet?: Wallet;
@@ -36,7 +36,7 @@ export function AccountProvider({
       if (!accountId && near?.wallet) {
         const accounts = await near.wallet.getAccounts();
         setAccountId(
-          accounts?.[0]?.accountId || near.account?.accountId || null
+          accounts?.[0]?.accountId || near.account?.accountId || null,
         );
       }
     };
@@ -46,7 +46,7 @@ export function AccountProvider({
   useEffect(() => {
     if (!near?.account && !near?.wallet && !evm) {
       console.warn(
-        "No wallet or account configured - users will not be able to send transactions"
+        'No wallet or account configured - users will not be able to send transactions',
       );
     }
   }, [near, evm]);
@@ -70,7 +70,7 @@ export function AccountProvider({
 export function useAccount() {
   const context = useContext(AccountContext);
   if (context === undefined) {
-    throw new Error("useAccount must be used within an AccountProvider");
+    throw new Error('useAccount must be used within an AccountProvider');
   }
   return context;
 }

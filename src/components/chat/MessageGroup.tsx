@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { NearSafe } from "near-safe";
+import { NearSafe } from 'near-safe';
 
-import { Wallet } from "@near-wallet-selector/core";
-import { Account } from "near-api-js";
+import { Wallet } from '@near-wallet-selector/core';
+import { Account } from 'near-api-js';
 
-import { formatAgentId, getAgentIdFromMessage } from "../../lib/chat";
-import { BittePrimitiveName, DEFAULT_AGENT_ID } from "../../lib/constants";
-import { BITTE_BLACK_IMG } from "../../lib/images";
-import { isDataString } from "../../lib/regex";
+import { formatAgentId, getAgentIdFromMessage } from '../../lib/chat';
+import { BittePrimitiveName, DEFAULT_AGENT_ID } from '../../lib/constants';
+import { BITTE_BLACK_IMG } from '../../lib/images';
+import { isDataString } from '../../lib/regex';
 import {
   BitteToolResult,
   MessageGroupComponentProps,
   SmartActionAiMessage,
   TransactionButtonProps,
   TransactionContainerProps,
-} from "../../types/types";
-import { Button } from "../ui/button";
-import { ChartWrapper } from "../ui/charts/ChartWrapper";
-import { CodeBlock } from "./CodeBlock";
-import DefaultMessageContainer from "./default-components/DefaultMessageContainer";
-import { ErrorBoundary } from "./ErrorBoundary";
-import { SAMessage } from "./Message";
-import { EvmTxCard } from "./transactions/EvmTxCard";
-import { ReviewSignMessage } from "./transactions/ReviewSignMessage";
-import { ReviewTransaction } from "./transactions/ReviewTransaction";
+} from '../../types/types';
+import { Button } from '../ui/button';
+import { ChartWrapper } from '../ui/charts/ChartWrapper';
+import { CodeBlock } from './CodeBlock';
+import DefaultMessageContainer from './default-components/DefaultMessageContainer';
+import { ErrorBoundary } from './ErrorBoundary';
+import { SAMessage } from './Message';
+import { EvmTxCard } from './transactions/EvmTxCard';
+import { ReviewSignMessage } from './transactions/ReviewSignMessage';
+import { ReviewTransaction } from './transactions/ReviewTransaction';
 
 interface MessageGroupProps {
   chatId: string | undefined;
@@ -76,7 +76,7 @@ export const MessageGroup = ({
 
   // Function to update agentId for each message
   const updateAgentIdForMessages = (
-    incomingMessages: SmartActionAiMessage[]
+    incomingMessages: SmartActionAiMessage[],
   ) => {
     return incomingMessages.map((message) => {
       let agentId = message.agentId || getAgentIdFromMessage(message);
@@ -85,7 +85,7 @@ export const MessageGroup = ({
       }
       // Check if the state already has an agentImage for this message
       const existingMessage = messagesWithAgentId?.find(
-        (m) => m.id === message.id
+        (m) => m.id === message.id,
       );
       const messageAgentImage =
         existingMessage?.agentImage || agentImage || BITTE_BLACK_IMG;
@@ -105,9 +105,9 @@ export const MessageGroup = ({
     if (message.toolInvocations) {
       for (const invocation of message.toolInvocations) {
         const { toolName, toolCallId, state, args } = invocation;
-        const result = state === "result" ? invocation.result : null;
+        const result = state === 'result' ? invocation.result : null;
 
-        if (state !== "result") {
+        if (state !== 'result') {
           if (toolName === BittePrimitiveName.SIGN_MESSAGE) {
             const { message, nonce, recipient, callbackUrl } = args;
 
@@ -150,7 +150,7 @@ export const MessageGroup = ({
           return (
             <ErrorBoundary key={`${groupKey}-${message.id}`}>
               {evmSignRequest ? (
-                <div className='bitte-my-4'>
+                <div className="bitte-my-4">
                   <EvmTxCard
                     evmData={evmSignRequest}
                     borderColor={borderColor}
@@ -162,7 +162,7 @@ export const MessageGroup = ({
                   />
                 </div>
               ) : (
-                <div className='bitte-my-4'>
+                <div className="bitte-my-4">
                   <ReviewTransaction
                     chatId={chatId}
                     creator={creator}
@@ -170,7 +170,7 @@ export const MessageGroup = ({
                     warnings={result?.warnings || []}
                     evmData={evmSignRequest}
                     agentId={formatAgentId(
-                      message.agentId || "Bitte-Assistant"
+                      message.agentId || 'Bitte-Assistant',
                     )}
                     walletLoading={isLoading}
                     borderColor={borderColor}
@@ -188,8 +188,8 @@ export const MessageGroup = ({
       }
     }
 
-    const isUser = message.role === "user";
-    const userName = creator || accountId || "";
+    const isUser = message.role === 'user';
+    const userName = creator || accountId || '';
 
     return (
       <MessageContainer
@@ -204,9 +204,9 @@ export const MessageGroup = ({
         }}
         uniqueKey={uniqueKey}
       >
-        <div className='bitte-mt-6 bitte-flex bitte-w-full bitte-flex-col bitte-gap-2'>
+        <div className="bitte-mt-6 bitte-flex bitte-w-full bitte-flex-col bitte-gap-2">
           {message.content && (
-            <div className='bitte-flex bitte-flex-col bitte-gap-4'>
+            <div className="bitte-flex bitte-flex-col bitte-gap-4">
               <SAMessage content={message.content} />
             </div>
           )}
@@ -214,23 +214,23 @@ export const MessageGroup = ({
           {message.toolInvocations?.map((toolInvocation, index) => {
             const { toolName, toolCallId, state } = toolInvocation;
             const result =
-              toolInvocation.state === "result" ? toolInvocation.result : null;
+              toolInvocation.state === 'result' ? toolInvocation.result : null;
 
             return (
               <div key={`${toolCallId}-${index}`}>
-                <div className='bitte-flex bitte-w-full bitte-items-center bitte-justify-between bitte-text-[12px]'>
+                <div className="bitte-flex bitte-w-full bitte-items-center bitte-justify-between bitte-text-[12px]">
                   <div>Tool Call</div>
-                  <div className='bitte-rounded bitte-bg-shad-white-10 bitte-px-2 bitte-py-1'>
+                  <div className="bitte-rounded bitte-bg-shad-white-10 bitte-px-2 bitte-py-1">
                     <code>{toolName}</code>
                   </div>
                 </div>
-                <div className='bitte-p-4'>
+                <div className="bitte-p-4">
                   {(() => {
-                    if (state === "result") {
+                    if (state === 'result') {
                       if (!result.data) {
                         return (
                           <CodeBlock
-                            content={`Error: ${result.error || "Unknown Error"}`}
+                            content={`Error: ${result.error || 'Unknown Error'}`}
                           />
                         );
                       }
@@ -239,17 +239,17 @@ export const MessageGroup = ({
                           return (
                             <img
                               src={result?.data?.url}
-                              className='bitte-w-full'
+                              className="bitte-w-full"
                             />
                           );
                         }
                         case BittePrimitiveName.CREATE_DROP: {
                           return (
-                            <div className='bitte-flex bitte-items-center bitte-justify-center bitte-gap-2'>
-                              <Button asChild variant='link'>
+                            <div className="bitte-flex bitte-items-center bitte-justify-center bitte-gap-2">
+                              <Button asChild variant="link">
                                 <a
                                   href={`/claim/${result.data}`}
-                                  target='_blank'
+                                  target="_blank"
                                 >
                                   View Drop
                                 </a>
@@ -285,7 +285,7 @@ export const MessageGroup = ({
                         }
                         default: {
                           const stringifiedData =
-                            typeof result.data === "string"
+                            typeof result.data === 'string'
                               ? result.data
                               : JSON.stringify(result.data);
                           return isDataString(stringifiedData) ? (
@@ -298,7 +298,7 @@ export const MessageGroup = ({
                     } else {
                       return (
                         <CodeBlock
-                          content={`Error: ${result.error || "Unknown Error"}`}
+                          content={`Error: ${result.error || 'Unknown Error'}`}
                         />
                       );
                     }
@@ -306,7 +306,7 @@ export const MessageGroup = ({
                 </div>
 
                 <div
-                  className='bitte-mt-2 bitte-border-t'
+                  className="bitte-mt-2 bitte-border-t"
                   style={{ borderColor: borderColor }}
                 />
               </div>

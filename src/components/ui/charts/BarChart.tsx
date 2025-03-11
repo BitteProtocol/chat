@@ -4,10 +4,9 @@ import {
   BarChart as RechartsBarChart,
   XAxis,
   YAxis,
-} from "recharts";
-import { ChartProps } from "../../../lib/chart-helpers";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../chart";
-
+} from 'recharts';
+import { ChartProps } from '../../../lib/chart-helpers';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '../chart';
 
 export const BarChart = ({
   chartConfig,
@@ -20,7 +19,7 @@ export const BarChart = ({
   return (
     <ChartContainer
       config={chartConfig}
-      className='bitte-min-h-[200px] bitte-w-full bitte-select-none'
+      className="bitte-min-h-[200px] bitte-w-full bitte-select-none"
     >
       <RechartsBarChart data={chartData}>
         <CartesianGrid vertical={false} strokeOpacity={0.2} syncWithTicks />
@@ -28,20 +27,20 @@ export const BarChart = ({
           dataKey={timeKey}
           tickLine={false}
           axisLine={false}
-          domain={["auto", "auto"]}
-          interval='equidistantPreserveStart'
+          domain={['auto', 'auto']}
+          interval="equidistantPreserveStart"
           tickFormatter={(value) => dateFormatter(value)}
         />
         <YAxis
           tickLine={false}
           axisLine={false}
-          domain={["auto", "auto"]}
+          domain={['auto', 'auto']}
           tickFormatter={(value) => valueFormatter(value, true)}
         />
         <ChartTooltip
           content={
             <ChartTooltipContent
-              indicator='dot'
+              indicator="dot"
               labelFormatter={(_value, payload) =>
                 dateFormatter(payload[0].payload[timeKey], false)
               }

@@ -1,12 +1,12 @@
 import type {
   FinalExecutionOutcome,
   Transaction,
-} from "@near-wallet-selector/core";
-import BN from "bn.js";
-import { Account } from "near-api-js";
-import { SafeEncodedSignRequest } from "near-safe";
-import { SuccessInfo } from "../hooks/useTransaction";
-import { AccountCreationData } from "./types";
+} from '@near-wallet-selector/core';
+import BN from 'bn.js';
+import { Account } from 'near-api-js';
+import { SafeEncodedSignRequest } from 'near-safe';
+import { SuccessInfo } from '../hooks/useTransaction';
+import { AccountCreationData } from './types';
 
 type ActionObject = {
   send: () => Promise<void>;
@@ -79,11 +79,11 @@ export type FlattenTransactionResults = {
 };
 
 export type ActionCosts =
-  | "CreateAccount"
-  | "Transfer"
-  | "Stake"
-  | "AddFullAccessKey"
-  | "DeleteKey";
+  | 'CreateAccount'
+  | 'Transfer'
+  | 'Stake'
+  | 'AddFullAccessKey'
+  | 'DeleteKey';
 
 export interface TransactionState {
   sponsor?: string;
@@ -109,7 +109,7 @@ export type NearTransactionParams = {
 };
 
 export type SendTransactionFunction = (
-  args?: SendTransactionParams
+  args?: SendTransactionParams,
 ) => Promise<SuccessInfo | void>;
 
 //FIX ME: IMPROVE TYPES
@@ -170,9 +170,9 @@ export interface TransactionErrorProps {
 }
 
 export enum Operation {
-  NEAR = "near",
-  RELAY = "relay",
-  SPONSOR = "sponsor",
+  NEAR = 'near',
+  RELAY = 'relay',
+  SPONSOR = 'sponsor',
 }
 
 interface Cost {

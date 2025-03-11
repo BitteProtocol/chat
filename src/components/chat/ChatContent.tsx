@@ -1,6 +1,6 @@
-import { generateId } from "ai";
-import { Message, useChat } from "ai/react";
-import { ArrowDown } from "lucide-react";
+import { generateId } from 'ai';
+import { Message, useChat } from 'ai/react';
+import { ArrowDown } from 'lucide-react';
 import React, {
   useCallback,
   useEffect,
@@ -8,25 +8,25 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from "react";
-import { Hex } from "viem";
-import { defaultColors } from "../../lib/constants";
-import { BITTE_IMG } from "../../lib/images";
-import { executeLocalToolCall } from "../../lib/local-agent";
-import { cn, shortenAddress } from "../../lib/utils";
+} from 'react';
+import { Hex } from 'viem';
+import { defaultColors } from '../../lib/constants';
+import { BITTE_IMG } from '../../lib/images';
+import { executeLocalToolCall } from '../../lib/local-agent';
+import { cn, shortenAddress } from '../../lib/utils';
 import {
   AssistantsMode,
   BitteAiChatProps,
   ChatRequestBody,
   type BitteToolResult,
-} from "../../types/types";
-import { useAccount } from "../AccountContext";
-import { Button } from "../ui/button";
-import { SmartActionsInput } from "./ChatInput";
-import { MessageGroup } from "./MessageGroup";
-import DefaultChatContainer from "./default-components/DefaultChatContainer";
-import DefaultInputContainer from "./default-components/DefaultInputContainer";
-import DefaultLoadingIndicator from "./default-components/DefaultLoadingIndicator";
+} from '../../types/types';
+import { useAccount } from '../AccountContext';
+import { Button } from '../ui/button';
+import { SmartActionsInput } from './ChatInput';
+import { MessageGroup } from './MessageGroup';
+import DefaultChatContainer from './default-components/DefaultChatContainer';
+import DefaultInputContainer from './default-components/DefaultInputContainer';
+import DefaultLoadingIndicator from './default-components/DefaultLoadingIndicator';
 
 export const ChatContent = ({
   agentId,
@@ -90,8 +90,8 @@ export const ChatContent = ({
         });
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : "Unknown error";
-        console.error("Error executing tool call:", errorMessage);
+          error instanceof Error ? error.message : 'Unknown error';
+        console.error('Error executing tool call:', errorMessage);
         return { error: errorMessage };
       }
     },
@@ -109,7 +109,7 @@ export const ChatContent = ({
         mode: AssistantsMode.DEBUG,
         agentId,
       },
-      accountId: accountId || "",
+      accountId: accountId || '',
       evmAddress: evmAddress as Hex,
       chainId,
       localAgent: options?.localAgent,
@@ -118,11 +118,11 @@ export const ChatContent = ({
 
   const groupedMessages = useMemo(() => {
     return messages?.reduce<Message[][]>((groups, message) => {
-      if (message.role === "user") {
+      if (message.role === 'user') {
         groups.push([message]);
       } else {
         const lastGroup = groups[groups.length - 1];
-        if (!lastGroup || lastGroup[0].role === "user") {
+        if (!lastGroup || lastGroup[0].role === 'user') {
           groups.push([message]);
         } else {
           lastGroup.push(message);
@@ -136,7 +136,7 @@ export const ChatContent = ({
     if (element) {
       element.scrollTo({
         top: element.scrollHeight,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
   }, []);
@@ -166,12 +166,12 @@ export const ChatContent = ({
   useEffect(() => {
     const scrollElement = messagesRef.current;
     if (scrollElement) {
-      scrollElement.addEventListener("scroll", handleScroll);
+      scrollElement.addEventListener('scroll', handleScroll);
       handleScroll();
     }
     return () => {
       if (scrollElement) {
-        scrollElement.removeEventListener("scroll", handleScroll);
+        scrollElement.removeEventListener('scroll', handleScroll);
       }
     };
   }, [handleScroll]);
@@ -185,14 +185,14 @@ export const ChatContent = ({
     if (options?.prompt && messages.length === 0 && !isInProgress) {
       append({
         id: generateId(),
-        role: "user",
+        role: 'user',
         content: options.prompt,
       });
     }
   }, [messages.length, isInProgress, options?.prompt, append]);
 
   return (
-    <div className='bitte-relative bitte-w-full bitte-h-full bitte-flex bitte-flex-col bitte-gap-4'>
+    <div className="bitte-relative bitte-w-full bitte-h-full bitte-flex bitte-flex-col bitte-gap-4">
       {/* Main chat container */}
       <ChatContainer
         style={{
@@ -202,17 +202,17 @@ export const ChatContent = ({
       >
         {!isAtBottom && (
           <Button
-            size='icon'
-            variant='outline'
-            className='bitte-absolute bitte-bottom-2 bitte-left-1/2 bitte--translate-x-1/2 hover:bitte-bg-inherit bitte-z-[99]'
+            size="icon"
+            variant="outline"
+            className="bitte-absolute bitte-bottom-2 bitte-left-1/2 bitte--translate-x-1/2 hover:bitte-bg-inherit bitte-z-[99]"
             style={{
               backgroundColor: generalBackground,
-              borderRadius: "9999px",
+              borderRadius: '9999px',
             }}
             onClick={scrollToBottomHandler}
           >
             <ArrowDown
-              className='bitte-h-4 bitte-w-4'
+              className="bitte-h-4 bitte-w-4"
               style={{ color: textColor }}
             />
           </Button>
@@ -220,34 +220,34 @@ export const ChatContent = ({
 
         <div
           ref={messagesRef}
-          className='bitte-absolute bitte-inset-0 bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
+          className="bitte-absolute bitte-inset-0 bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4"
         >
           <div
             className={cn(
-              "bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:bitte-mx-24 2xl:bitte-mx-56",
+              'bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:bitte-mx-24 2xl:bitte-mx-56',
               !!agentId
-                ? "bitte-h-[calc(100%-240px)]"
-                : "bitte-h-[calc(100%-208px)]"
+                ? 'bitte-h-[calc(100%-240px)]'
+                : 'bitte-h-[calc(100%-208px)]',
             )}
           >
             {messages.length === 0 &&
               (options?.customComponents?.welcomeMessageComponent ? (
                 options.customComponents.welcomeMessageComponent
               ) : (
-                <div className='bitte-flex bitte-flex-col bitte-gap-4 bitte-items-center bitte-justify-center bitte-absolute bitte-left-1/2 bitte--translate-x-1/2 bitte-top-1/2 bitte--translate-y-1/2 bitte-text-center bitte-w-full'>
+                <div className="bitte-flex bitte-flex-col bitte-gap-4 bitte-items-center bitte-justify-center bitte-absolute bitte-left-1/2 bitte--translate-x-1/2 bitte-top-1/2 bitte--translate-y-1/2 bitte-text-center bitte-w-full">
                   <img
-                    className='bitte-mx-auto bitte-mb-4'
-                    src={BITTE_IMG || "/placeholder.svg"}
-                    alt='Bitte'
+                    className="bitte-mx-auto bitte-mb-4"
+                    src={BITTE_IMG || '/placeholder.svg'}
+                    alt="Bitte"
                   />
-                  <div className='bitte-mb-14 bitte-text-[20px] bitte-font-medium bitte-text-gray-40'>
+                  <div className="bitte-mb-14 bitte-text-[20px] bitte-font-medium bitte-text-gray-40">
                     Execute Transactions with AI
                   </div>
                 </div>
               ))}
 
             <div
-              className='bitte-flex bitte-w-full bitte-flex-col bitte-gap-4 bitte-py-6'
+              className="bitte-flex bitte-w-full bitte-flex-col bitte-gap-4 bitte-py-6"
               style={{ color: textColor }}
             >
               {groupedMessages?.map((messages: Message[]) => {
@@ -274,7 +274,7 @@ export const ChatContent = ({
               })}
 
               {error && (
-                <div className='bitte-flex bitte-flex-col bitte-items-center bitte-justify-center bitte-space-y-2 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
+                <div className="bitte-flex bitte-flex-col bitte-items-center bitte-justify-center bitte-space-y-2 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm">
                   {!accountId && !evmAddress ? (
                     <p>
                       An error occurred. <br />
@@ -284,9 +284,9 @@ export const ChatContent = ({
                     <>
                       <p>An error occurred.</p>
                       <Button
-                        type='button'
-                        variant='default'
-                        size='sm'
+                        type="button"
+                        variant="default"
+                        size="sm"
                         onClick={() => reload()}
                       >
                         Retry

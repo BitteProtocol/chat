@@ -1,9 +1,9 @@
-import Lottie from "react-lottie-player/dist/LottiePlayerLight";
+import Lottie from 'react-lottie-player/dist/LottiePlayerLight';
 
-import { Color } from "../../lib/animation-colors/colors";
-import { hexToRgb } from "../../lib/animation-colors/hex-to-rgb";
-import { Solver } from "../../lib/animation-colors/solver";
-import bitteAnimation from "./../../assets/bitte_animation.json";
+import { Color } from '../../lib/animation-colors/colors';
+import { hexToRgb } from '../../lib/animation-colors/hex-to-rgb';
+import { Solver } from '../../lib/animation-colors/solver';
+import bitteAnimation from './../../assets/bitte_animation.json';
 
 export const BitteSpinner = ({
   width = 200,

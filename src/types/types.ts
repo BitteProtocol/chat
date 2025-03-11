@@ -1,26 +1,26 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 import {
   FunctionCallAction,
   Transaction,
   TransferAction,
   Wallet,
-} from "@near-wallet-selector/core";
-import { CoreMessage, CoreTool, JSONValue, Message } from "ai";
-import { AssistantTool, FunctionTool } from "openai/resources/beta/assistants";
-import { FunctionDefinition } from "openai/resources/index";
-import { OpenAPIV3 } from "openapi-types";
+} from '@near-wallet-selector/core';
+import { CoreMessage, CoreTool, JSONValue, Message } from 'ai';
+import { AssistantTool, FunctionTool } from 'openai/resources/beta/assistants';
+import { FunctionDefinition } from 'openai/resources/index';
+import { OpenAPIV3 } from 'openapi-types';
 
-import BN from "bn.js";
-import { Account } from "near-api-js/lib/account";
-import { SignRequestData } from "near-safe";
-import { Hex } from "viem";
+import BN from 'bn.js';
+import { Account } from 'near-api-js/lib/account';
+import { SignRequestData } from 'near-safe';
+import { Hex } from 'viem';
 import type {
   UseSendTransactionReturnType,
   UseSwitchChainReturnType,
-} from "wagmi";
-import { BittePrimitiveName } from "../lib/constants";
-import { TransactionOperation } from "./transaction";
+} from 'wagmi';
+import { BittePrimitiveName } from '../lib/constants';
+import { TransactionOperation } from './transaction';
 
 export type BitteMetadata = {
   [key: string]: unknown;
@@ -31,11 +31,11 @@ export type BittePrimitiveRef = {
 };
 
 export type BitteOpenAPISpec = OpenAPIV3.Document & {
-  "x-mb": {
-    "account-id": string;
+  'x-mb': {
+    'account-id': string;
     assistant?: Pick<
       BitteAssistantConfig,
-      "name" | "description" | "instructions" | "tools" | "image"
+      'name' | 'description' | 'instructions' | 'tools' | 'image'
     > & {
       tools?: (AssistantTool | BittePrimitiveRef)[];
     };
@@ -51,7 +51,7 @@ export type ExecutionDefinition = {
 export type PluginToolSpec = {
   id: string;
   agentId: string;
-  type: "function";
+  type: 'function';
   function: FunctionDefinition;
   execution: ExecutionDefinition;
   verified: boolean;
@@ -73,12 +73,12 @@ export type BitteToolExecutor<
   TResult = unknown,
 > = (
   args: TArgs,
-  metadata?: BitteMetadata
+  metadata?: BitteMetadata,
 ) => Promise<BitteToolResult<TResult>>;
 
 export type BitteToolRenderer<TArgs = unknown> = (
   args: TArgs,
-  metadata?: BitteMetadata
+  metadata?: BitteMetadata,
 ) => ReactNode | null;
 
 export type BitteTool<TArgs = Record<string, JSONValue>, TResult = unknown> = {
@@ -101,7 +101,7 @@ export type BitteAssistantConfig = {
   image?: string;
 };
 
-export type BitteAssistant = Omit<BitteAssistantConfig, "tools"> & {
+export type BitteAssistant = Omit<BitteAssistantConfig, 'tools'> & {
   toolSpecs?: FunctionTool[];
   tools?: Record<string, CoreTool>;
 };
@@ -150,11 +150,11 @@ export type SaveSmartActionMessages = {
   messages: SmartActionMessage[];
 };
 
-type TransferTransaction = Omit<Transaction, "actions"> & {
+type TransferTransaction = Omit<Transaction, 'actions'> & {
   actions: Array<TransferAction>;
 };
 
-export type AccountTransaction = Omit<Transaction, "actions"> & {
+export type AccountTransaction = Omit<Transaction, 'actions'> & {
   actions: Array<FunctionCallAction | TransferAction>;
 };
 
@@ -169,14 +169,14 @@ export type SmartActionTransaction =
   | TransferTransaction;
 
 export enum AssistantsMode {
-  DEFAULT = "default",
-  DEBUG = "debug",
+  DEFAULT = 'default',
+  DEBUG = 'debug',
 }
 
 export enum Model {
-  GPT4o = "gpt4o",
-  Grok2 = "grok2",
-  Sonnet = "sonnet",
+  GPT4o = 'gpt4o',
+  Grok2 = 'grok2',
+  Sonnet = 'sonnet',
 }
 
 export type ChatComponentColors = {
@@ -304,8 +304,8 @@ export type AllowlistedToken = {
 };
 
 export interface EVMWalletAdapter {
-  sendTransaction: UseSendTransactionReturnType["sendTransaction"];
-  switchChain: UseSwitchChainReturnType["switchChain"];
+  sendTransaction: UseSendTransactionReturnType['sendTransaction'];
+  switchChain: UseSwitchChainReturnType['switchChain'];
   address: string | undefined;
   chainId?: number;
   hash?: string;

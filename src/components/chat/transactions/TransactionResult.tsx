@@ -1,6 +1,6 @@
-import { MoveUpRight } from "lucide-react";
-import { Network } from "near-safe";
-import { getNearblocksURL, shortenString } from "../../../lib/utils";
+import { MoveUpRight } from 'lucide-react';
+import { Network } from 'near-safe';
+import { getNearblocksURL, shortenString } from '../../../lib/utils';
 
 export const TransactionResult = ({
   result: { evm, near },
@@ -26,8 +26,8 @@ export const TransactionResult = ({
             <a
               className="bitte-flex bitte-gap-1 bitte-items-center"
               href={scanUrl}
-              target='_blank'
-              rel='noopener noreferrer'
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {shortenString(evm.txHash, 10)}
               <MoveUpRight width={12} height={12} />
@@ -44,8 +44,8 @@ export const TransactionResult = ({
               <a
                 className="bitte-flex bitte-gap-1 bitte-items-center"
                 href={getNearblocksURL(accountId, receipt.transaction.hash)}
-                target='_blank'
-                rel='noopener noreferrer'
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {shortenString(receipt.transaction.hash, 10)}
                 <MoveUpRight width={12} height={12} />

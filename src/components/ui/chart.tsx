@@ -1,9 +1,9 @@
-import * as React from "react";
-import * as RechartsPrimitive from "recharts";
-import { cn } from "../../lib/utils";
+import * as React from 'react';
+import * as RechartsPrimitive from 'recharts';
+import { cn } from '../../lib/utils';
 
 // Format: { THEME_NAME: CSS_SELECTOR }
-const THEMES = { light: "", dark: ".dark" } as const;
+const THEMES = { light: '', dark: '.dark' } as const;
 
 export type ChartConfig = {
   [k in string]: {
@@ -25,7 +25,7 @@ function useChart() {
   const context = React.useContext(ChartContext);
 
   if (!context) {
-    throw new Error("useChart must be used within a <ChartContainer />");
+    throw new Error('useChart must be used within a <ChartContainer />');
   }
 
   return context;
@@ -33,15 +33,15 @@ function useChart() {
 
 const ChartContainer = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div"> & {
+  React.ComponentProps<'div'> & {
     config: ChartConfig;
     children: React.ComponentProps<
       typeof RechartsPrimitive.ResponsiveContainer
-    >["children"];
+    >['children'];
   }
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
-  const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
+  const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -49,8 +49,8 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "bitte-flex bitte-aspect-video bitte-justify-center bitte-text-xs [&_.recharts-cartesian-axis-tick_text]:bitte-fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke=#ccc]]:bitte-stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:bitte-stroke-border [&_.recharts-dot[stroke=#fff]]:bitte-stroke-transparent [&_.recharts-layer]:bitte-outline-none [&_.recharts-polar-grid_[stroke=#ccc]]:bitte-stroke-border [&_.recharts-radial-bar-background-sector]:bitte-fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:bitte-fill-muted [&_.recharts-reference-line_[stroke=#ccc]]:bitte-stroke-border [&_.recharts-sector[stroke=#fff]]:bitte-stroke-transparent [&_.recharts-sector]:bitte-outline-none [&_.recharts-surface]:bitte-outline-none",
-          className
+          'bitte-flex bitte-aspect-video bitte-justify-center bitte-text-xs [&_.recharts-cartesian-axis-tick_text]:bitte-fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke=#ccc]]:bitte-stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:bitte-stroke-border [&_.recharts-dot[stroke=#fff]]:bitte-stroke-transparent [&_.recharts-layer]:bitte-outline-none [&_.recharts-polar-grid_[stroke=#ccc]]:bitte-stroke-border [&_.recharts-radial-bar-background-sector]:bitte-fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:bitte-fill-muted [&_.recharts-reference-line_[stroke=#ccc]]:bitte-stroke-border [&_.recharts-sector[stroke=#fff]]:bitte-stroke-transparent [&_.recharts-sector]:bitte-outline-none [&_.recharts-surface]:bitte-outline-none',
+          className,
         )}
         {...props}
       >
@@ -62,11 +62,11 @@ const ChartContainer = React.forwardRef<
     </ChartContext.Provider>
   );
 });
-ChartContainer.displayName = "Chart";
+ChartContainer.displayName = 'Chart';
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([, config]) => config.theme || config.color
+    ([, config]) => config.theme || config.color,
   );
 
   if (!colorConfig.length) {
@@ -87,11 +87,11 @@ ${colorConfig
       itemConfig.color;
     return color ? `  --color-${key}: ${color};` : null;
   })
-  .join("\n")}
+  .join('\n')}
 }
-`
+`,
           )
-          .join("\n"),
+          .join('\n'),
       }}
     />
   );
@@ -102,10 +102,10 @@ const ChartTooltip = RechartsPrimitive.Tooltip;
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-    React.ComponentProps<"div"> & {
+    React.ComponentProps<'div'> & {
       hideLabel?: boolean;
       hideIndicator?: boolean;
-      indicator?: "line" | "dot" | "dashed";
+      indicator?: 'line' | 'dot' | 'dashed';
       nameKey?: string;
       labelKey?: string;
     }
@@ -115,7 +115,7 @@ const ChartTooltipContent = React.forwardRef<
       active,
       payload,
       className,
-      indicator = "dot",
+      indicator = 'dot',
       hideLabel = false,
       hideIndicator = false,
       label,
@@ -126,7 +126,7 @@ const ChartTooltipContent = React.forwardRef<
       nameKey,
       labelKey,
     },
-    ref
+    ref,
   ) => {
     const { config } = useChart();
 
@@ -136,16 +136,16 @@ const ChartTooltipContent = React.forwardRef<
       }
 
       const [item] = payload;
-      const key = `${labelKey || item.dataKey || item.name || "value"}`;
+      const key = `${labelKey || item.dataKey || item.name || 'value'}`;
       const itemConfig = getPayloadConfigFromPayload(config, item, key);
       const value =
-        !labelKey && typeof label === "string"
+        !labelKey && typeof label === 'string'
           ? config[label as keyof typeof config]?.label || label
           : itemConfig?.label;
 
       if (labelFormatter) {
         return (
-          <div className={cn("bitte-font-medium", labelClassName)}>
+          <div className={cn('bitte-font-medium', labelClassName)}>
             {labelFormatter(value, payload)}
           </div>
         );
@@ -156,7 +156,7 @@ const ChartTooltipContent = React.forwardRef<
       }
 
       return (
-        <div className={cn("bitte-font-medium", labelClassName)}>{value}</div>
+        <div className={cn('bitte-font-medium', labelClassName)}>{value}</div>
       );
     }, [
       label,
@@ -172,20 +172,20 @@ const ChartTooltipContent = React.forwardRef<
       return null;
     }
 
-    const nestLabel = payload.length === 1 && indicator !== "dot";
+    const nestLabel = payload.length === 1 && indicator !== 'dot';
 
     return (
       <div
         ref={ref}
         className={cn(
-          "bitte-grid bitte-min-w-[8rem] bitte-items-start bitte-gap-1.5 bitte-rounded-lg bitte-border bitte-border-border/50 bitte-bg-background bitte-px-2.5 bitte-py-1.5 bitte-text-xs bitte-shadow-xl",
-          className
+          'bitte-grid bitte-min-w-[8rem] bitte-items-start bitte-gap-1.5 bitte-rounded-lg bitte-border bitte-border-border/50 bitte-bg-background bitte-px-2.5 bitte-py-1.5 bitte-text-xs bitte-shadow-xl',
+          className,
         )}
       >
         {!nestLabel ? tooltipLabel : null}
-        <div className='bitte-grid bitte-gap-1.5'>
+        <div className="bitte-grid bitte-gap-1.5">
           {payload.map((item, index) => {
-            const key = `${nameKey || item.name || item.dataKey || "value"}`;
+            const key = `${nameKey || item.name || item.dataKey || 'value'}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
             const indicatorColor = color || item.payload.fill || item.color;
 
@@ -193,8 +193,8 @@ const ChartTooltipContent = React.forwardRef<
               <div
                 key={item.dataKey}
                 className={cn(
-                  "bitte-flex bitte-w-full bitte-flex-wrap bitte-items-stretch bitte-gap-2 [&>svg]:bitte-h-2.5 [&>svg]:bitte-w-2.5 [&>svg]:bitte-text-muted-foreground",
-                  indicator === "dot" && "bitte-items-center"
+                  'bitte-flex bitte-w-full bitte-flex-wrap bitte-items-stretch bitte-gap-2 [&>svg]:bitte-h-2.5 [&>svg]:bitte-w-2.5 [&>svg]:bitte-text-muted-foreground',
+                  indicator === 'dot' && 'bitte-items-center',
                 )}
               >
                 {formatter && item?.value !== undefined && item.name ? (
@@ -207,19 +207,20 @@ const ChartTooltipContent = React.forwardRef<
                       !hideIndicator && (
                         <div
                           className={cn(
-                            "bitte-shrink-0 bitte-rounded-[2px] bitte-border-[--color-border] bitte-bg-[--color-bg]",
+                            'bitte-shrink-0 bitte-rounded-[2px] bitte-border-[--color-border] bitte-bg-[--color-bg]',
                             {
-                              "bitte-h-2.5 bitte-w-2.5": indicator === "dot",
-                              "bitte-w-1": indicator === "line",
-                              "bitte-w-0 bitte-border-[1.5px] bitte-border-dashed bitte-bg-transparent":
-                                indicator === "dashed",
-                              "bitte-my-0.5": nestLabel && indicator === "dashed",
-                            }
+                              'bitte-h-2.5 bitte-w-2.5': indicator === 'dot',
+                              'bitte-w-1': indicator === 'line',
+                              'bitte-w-0 bitte-border-[1.5px] bitte-border-dashed bitte-bg-transparent':
+                                indicator === 'dashed',
+                              'bitte-my-0.5':
+                                nestLabel && indicator === 'dashed',
+                            },
                           )}
                           style={
                             {
-                              "--color-bg": indicatorColor,
-                              "--color-border": indicatorColor,
+                              '--color-bg': indicatorColor,
+                              '--color-border': indicatorColor,
                             } as React.CSSProperties
                           }
                         />
@@ -227,18 +228,18 @@ const ChartTooltipContent = React.forwardRef<
                     )}
                     <div
                       className={cn(
-                        "bitte-flex bitte-flex-1 bitte-justify-between bitte-leading-none",
-                        nestLabel ? "bitte-items-end" : "bitte-items-center"
+                        'bitte-flex bitte-flex-1 bitte-justify-between bitte-leading-none',
+                        nestLabel ? 'bitte-items-end' : 'bitte-items-center',
                       )}
                     >
-                      <div className='bitte-grid bitte-gap-1.5'>
+                      <div className="bitte-grid bitte-gap-1.5">
                         {nestLabel ? tooltipLabel : null}
-                        <span className='bitte-text-muted-foreground'>
+                        <span className="bitte-text-muted-foreground">
                           {itemConfig?.label || item.name}
                         </span>
                       </div>
                       {item.value && (
-                        <span className='bitte-font-mono bitte-font-medium bitte-tabular-nums bitte-text-foreground'>
+                        <span className="bitte-font-mono bitte-font-medium bitte-tabular-nums bitte-text-foreground">
                           {item.value.toLocaleString()}
                         </span>
                       )}
@@ -251,23 +252,23 @@ const ChartTooltipContent = React.forwardRef<
         </div>
       </div>
     );
-  }
+  },
 );
-ChartTooltipContent.displayName = "ChartTooltip";
+ChartTooltipContent.displayName = 'ChartTooltip';
 
 const ChartLegend = RechartsPrimitive.Legend;
 
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+  React.ComponentProps<'div'> &
+    Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
       hideIcon?: boolean;
       nameKey?: string;
     }
 >(
   (
-    { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
-    ref
+    { className, hideIcon = false, payload, verticalAlign = 'bottom', nameKey },
+    ref,
   ) => {
     const { config } = useChart();
 
@@ -279,27 +280,27 @@ const ChartLegendContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "bitte-flex bitte-items-center bitte-justify-center bitte-gap-4",
-          verticalAlign === "top" ? "bitte-pb-3" : "bitte-pt-3",
-          className
+          'bitte-flex bitte-items-center bitte-justify-center bitte-gap-4',
+          verticalAlign === 'top' ? 'bitte-pb-3' : 'bitte-pt-3',
+          className,
         )}
       >
         {payload.map((item) => {
-          const key = `${nameKey || item.dataKey || "value"}`;
+          const key = `${nameKey || item.dataKey || 'value'}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
           return (
             <div
               key={item.value}
               className={cn(
-                "bitte-flex bitte-items-center bitte-gap-1.5 [&>svg]:bitte-h-3 [&>svg]:bitte-w-3 [&>svg]:bitte-text-muted-foreground"
+                'bitte-flex bitte-items-center bitte-gap-1.5 [&>svg]:bitte-h-3 [&>svg]:bitte-w-3 [&>svg]:bitte-text-muted-foreground',
               )}
             >
               {itemConfig?.icon && !hideIcon ? (
                 <itemConfig.icon />
               ) : (
                 <div
-                  className='bitte-h-2 bitte-w-2 bitte-shrink-0 bitte-rounded-[2px]'
+                  className="bitte-h-2 bitte-w-2 bitte-shrink-0 bitte-rounded-[2px]"
                   style={{
                     backgroundColor: item.color,
                   }}
@@ -311,23 +312,23 @@ const ChartLegendContent = React.forwardRef<
         })}
       </div>
     );
-  }
+  },
 );
-ChartLegendContent.displayName = "ChartLegend";
+ChartLegendContent.displayName = 'ChartLegend';
 
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,
-  key: string
+  key: string,
 ) {
-  if (typeof payload !== "object" || payload === null) {
+  if (typeof payload !== 'object' || payload === null) {
     return undefined;
   }
 
   const payloadPayload =
-    "payload" in payload &&
-    typeof payload.payload === "object" &&
+    'payload' in payload &&
+    typeof payload.payload === 'object' &&
     payload.payload !== null
       ? payload.payload
       : undefined;
@@ -336,13 +337,13 @@ function getPayloadConfigFromPayload(
 
   if (
     key in payload &&
-    typeof payload[key as keyof typeof payload] === "string"
+    typeof payload[key as keyof typeof payload] === 'string'
   ) {
     configLabelKey = payload[key as keyof typeof payload] as string;
   } else if (
     payloadPayload &&
     key in payloadPayload &&
-    typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
+    typeof payloadPayload[key as keyof typeof payloadPayload] === 'string'
   ) {
     configLabelKey = payloadPayload[
       key as keyof typeof payloadPayload
