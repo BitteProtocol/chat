@@ -1,8 +1,9 @@
 import { BitteToolResult } from "../types";
 
-interface ToolCall {
-  toolName: string;
-  args?: any;
+interface ToolCall<NAME extends string, ARGS> {
+  toolCallId: string;
+  toolName: NAME;
+  args: ARGS;
 }
 
 interface LocalAgent {
@@ -12,10 +13,17 @@ interface LocalAgent {
   };
 }
 
-export const executeLocalToolCall = async (
-  localAgent: LocalAgent,
-  toolCall: ToolCall
-): Promise<BitteToolResult | undefined> => {
+interface LocalToolCallProps {
+  localAgent: LocalAgent;
+  toolCall: ToolCall<string, unknown>;
+  metadata?: Record<string, unknown>;
+}
+
+export const executeLocalToolCall = async ({
+  localAgent,
+  toolCall,
+  metadata,
+}: LocalToolCallProps): Promise<BitteToolResult | undefined> => {
   const baseUrl = localAgent.spec.servers?.[0]?.url;
   if (!baseUrl) return undefined;
 
@@ -32,7 +40,12 @@ export const executeLocalToolCall = async (
   try {
     const args = toolCall.args ? JSON.parse(JSON.stringify(toolCall.args)) : {};
     const { url, remainingArgs } = buildUrlWithParams(baseUrl, toolPath, args);
-    const { options } = buildRequestOptions(httpMethod, remainingArgs);
+    
+    const { options } = buildRequestOptions({
+      httpMethod,
+      remainingArgs,
+      metadata,
+    });
 
     const finalUrl =
       httpMethod === "GET" ? handleQueryParams(url, remainingArgs) : url;
@@ -103,12 +116,18 @@ export const buildUrlWithParams = (
   return { url, remainingArgs };
 };
 
-export const buildRequestOptions = (
-  httpMethod: string,
-  remainingArgs: any
-): { options: RequestInit } => {
+export const buildRequestOptions = ({
+  httpMethod,
+  remainingArgs,
+  metadata,
+}: {
+  httpMethod: string;
+  remainingArgs: any;
+  metadata?: Record<string, unknown>;
+}): { options: RequestInit } => {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
+    ...(metadata ? { "mb-metadata": JSON.stringify(metadata) } : {}),
   };
 
   const fetchOptions: RequestInit = {

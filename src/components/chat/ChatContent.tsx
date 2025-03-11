@@ -79,7 +79,15 @@ export const ChatContent = ({
       if (!localAgent) return undefined;
 
       try {
-        return await executeLocalToolCall(localAgent, toolCall);
+        return await executeLocalToolCall({
+          localAgent,
+          toolCall,
+          metadata: {
+            accountId,
+            evmAddress,
+            chainId,
+          },
+        });
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : "Unknown error";

@@ -37,7 +37,6 @@ export const signMessage = async (
       console.error("failed in signMessage", errorMessage);
       throw new Error(errorMessage);
     });
-  console.log("signedMessage", signedMessage);
 
   // Bitte Wallet redirects so signMessage will not have a result
   if (signedMessage) {
