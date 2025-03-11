@@ -223,20 +223,10 @@ export const ReviewSignMessage = ({
 
       {!loading && !result && !errorMsg ? (
         <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
-          <Button
-            variant='outline'
-            className='bitte-w-1/2'
+          <DeclineButton
             onClick={() => addToolResult({ error: "User declined to sign" })}
-          >
-            Decline
-          </Button>
-          <Button
-            variant='default'
-            className='bitte-w-1/2'
-            onClick={handleMessageSign}
-          >
-            Sign Message
-          </Button>
+          />
+          <ApproveButton onClick={handleMessageSign} label='Sign Message' />
         </CardFooter>
       ) : null}
     </TxContainer>

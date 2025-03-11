@@ -4,6 +4,7 @@ import { Button } from "../../ui/button";
 const DefaultTxDeclineButton: React.FC<TransactionButtonProps> = ({
   onClick,
   disabled,
+  label,
 }) => (
   <Button
     variant='outline'
@@ -11,7 +12,7 @@ const DefaultTxDeclineButton: React.FC<TransactionButtonProps> = ({
     onClick={onClick}
     disabled={disabled}
   >
-    Decline
+    {label || "Decline"}
   </Button>
 );
 
