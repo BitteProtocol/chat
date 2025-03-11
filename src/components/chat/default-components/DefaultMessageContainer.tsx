@@ -55,8 +55,9 @@ const DefaultMessageContainer = ({
                   )}
                   alt={`${message.agentId} icon`}
                 />
-                <p className='bitte-text-[14px]'>
-                  {message.agentName || formatAgentId(message.agentId || "Bitte Assistant")}
+                <p className="bitte-text-[14px]">
+                  {message.agentName ||
+                    formatAgentId(message.agentId || 'Bitte Assistant')}
                 </p>
               </>
             )}

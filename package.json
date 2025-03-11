@@ -10,7 +10,7 @@
     "build": "tsup --config tsup.config.ts",
     "build:css": "tailwindcss -i ./src/style.css -o ./dist/styles.css --minify",
     "typecheck": "tsc --noEmit",
-    "prettier:write": "prettier --w src",
+    "prettier:write": "prettier --write src",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "exports": {
