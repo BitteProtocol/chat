@@ -1,5 +1,5 @@
 import { Transaction } from "@near-wallet-selector/core";
-import BN from "bn.js";
+import BN from "bn.js/lib/bn.js";
 import { SafeEncodedSignRequest } from "near-safe";
 import { useEffect, useState } from "react";
 import { useAccountBalance } from "../../../hooks/useAccountBalance";
