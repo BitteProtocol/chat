@@ -5,7 +5,7 @@ import {
   Transaction,
 } from "@near-wallet-selector/core";
 import BN from "bn.js/";
-import { formatNearAmount } from "near-api-js/lib/utils/format";
+import { formatNearAmount } from "near-api-js/lib/utils/format.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { RPC_URL } from "../lib/constants";
 import { Cost } from "../types";
