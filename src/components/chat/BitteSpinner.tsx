@@ -1,4 +1,4 @@
-import Lottie from "react-lottie-player/dist/LottiePlayerLight";
+import Lottie from "react-lottie-player/dist/LottiePlayerLight.js";
 
 import { Color } from "../../lib/animation-colors/colors";
 import { hexToRgb } from "../../lib/animation-colors/hex-to-rgb";

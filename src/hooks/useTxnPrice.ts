@@ -1,4 +1,4 @@
-import { getLatestGasPrice } from "@mintbase-js/rpc/lib/methods/getLatestGasPrice";
+import { getLatestGasPrice } from "@mintbase-js/rpc/lib/methods/getLatestGasPrice.js";
 import {
   Action,
   FunctionCallAction,
