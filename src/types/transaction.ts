@@ -2,7 +2,7 @@ import type {
   FinalExecutionOutcome,
   Transaction,
 } from "@near-wallet-selector/core";
-import BN from "bn.js";
+import BN from  "bn.js/lib/bn.js";
 import { Account } from "near-api-js";
 import { SafeEncodedSignRequest } from "near-safe";
 import { SuccessInfo } from "../hooks/useTransaction";

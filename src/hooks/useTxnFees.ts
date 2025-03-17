@@ -1,6 +1,6 @@
 import { Transaction } from "@near-wallet-selector/core";
-import BN from "bn.js";
-import { formatNearAmount } from "near-api-js/lib/utils/format";
+import BN from  "bn.js/lib/bn.js";
+import { formatNearAmount } from "near-api-js/lib/utils/format.js";
 import { formatUnits } from "viem";
 import { removeTrailingZeros } from "../lib/utils";
 import { Cost } from "../types";

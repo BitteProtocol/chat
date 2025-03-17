@@ -11,7 +11,7 @@ import { AssistantTool, FunctionTool } from "openai/resources/beta/assistants";
 import { FunctionDefinition } from "openai/resources/index";
 import { OpenAPIV3 } from "openapi-types";
 
-import BN from "bn.js";
+import BN from  "bn.js/lib/bn.js";
 import { Account } from "near-api-js/lib/account";
 import { SignRequestData } from "near-safe";
 import { Hex } from "viem";
