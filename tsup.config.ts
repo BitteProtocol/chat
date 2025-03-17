@@ -6,7 +6,7 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   clean: true,
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'bn.js/lib/bn.js'],
   minify: true,
   outDir: 'dist',
   sourcemap: true,
