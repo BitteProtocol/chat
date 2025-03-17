@@ -1,4 +1,4 @@
-import BN from "bn.js";
+import BN from "bn.js/lib/bn.js";
 import { clsx, type ClassValue } from "clsx";
 import { formatNearAmount } from "near-api-js/lib/utils/format.js";
 import { twMerge } from "tailwind-merge";
