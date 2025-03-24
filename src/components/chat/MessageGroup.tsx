@@ -45,6 +45,10 @@ interface MessageGroupProps {
     toolCallId: string;
     result: BitteToolResult;
   }) => void;
+  customToolComponents?: {
+    toolName: string;
+    component: React.ComponentType<{ data: any }>; // Changed from JSX.Element to ComponentType
+  }[];
   customMessageContainer?: React.ComponentType<MessageGroupComponentProps>;
   customTxContainer?: React.ComponentType<TransactionContainerProps>;
   customApproveTxButton?: React.ComponentType<TransactionButtonProps>;
@@ -68,6 +72,7 @@ export const MessageGroup = ({
   customTxContainer,
   customApproveTxButton,
   customDeclineTxButton,
+  customToolComponents,
 }: MessageGroupProps) => {
   // State to track agentId for each message
   const [messagesWithAgentId, setMessagesWithAgentId] = useState<
@@ -234,6 +239,15 @@ export const MessageGroup = ({
                           />
                         );
                       }
+                      // Check for custom tool component first
+                      const customTool = customToolComponents?.find(
+                        (tool) => tool.toolName === toolName
+                      );
+                      if (customTool) {
+                        const CustomComponent = customTool.component;
+                        return <CustomComponent data={result.data} />;
+                      }
+
                       switch (toolName) {
                         case BittePrimitiveName.GENERATE_IMAGE: {
                           return (

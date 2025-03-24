@@ -238,6 +238,10 @@ export interface BitteAiChatProps {
   messages?: Message[];
   wallet?: WalletOptions;
   options?: BitteAiChatOptions;
+  customToolComponents: {
+    toolName: string;
+    component: React.ComponentType<{ data: any }>;
+  }[];
 }
 
 /**

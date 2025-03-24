@@ -34,6 +34,7 @@ export const ChatContent = ({
   apiKey,
   options,
   messages: initialMessages,
+  customToolComponents,
 }: BitteAiChatProps) => {
   const chatId = useRef(options?.chatId || generateId()).current;
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -269,6 +270,7 @@ export const ChatContent = ({
                     customMessageContainer={
                       options?.customComponents?.messageContainer
                     }
+                    customToolComponents={customToolComponents}
                   />
                 );
               })}
