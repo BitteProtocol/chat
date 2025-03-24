@@ -240,7 +240,7 @@ export interface BitteAiChatProps {
   options?: BitteAiChatOptions;
   customToolComponents: {
     toolName: string;
-    component: React.ComponentType<{ data: any }>; // Changed from JSX.Element to ComponentType
+    component: React.ComponentType<{ data: any }>;
   }[];
 }
 
