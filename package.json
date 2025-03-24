@@ -5,6 +5,8 @@
   "files": [
     "dist"
   ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs.js",
   "scripts": {
     "build": "tsup --config tsup.config.ts",
     "lint": "eslint src --ext .ts,tsx,js,jsx",
@@ -17,7 +19,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.js",
+      "default": "./dist/index.mjs"
     },
     "./style.css": "./dist/style.css"
   },
