@@ -21,7 +21,7 @@ const DefaultMessageContainer = ({
   uniqueKey,
 }: MessageGroupComponentProps) => (
   <Card
-    className='bitte-p-6'
+    className='bitte:p-6'
     style={{
       backgroundColor: style.backgroundColor,
       borderColor: style.borderColor,
@@ -32,15 +32,15 @@ const DefaultMessageContainer = ({
       type='single'
       defaultValue={uniqueKey}
       collapsible
-      className='bitte-w-full'
+      className='bitte:w-full'
     >
-      <AccordionItem value={uniqueKey} className='bitte-border-0'>
-        <AccordionTrigger className='bitte-p-0'>
-          <div className='bitte-flex bitte-items-center bitte-justify-center bitte-gap-2'>
+      <AccordionItem value={uniqueKey} className='bitte:border-0'>
+        <AccordionTrigger className='bitte:p-0'>
+          <div className='bitte:flex bitte:items-center bitte:justify-center bitte:gap-2'>
             {isUser ? (
               <>
-                <MessageSquare className='bitte-h-[18px] bitte-w-[18px]' />
-                <p className='bitte-text-[14px]'>{userName}</p>
+                <MessageSquare className='bitte:h-[18px] bitte:w-[18px]' />
+                <p className='bitte:text-[14px]'>{userName}</p>
               </>
             ) : (
               <>
@@ -48,14 +48,14 @@ const DefaultMessageContainer = ({
                   src={message.agentImage || "/placeholder.svg"}
                   fallbackSrc={BITTE_BLACK_IMG}
                   className={cn(
-                    "bitte-h-[18px] bitte-w-[18px] bitte-rounded",
+                    "bitte:h-[18px] bitte:w-[18px] bitte:rounded",
                     message.agentImage === BITTE_BLACK_IMG
-                      ? "bitte-invert-0 bitte-dark:invert"
+                      ? "bitte:invert-0 bitte-dark:invert"
                       : "bitte-dark:bg-card-list"
                   )}
                   alt={`${message.agentId} icon`}
                 />
-                <p className='bitte-text-[14px]'>
+                <p className='bitte:text-[14px]'>
                   {message.agentName || formatAgentId(message.agentId ?? "Bitte Assistant")}
                 </p>
               </>
@@ -63,7 +63,7 @@ const DefaultMessageContainer = ({
           </div>
         </AccordionTrigger>
         <AccordionContent
-          className='bitte-mt-6 bitte-border-t bitte-pb-0'
+          className='bitte:mt-6 bitte:border-t bitte:pb-0'
           style={{ borderColor: style.borderColor }}
         >
           {children}

@@ -192,7 +192,7 @@ export const ChatContent = ({
   }, [messages.length, isInProgress, options?.prompt, append]);
 
   return (
-    <div className='bitte-relative bitte-w-full bitte-h-full bitte-flex bitte-flex-col bitte-gap-4'>
+    <div className='bitte:relative bitte:w-full bitte:h-full bitte:flex bitte:flex-col bitte:gap-4'>
       {/* Main chat container */}
       <ChatContainer
         style={{
@@ -204,7 +204,7 @@ export const ChatContent = ({
           <Button
             size='icon'
             variant='outline'
-            className='bitte-absolute bitte-bottom-2 bitte-left-1/2 bitte--translate-x-1/2 hover:bitte-bg-inherit bitte-z-[99]'
+            className='bitte:absolute bitte:bottom-2 bitte:left-1/2 bitte:-translate-x-1/2 bitte:hover:bg-inherit bitte:z-99'
             style={{
               backgroundColor: generalBackground,
               borderRadius: "9999px",
@@ -212,7 +212,7 @@ export const ChatContent = ({
             onClick={scrollToBottomHandler}
           >
             <ArrowDown
-              className='bitte-h-4 bitte-w-4'
+              className='bitte:h-4 bitte:w-4'
               style={{ color: textColor }}
             />
           </Button>
@@ -220,34 +220,34 @@ export const ChatContent = ({
 
         <div
           ref={messagesRef}
-          className='bitte-absolute bitte-inset-0 bitte-flex bitte-h-full bitte-w-full bitte-justify-center bitte-overflow-y-auto bitte-overflow-x-hidden bitte-p-4'
+          className='bitte:absolute bitte:inset-0 bitte:flex bitte:h-full bitte:w-full bitte:justify-center bitte:overflow-y-auto bitte:overflow-x-hidden bitte:p-4'
         >
           <div
             className={cn(
-              "bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col md:bitte-mx-24 2xl:bitte-mx-56",
+              "bitte:mx-auto bitte:flex bitte:w-full bitte:flex-col bitte:md:mx-24 bitte:2xl:mx-56",
               !!agentId
-                ? "bitte-h-[calc(100%-240px)]"
-                : "bitte-h-[calc(100%-208px)]"
+                ? "bitte:h-[calc(100%-240px)]"
+                : "bitte:h-[calc(100%-208px)]"
             )}
           >
             {messages.length === 0 &&
               (options?.customComponents?.welcomeMessageComponent ? (
                 options.customComponents.welcomeMessageComponent
               ) : (
-                <div className='bitte-flex bitte-flex-col bitte-gap-4 bitte-items-center bitte-justify-center bitte-absolute bitte-left-1/2 bitte--translate-x-1/2 bitte-top-1/2 bitte--translate-y-1/2 bitte-text-center bitte-w-full'>
+                <div className='bitte:flex bitte:flex-col bitte:gap-4 bitte:items-center bitte:justify-center bitte:absolute bitte:left-1/2 bitte:-translate-x-1/2 bitte:top-1/2 bitte:-translate-y-1/2 bitte:text-center bitte:w-full'>
                   <img
-                    className='bitte-mx-auto bitte-mb-4'
+                    className='bitte:mx-auto bitte:mb-4'
                     src={BITTE_IMG || "/placeholder.svg"}
                     alt='Bitte'
                   />
-                  <div className='bitte-mb-14 bitte-text-[20px] bitte-font-medium bitte-text-gray-40'>
+                  <div className='bitte:mb-14 bitte:text-[20px] bitte:font-medium bitte:text-gray-40'>
                     Execute Transactions with AI
                   </div>
                 </div>
               ))}
 
             <div
-              className='bitte-flex bitte-w-full bitte-flex-col bitte-gap-4 bitte-py-6'
+              className='bitte:flex bitte:w-full bitte:flex-col bitte:gap-4 bitte:py-6'
               style={{ color: textColor }}
             >
               {groupedMessages?.map((messages: Message[]) => {
@@ -274,7 +274,7 @@ export const ChatContent = ({
               })}
 
               {error && (
-                <div className='bitte-flex bitte-flex-col bitte-items-center bitte-justify-center bitte-space-y-2 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
+                <div className='bitte:flex bitte:flex-col bitte:items-center bitte:justify-center bitte:space-y-2 bitte:px-6 bitte:pb-6 bitte:text-center bitte:text-sm'>
                   {!accountId && !evmAddress ? (
                     <p>
                       An error occurred. <br />

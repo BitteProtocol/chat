@@ -81,12 +81,12 @@ export const ChartWrapper = memo(
     );
 
     return (
-      <Card className='max-lg:bitte--mx-4 max-lg:bitte-p-2'>
-        <CardHeader className='max-lg:bitte-p-2'>
+      <Card className='bitte:max-lg:-mx-4 bitte:max-lg:p-2'>
+        <CardHeader className='bitte:max-lg:p-2'>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardContent className='bitte-pb-0 max-lg:bitte-p-2'>
+        <CardContent className='bitte:pb-0 bitte:max-lg:p-2'>
           <ChartComponent
             chartConfig={chartConfig}
             timeKey={timeKey}
@@ -97,16 +97,16 @@ export const ChartWrapper = memo(
           />
         </CardContent>
         {showMetricData ? (
-          <CardFooter className='bitte-pt-2'>
-            <div className='bitte-grid bitte-w-full bitte-grid-cols-2 bitte-gap-2 bitte-text-sm'>
+          <CardFooter className='bitte:pt-2'>
+            <div className='bitte:grid bitte:w-full bitte:grid-cols-2 bitte:gap-2 bitte:text-sm'>
               {metricData.map(
                 ({ metric, percentageChange, isPositive, isCandle }) => (
-                  <div key={metric} className='bitte-grid bitte-gap-2'>
-                    <div className='bitte-flex bitte-items-center bitte-gap-2 bitte-font-medium bitte-leading-none'>
+                  <div key={metric} className='bitte:grid bitte:gap-2'>
+                    <div className='bitte:flex bitte:items-center bitte:gap-2 bitte:font-medium bitte:leading-none'>
                       {isCandle ? null : (
-                        <div className='bitte-flex bitte-items-center bitte-gap-2'>
+                        <div className='bitte:flex bitte:items-center bitte:gap-2'>
                           <div
-                            className='bitte-size-4 bitte-rounded-sm'
+                            className='bitte:size-4 bitte:rounded-sm'
                             style={{
                               backgroundColor: chartConfig[metric].color,
                             }}
@@ -117,15 +117,15 @@ export const ChartWrapper = memo(
                       {isPositive ? "Trending Up" : "Trending Down"} by{" "}
                       {Math.abs(percentageChange).toFixed(1)}%{" "}
                       {isPositive ? (
-                        <TrendingUp className='bitte-size-4 bitte-text-shad-green-success' />
+                        <TrendingUp className='bitte:size-4 bitte:text-shad-green-success' />
                       ) : (
-                        <TrendingDown className='bitte-size-4 bitte-text-shad-red-100' />
+                        <TrendingDown className='bitte:size-4 bitte:text-shad-red-100' />
                       )}
                     </div>
                   </div>
                 )
               )}
-              <div className='bitte-col-span-2 bitte-flex bitte-items-center bitte-gap-2 bitte-leading-none bitte-text-muted-foreground'>
+              <div className='bitte:col-span-2 bitte:flex bitte:items-center bitte:gap-2 bitte:leading-none bitte:text-muted-foreground'>
                 {startDate} - {endDate}
               </div>
             </div>

@@ -31,13 +31,13 @@ export const MarkdownTable = ({ content }: { content: string }) => {
   );
 
   return (
-    <Table className="bitte-mt-4 bitte-w-full">
+    <Table className="bitte:mt-4 bitte:w-full">
       <TableHeader>
-        <TableRow className="bitte-border-none hover:bitte-bg-transparent">
+        <TableRow className="bitte:border-none bitte:hover:bg-transparent">
           {cells[0].map((header, index) => (
             <TableHead
               key={index}
-              className="bitte-whitespace-nowrap bitte-px-4 bitte-text-left text-[12px] bitte-font-medium"
+              className="bitte:whitespace-nowrap bitte:px-4 bitte:text-left text-[12px] bitte:font-medium"
             >
               {header}
             </TableHead>
@@ -46,7 +46,7 @@ export const MarkdownTable = ({ content }: { content: string }) => {
       </TableHeader>
       <TableBody>
         {cells.slice(1).map((row, rowIndex) => (
-          <TableRow key={rowIndex} className="bitte-border-none hover:bitte-bg-transparent">
+          <TableRow key={rowIndex} className="bitte:border-none bitte:hover:bg-transparent">
             {row.map((cell, cellIndex) => {
               const linkMatchQuery = cell.match(/\[Link\]\((.*)\)/);
               const linkValue = linkMatchQuery?.[1];
@@ -59,28 +59,28 @@ export const MarkdownTable = ({ content }: { content: string }) => {
               return (
                 <TableCell
                   key={cellIndex}
-                  className="bitte-whitespace-nowrap bitte-px-4 bitte-text-left"
+                  className="bitte:whitespace-nowrap bitte:px-4 bitte:text-left"
                 >
-                  <div className="bitte-max-w-[250px] bitte-break-words">
+                  <div className="bitte:max-w-[250px] bitte:break-words">
                     {linkValue ? (
                       <a href={linkValue} target='_blank'>
                         <Button
                           variant='ghost'
-                          className="bitte-flex bitte-items-center bitte-gap-2 bitte-p-0 bitte-text-shad-blue-100 hover:text-shad-blue-100"
+                          className="bitte:flex bitte:items-center bitte:gap-2 bitte:p-0 bitte:text-shad-blue-100 hover:text-shad-blue-100"
                         >
                           View
-                          <ArrowUpRight className="bitte-h-4 bitte-w-4" />
+                          <ArrowUpRight className="bitte:h-4 bitte:w-4" />
                         </Button>
                       </a>
                     ) : imageMatch ? (
-                      <div className="bitte-relative bitte-h-24 bitte-w-24">
+                      <div className="bitte:relative bitte:h-24 bitte:w-24">
                         <img
                           src={`${IMAGE_API}${imageValue}`}
                           alt={`result-${cellIndex}`}
                         />
                       </div>
                     ) : (
-                      <div className="bitte-truncate">{cell}</div>
+                      <div className="bitte:truncate">{cell}</div>
                     )}
                   </div>
                 </TableCell>

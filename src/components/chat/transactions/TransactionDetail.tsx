@@ -8,9 +8,9 @@ export const TransactionDetail = ({
   className?: string;
 }) => (
   <div
-    className={`bitte-flex bitte-items-center bitte-justify-between bitte-text-sm ${className}`}
+    className={`bitte:flex bitte:items-center bitte:justify-between bitte:text-sm ${className}`}
   >
-    <div className='bitte-text-text-secondary'>{label}</div>
-    <div className='bitte-break-all'>{value}</div>
+    <div className='bitte:text-text-secondary'>{label}</div>
+    <div className='bitte:break-all'>{value}</div>
   </div>
 );

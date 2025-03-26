@@ -150,7 +150,7 @@ export const MessageGroup = ({
           return (
             <ErrorBoundary key={`${groupKey}-${message.id}`}>
               {evmSignRequest ? (
-                <div className='bitte-my-4'>
+                <div className='bitte:my-4'>
                   <EvmTxCard
                     evmData={evmSignRequest}
                     borderColor={borderColor}
@@ -162,7 +162,7 @@ export const MessageGroup = ({
                   />
                 </div>
               ) : (
-                <div className='bitte-my-4'>
+                <div className='bitte:my-4'>
                   <ReviewTransaction
                     chatId={chatId}
                     creator={creator}
@@ -204,9 +204,9 @@ export const MessageGroup = ({
         }}
         uniqueKey={uniqueKey}
       >
-        <div className='bitte-mt-6 bitte-flex bitte-w-full bitte-flex-col bitte-gap-2'>
+        <div className='bitte:mt-6 bitte:flex bitte:w-full bitte:flex-col bitte:gap-2'>
           {message.content && (
-            <div className='bitte-flex bitte-flex-col bitte-gap-4'>
+            <div className='bitte:flex bitte:flex-col bitte:gap-4'>
               <SAMessage content={message.content} />
             </div>
           )}
@@ -218,13 +218,13 @@ export const MessageGroup = ({
 
             return (
               <div key={`${toolCallId}-${index}`}>
-                <div className='bitte-flex bitte-w-full bitte-items-center bitte-justify-between bitte-text-[12px]'>
+                <div className='bitte:flex bitte:w-full bitte:items-center bitte:justify-between bitte:text-[12px]'>
                   <div>Tool Call</div>
-                  <div className='bitte-rounded bitte-bg-shad-white-10 bitte-px-2 bitte-py-1'>
+                  <div className='bitte:rounded bitte:bg-shad-white-10 bitte:px-2 bitte:py-1'>
                     <code>{toolName}</code>
                   </div>
                 </div>
-                <div className='bitte-p-4'>
+                <div className='bitte:p-4'>
                   {(() => {
                     if (state === "result") {
                       if (!result.data) {
@@ -239,13 +239,13 @@ export const MessageGroup = ({
                           return (
                             <img
                               src={result?.data?.url}
-                              className='bitte-w-full'
+                              className='bitte:w-full'
                             />
                           );
                         }
                         case BittePrimitiveName.CREATE_DROP: {
                           return (
-                            <div className='bitte-flex bitte-items-center bitte-justify-center bitte-gap-2'>
+                            <div className='bitte:flex bitte:items-center bitte:justify-center bitte:gap-2'>
                               <Button asChild variant='link'>
                                 <a
                                   href={`/claim/${result.data}`}
@@ -306,7 +306,7 @@ export const MessageGroup = ({
                 </div>
 
                 <div
-                  className='bitte-mt-2 bitte-border-t'
+                  className='bitte:mt-2 bitte:border-t'
                   style={{ borderColor: borderColor }}
                 />
               </div>
