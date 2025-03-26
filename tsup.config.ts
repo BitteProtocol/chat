@@ -1,5 +1,4 @@
-import { defineConfig } from 'tsup'
-
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -24,4 +23,5 @@ export default defineConfig({
   loader: {
     '.css': 'copy',
   },
+  onSuccess: 'npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify',
 });

@@ -22,7 +22,7 @@
       "require": "./dist/index.js",
       "default": "./dist/index.mjs"
     },
-    "./style.css": "./dist/style.css"
+    "./styles.css": "./dist/styles.css"
   },
   "repository": {
     "type": "git",
