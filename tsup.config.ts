@@ -1,8 +1,7 @@
 import { defineConfig } from 'tsup'
 
-
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: ['src/index.ts'], // Your main entry point
   format: ['cjs', 'esm'],
   dts: true,
   clean: true,
@@ -22,6 +21,7 @@ export default defineConfig({
     options.assetNames = '[name]';
   },
   loader: {
-    '.css': 'copy',
+    '.css': 'copy', // Ensures CSS files are copied to dist
   },
+  onSuccess: 'npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css', // Compiles Tailwind CSS
 });
