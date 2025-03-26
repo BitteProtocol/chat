@@ -271,3 +271,5 @@ type ChatComponentColors = {
 ## Example Projects
 
 - [Bitte AI Chat Boilerplate](https://github.com/BitteProtocol/chat-boilerplate)
+- [Bitte AI Chat Boilerplate Next.js Pages Router](https://github.com/BitteProtocol/chat-boilerplate-next-pages)
+
