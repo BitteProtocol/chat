@@ -51,7 +51,7 @@ export const EvmTxCard = ({
 
   if (!evmData)
     return (
-      <p className='bitte-my-4 bitte-overflow-auto bitte-text-center'>
+      <p className='bitte:my-4 bitte:overflow-auto bitte:text-center'>
         Unable to create evm transaction.
       </p>
     );
@@ -61,7 +61,7 @@ export const EvmTxCard = ({
     !evmData.params.every(isValidEvmParams)
   ) {
     return (
-      <p className='bitte-my-4 bitte-overflow-auto bitte-text-center'>
+      <p className='bitte:my-4 bitte:overflow-auto bitte:text-center'>
         Invalid EVM transaction parameters.
       </p>
     );
@@ -106,15 +106,15 @@ export const EvmTxCard = ({
       }}
     >
       <CardHeader
-        className='bitte-border-b bitte-p-4 bitte-text-center bitte-md:p-6'
+        className='bitte:border-b bitte:p-4 bitte:text-center bitte-md:p-6'
         style={{ borderColor: borderColor }}
       >
-        <p className='bitte-text-xl bitte-font-semibold'>EVM Transaction</p>
+        <p className='bitte:text-xl bitte:font-semibold'>EVM Transaction</p>
       </CardHeader>
       <div>
         {evmData ? (
-          <div className='bitte-p-6'>
-            <div className='bitte-flex bitte-flex-col bitte-gap-6 bitte-text-sm'>
+          <div className='bitte:p-6'>
+            <div className='bitte:flex bitte:flex-col bitte:gap-6 bitte:text-sm'>
               <TransactionDetail
                 label='Chain ID'
                 value={shortenString(
@@ -129,16 +129,16 @@ export const EvmTxCard = ({
                     key={`tx-${transaction.to}-${index}`}
                     value={`transaction-${index}`}
                   >
-                    <AccordionTrigger className='bitte-pt-0'>
-                      <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-sm'>
+                    <AccordionTrigger className='bitte:pt-0'>
+                      <div className='bitte:flex bitte:items-center bitte:justify-between bitte:text-sm'>
                         <p>Transaction {index + 1}</p>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className='bitte-flex bitte-flex-col bitte-gap-6'>
+                    <AccordionContent className='bitte:flex bitte:flex-col bitte:gap-6'>
                       {transaction.to && (
                         <TransactionDetail
                           label='To'
-                          className='bitte--mr-2.5'
+                          className='bitte:-mr-2.5'
                           value={
                             <CopyStandard
                               text={transaction.to}
@@ -176,12 +176,12 @@ export const EvmTxCard = ({
       </div>
 
       {errorMsg ? (
-        <div className='bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
-          <p className='bitte-text-red-300'>
+        <div className='bitte:flex bitte:flex-col bitte:items-center bitte:gap-4 bitte:px-6 bitte:pb-6 bitte:text-center bitte:text-sm'>
+          <p className='bitte:text-red-300'>
             An error occurred trying to execute your transaction: {errorMsg}.
           </p>
           <Button
-            className='bitte-w-1/2'
+            className='bitte:w-1/2'
             variant='outline'
             onClick={() => {
               setErrorMsg("");
@@ -201,7 +201,7 @@ export const EvmTxCard = ({
         />
       ) : null}
       {!isLoading && !errorMsg && !txHash ? (
-        <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
+        <CardFooter className='bitte:flex bitte:items-center bitte:gap-6'>
           <>
             <DeclineButton
               onClick={() => {

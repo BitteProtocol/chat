@@ -22,7 +22,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <p className="bitte-my-4 bitte-overflow-auto bitte-text-center bitte-text-text-secondary">
+        <p className="bitte:my-4 bitte:overflow-auto bitte:text-center bitte:text-text-secondary">
           Something went wrong
         </p>
       );

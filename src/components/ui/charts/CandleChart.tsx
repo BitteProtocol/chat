@@ -41,8 +41,8 @@ export const CandleChart = ({
       wickBottom: Math.abs(low - candleLow),
       candleHeight,
       candleColor: up
-        ? "bitte-fill-shad-green-success"
-        : "bitte-fill-shad-red-100", // Using literal hex colors instead of class names
+        ? "bitte:fill-shad-green-success"
+        : "bitte:fill-shad-red-100", // Using literal hex colors instead of class names
       diff: point.close - point.open,
       diffPercent: ((point.close - point.open) / point.open) * 100,
     };
@@ -67,7 +67,7 @@ export const CandleChart = ({
   return (
     <ChartContainer
       config={chartConfig}
-      className='bitte-min-h-[200px] bitte-w-full bitte-select-none'
+      className='bitte:min-h-[200px] bitte:w-full bitte:select-none'
     >
       <ComposedChart
         data={data}
@@ -112,7 +112,7 @@ export const CandleChart = ({
                 );
 
                 return (
-                  <div className='bitte--mb-4 bitte-grid bitte-grid-cols-2 bitte-gap-2'>
+                  <div className='bitte:-mb-4 bitte:grid bitte:grid-cols-2 bitte:gap-2'>
                     <p style={{ color: entry.payload.candleColor }}>
                       {diff > 0 ? "+" : ""}
                       {valueFormatter(diff)}
@@ -123,7 +123,7 @@ export const CandleChart = ({
                     </p>
                     {values.map((value, index) => (
                       <p key={TOOLTIP_LABELS[index]}>
-                        <span className='bitte-text-muted-foreground'>
+                        <span className='bitte:text-muted-foreground'>
                           {TOOLTIP_LABELS[index]}:
                         </span>{" "}
                         {valueFormatter(value)}

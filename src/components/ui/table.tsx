@@ -6,10 +6,10 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="bitte-relative bitte-w-full bitte-overflow-auto">
+  <div className="bitte:relative bitte:w-full bitte:overflow-auto">
     <table
       ref={ref}
-      className={cn("bitte-w-full bitte-caption-bottom bitte-text-sm", className)}
+      className={cn("bitte:w-full bitte:caption-bottom bitte:text-sm", className)}
       {...props}
     />
   </div>
@@ -20,7 +20,7 @@ const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn("[&_tr]:bitte-border-b", className)} {...props} />
+  <thead ref={ref} className={cn("bitte:[&_tr]:border-b", className)} {...props} />
 ))
 TableHeader.displayName = "TableHeader"
 
@@ -30,7 +30,7 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn("[&_tr:last-child]:bitte-border-0", className)}
+    className={cn("bitte:[&_tr:last-child]:border-0", className)}
     {...props}
   />
 ))
@@ -43,7 +43,7 @@ const TableFooter = React.forwardRef<
   <tfoot
     ref={ref}
     className={cn(
-      "bitte-border-t bitte-bg-muted/50 bitte-font-medium [&>tr]:last:bitte-border-b-0",
+      "bitte:border-t bitte:bg-muted/50 bitte:font-medium bitte:last:[&>tr]:border-b-0",
       className
     )}
     {...props}
@@ -58,7 +58,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "bitte-border-b bitte-transition-colors hover:bitte-bg-muted/50 data-[state=selected]:bitte-bg-muted",
+      "bitte:border-b bitte:transition-colors bitte:hover:bg-muted/50 bitte:data-[state=selected]:bg-muted",
       className
     )}
     {...props}
@@ -73,7 +73,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "bitte-h-10 bitte-px-2 bitte-text-left bitte-align-middle bitte-font-medium bitte-text-muted-foreground [&:has([role=checkbox])]:bitte-pr-0 [&>[role=checkbox]]:bitte-translate-y-[2px]",
+      "bitte:h-10 bitte:px-2 bitte:text-left bitte:align-middle bitte:font-medium bitte:text-muted-foreground bitte:[&:has([role=checkbox])]:pr-0 bitte:[&>[role=checkbox]]:translate-y-[2px]",
       className
     )}
     {...props}
@@ -88,7 +88,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "bitte-p-2 bitte-align-middle [&:has([role=checkbox])]:bitte-pr-0 [&>[role=checkbox]]:bitte-translate-y-[2px]",
+      "bitte:p-2 bitte:align-middle bitte:[&:has([role=checkbox])]:pr-0 bitte:[&>[role=checkbox]]:translate-y-[2px]",
       className
     )}
     {...props}
@@ -102,7 +102,7 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("bitte-mt-4 bitte-text-sm bitte-text-muted-foreground", className)}
+    className={cn("bitte:mt-4 bitte:text-sm bitte:text-muted-foreground", className)}
     {...props}
   />
 ))

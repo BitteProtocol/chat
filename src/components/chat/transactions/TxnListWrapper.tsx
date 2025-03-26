@@ -17,8 +17,8 @@ export const TxnListWrapper = ({
   borderColor
 }: TransactionListProps): JSX.Element => {
   return (
-    <div className="bitte-mx-auto bitte-flex bitte-w-full bitte-flex-col bitte-gap-1">
-      <div className="bitte-flex bitte-w-full bitte-flex-col bitte-justify-center bitte-rounded">
+    <div className="bitte:mx-auto bitte:flex bitte:w-full bitte:flex-col bitte:gap-1">
+      <div className="bitte:flex bitte:w-full bitte:flex-col bitte:justify-center bitte:rounded">
         <ShowDetailsBtn
           setShowDetails={setShowTxnDetail}
           showDetails={showTxnDetail}
