@@ -6,7 +6,7 @@ const DefaultTxContainer: React.FC<TransactionContainerProps> = ({
   style,
 }) => (
   <Card
-    className='bitte-mb-8 bitte-flex bitte-flex-col bitte-justify-center bitte-w-full'
+    className='bitte:mb-8 bitte:flex bitte:flex-col bitte:justify-center bitte:w-full'
     style={{
       backgroundColor: style.backgroundColor,
       borderColor: style.borderColor,

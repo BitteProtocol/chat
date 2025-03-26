@@ -53,11 +53,11 @@ export const SmartActionsInput = ({
 
   return (
     <form
-      className='bitte-relative bitte-mb-0 bitte-flex bitte-w-full bitte-items-center bitte-justify-center bitte-gap-4 max-lg:bitte-flex-wrap'
+      className='bitte:relative bitte:mb-0 bitte:flex bitte:w-full bitte:items-center bitte:justify-center bitte:gap-4 bitte:max-lg:flex-wrap'
       style={{ color: textColor }}
       onSubmit={handleSubmit}
     >
-      <div className='bitte-w-full bitte-relative'>
+      <div className='bitte:w-full bitte:relative'>
         <AgentPill name={agentName || previousAgentName} ref={agentNameRef} />
 
         <Textarea
@@ -67,7 +67,7 @@ export const SmartActionsInput = ({
             background: backgroundColor,
             borderColor: borderColor,
           }}
-          className='bitte-h-[42px] bitte-w-full bitte-resize-none bitte-min-h-0 textarea-chat'
+          className='bitte:h-[42px] bitte:w-full bitte:resize-none bitte:min-h-0 textarea-chat'
           onChange={handleChange}
           onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
             if (e.key === "Enter" && !e.shiftKey && !isLoading) {
@@ -78,9 +78,9 @@ export const SmartActionsInput = ({
           value={input}
         />
       </div>
-      <div className='bitte-flex bitte-gap-2 bitte-w-full lg:bitte-contents'>
+      <div className='bitte:flex bitte:gap-2 bitte:w-full bitte:lg:contents'>
         {mobileInputExtraButton ? (
-          <div className='bitte-w-full lg:bitte-hidden'>
+          <div className='bitte:w-full bitte:lg:hidden'>
             {mobileInputExtraButton}
           </div>
         ) : null}

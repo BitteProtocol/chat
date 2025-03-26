@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bitte-rounded-md bitte-border bitte-bg-card bitte-text-card-foreground bitte-shadow sm:bitte-min-w-[320px] xl:bitte-min-w-[500px]",
+      "bitte:rounded-md bitte:border bitte:bg-card bitte:text-card-foreground bitte:shadow bitte:sm:min-w-[320px] bitte:xl:min-w-[500px]",
       className
     )}
     style={style}
@@ -25,7 +25,7 @@ const CardHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bitte-flex bitte-flex-col bitte-space-y-1.5 bitte-p-6",
+      "bitte:flex bitte:flex-col bitte:space-y-1.5 bitte:p-6",
       className
     )}
     style={style}
@@ -41,7 +41,7 @@ const CardTitle = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bitte-font-semibold bitte-leading-none bitte-tracking-tight",
+      "bitte:font-semibold bitte:leading-none bitte:tracking-tight",
       className
     )}
     {...props}
@@ -55,7 +55,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("bitte-text-sm bitte-text-muted-foreground", className)}
+    className={cn("bitte:text-sm bitte:text-muted-foreground", className)}
     {...props}
   />
 ));
@@ -65,7 +65,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("bitte-p-6 bitte-pt-0", className)} {...props} />
+  <div ref={ref} className={cn("bitte:p-6 bitte:pt-0", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -76,7 +76,7 @@ const CardFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "bitte-flex bitte-items-center bitte-p-6 bitte-pt-0",
+      "bitte:flex bitte:items-center bitte:p-6 bitte:pt-0",
       className
     )}
     {...props}

@@ -162,25 +162,25 @@ export const ReviewSignMessage = ({
       }}
     >
       <CardHeader
-        className='bitte-border-b bitte-text-center'
+        className='bitte:border-b bitte:text-center'
         style={{ borderColor: borderColor }}
       >
-        <p className='bitte-text-[20px] bitte-font-semibold'>Sign Message</p>
+        <p className='bitte:text-[20px] bitte:font-semibold'>Sign Message</p>
       </CardHeader>
 
       <CardContent>
-        <div className='bitte-border-b' style={{ borderColor: borderColor }}>
-          <div className='bitte-flex bitte-flex-col bitte-gap-6 bitte-p-6'>
-            <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]'>
+        <div className='bitte:border-b' style={{ borderColor: borderColor }}>
+          <div className='bitte:flex bitte:flex-col bitte:gap-6 bitte:p-6'>
+            <div className='bitte:flex bitte:items-center bitte:justify-between bitte:text-[14px]'>
               <div style={{ color: textColor }}>Message</div>
               <div style={{ color: textColor }}>{message}</div>
             </div>
-            <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]'>
+            <div className='bitte:flex bitte:items-center bitte:justify-between bitte:text-[14px]'>
               <div style={{ color: textColor }}>Nonce</div>
               <div style={{ color: textColor }}>{nonce}</div>
             </div>
             {recipient ? (
-              <div className='bitte-flex bitte-items-center bitte-justify-between bitte-text-[14px]'>
+              <div className='bitte:flex bitte:items-center bitte:justify-between bitte:text-[14px]'>
                 <div style={{ color: textColor }}>Recipient</div>
                 <div style={{ color: textColor }}>{recipient}</div>
               </div>
@@ -189,9 +189,9 @@ export const ReviewSignMessage = ({
         </div>
 
         {result && !loading ? (
-          <CardContent className='bitte-pt-6'>
-            <div className='bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
-              <div className='bitte-flex bitte-justify-end'>
+          <CardContent className='bitte:pt-6'>
+            <div className='bitte:flex bitte:flex-col bitte:items-center bitte:gap-4 bitte:px-6 bitte:pb-6 bitte:text-center bitte:text-sm'>
+              <div className='bitte:flex bitte:justify-end'>
                 <CopyStandard
                   text={result.signature}
                   textSize='sm'
@@ -205,12 +205,12 @@ export const ReviewSignMessage = ({
       </CardContent>
 
       {errorMsg && !loading ? (
-        <div className='bitte-flex bitte-flex-col bitte-items-center bitte-gap-4 bitte-px-6 bitte-pb-6 bitte-text-center bitte-text-sm'>
-          <p className='bitte-text-red-300'>
+        <div className='bitte:flex bitte:flex-col bitte:items-center bitte:gap-4 bitte:px-6 bitte:pb-6 bitte:text-center bitte:text-sm'>
+          <p className='bitte:text-red-300'>
             An error occurred while signing the message: {errorMsg}
           </p>
           <Button
-            className='bitte-w-1/2'
+            className='bitte:w-1/2'
             variant='outline'
             onClick={() => setErrorMsg("")}
           >
@@ -222,7 +222,7 @@ export const ReviewSignMessage = ({
       {loading ? <LoadingMessage color={textColor} /> : null}
 
       {!loading && !result && !errorMsg ? (
-        <CardFooter className='bitte-flex bitte-items-center bitte-gap-6'>
+        <CardFooter className='bitte:flex bitte:items-center bitte:gap-6'>
           <DeclineButton
             onClick={() => addToolResult({ error: "User declined to sign" })}
           />

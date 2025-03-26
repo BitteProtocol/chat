@@ -7,7 +7,7 @@ const DefaultTxApproveButton: React.FC<TransactionButtonProps> = ({
   isLoading,
   label,
 }) => (
-  <Button className='bitte-w-1/2' onClick={onClick} disabled={disabled}>
+  <Button className='bitte:w-1/2' onClick={onClick} disabled={disabled}>
     {isLoading ? "Confirming..." : label || "Approve"}
   </Button>
 );

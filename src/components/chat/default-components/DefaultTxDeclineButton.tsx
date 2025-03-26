@@ -8,7 +8,7 @@ const DefaultTxDeclineButton: React.FC<TransactionButtonProps> = ({
 }) => (
   <Button
     variant='outline'
-    className='bitte-w-1/2'
+    className='bitte:w-1/2'
     onClick={onClick}
     disabled={disabled}
   >
